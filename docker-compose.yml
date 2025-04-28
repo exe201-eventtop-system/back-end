@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  apigateway:
+    build:
+      context: ./API-Gatewate
+      dockerfile: ./API/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - userservice
+      - orderservice
+      - productservice
+    networks:
+      - backend
+
+  userservice:
+    build:
+      context: ./UserService
+      dockerfile: ./UserService.API/Dockerfile
+    ports:
+      - "5001:5001"
+    networks:
+      - backend
+
+  productservice:
+    build:
+      context: ./ProductService
+    ports:
+      - "8082:8082"
+    networks:
+      - backend
+
+  feedbackservice:
+    build:
+      context: ./FeedbackService
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
