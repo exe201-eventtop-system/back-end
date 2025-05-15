@@ -1,3 +1,4 @@
+﻿using Microsoft.OpenApi.Models;
 
 namespace UserService.API
 {
@@ -8,27 +9,34 @@ namespace UserService.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.WebHost.UseUrls("http://*:5001");
-            builder.Services.AddSwaggerGen();
+
+            // Add Swagger configuration
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "User Service API",
+                    Version = "v1"
+                });
+            });
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                // Enable Swagger
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Service API V1");
+                });
             }
 
-            app.UseHttpsRedirection();
-
+            app.UseHttpsRedirection();  // Có thể bỏ dòng này nếu không dùng HTTPS trong phát triển.
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

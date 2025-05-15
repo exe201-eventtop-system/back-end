@@ -2,15 +2,29 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/User/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "userservice",
-          "Port": 5001
+          "Host": "localhost",
+          "Port": 7228
         }
       ],
       "UpstreamPathTemplate": "/user/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "userService"
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5100
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "authService"
     },
     {
       "DownstreamPathTemplate": "/api/posts/{everything}",
@@ -22,7 +36,8 @@
         }
       ],
       "UpstreamPathTemplate": "/posts/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "feedbackService"
     },
     {
       "DownstreamPathTemplate": "/api/products/{everything}",
@@ -34,10 +49,53 @@
         }
       ],
       "UpstreamPathTemplate": "/product/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "productService"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "userService",
+      "Config": [
+        {
+          "Name": "User Service API",
+          "Version": "v1",
+          "Url": "https://localhost:7228/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "authService",
+      "Config": [
+        {
+          "Name": "Auth Service API",
+          "Version": "v1",
+          "Url": "https://localhost:5100/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "feedbackService",
+      "Config": [
+        {
+          "Name": "Feedback Service API",
+          "Version": "v1",
+          "Url": "http://localhost:3000/api-docs/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "productService",
+      "Config": [
+        {
+          "Name": "Product Service API",
+          "Version": "v1",
+          "Url": "https://productservice:8082/swagger/v1/swagger.json"
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:8080"
+    "BaseUrl": "http://localhost:5000"
   }
 }
