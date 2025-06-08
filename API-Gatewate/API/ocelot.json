@@ -42,9 +42,35 @@
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "Role": "Customer" 
+        "Role": "Customer"
       },
       "SwaggerKey": "planningService"
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5300
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "HttpHandlerOptions": {
+        "UseCookieContainer": true
+      },
+      "SwaggerKey": "productService",
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      },
+      "AddHeadersToRequest": {},
+      "Forwarding": {
+        "PreserveDownstreamCookies": true
+      }
     }
   ],
   "SwaggerEndPoints": [
