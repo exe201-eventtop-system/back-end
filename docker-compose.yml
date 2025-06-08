@@ -29,13 +29,6 @@ services:
     networks:
       - backend
 
-  feedbackservice:
-    build:
-      context: ./FeedbackService
-    ports:
-      - "3000:3000"
-    networks:
-      - backend
 
 networks:
   backend:

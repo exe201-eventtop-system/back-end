@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Your Email</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f4f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #0077cc;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+            .content p {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            background-color: #0077cc;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #888888;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .code-box {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 4px solid #0077cc;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to YourApp, {{username}}!</h1>
+        </div>
+        <div class="content">
+            <p>Thank you for signing up. We're excited to have you on board!</p>
+            <p>To get started, please verify your email address. This step helps us keep your account safe and gives you full access to all features.</p>
+
+            <p><strong>Click the button below to confirm your email:</strong></p>
+            <a href="{{confirm_link}}" class="button">Confirm Email</a>
+
+            <p>If the button doesn't work, copy and paste this URL into your browser:</p>
+            <div class="code-box">{{confirm_link}}</div>
+
+            <p>If you did not create an account with us, you can safely ignore this email.</p>
+        </div>
+        <div class="footer">
+            &copy; 2025 YourApp. All rights reserved.<br>
+            123 Main Street, Your City, Your Country
+        </div>
+    </div>
+</body>
+</html>

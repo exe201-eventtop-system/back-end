@@ -1,6 +1,5 @@
-
-using Microsoft.OpenApi.Models;
-
+﻿
+using API.Extentions;
 namespace AuthService
 {
     public class Program
@@ -8,39 +7,43 @@ namespace AuthService
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
+            var config = builder.Configuration;
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-            builder.Services.AddTransient<EmailService>();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Auth Service API",
-                    Version = "v1"
-                });
-            });
+            builder.Services.AddApplicationServices(config);
+            builder.Services.AddDatabase(config);
+            builder.Services.AddGoogleConfig();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+           
 
+            app.UseCookiePolicy();
+            app.UseSession();
+            app.Use(async (context, next) =>
+            {
+                var check = context.Session.GetString("session_test");
+                if (string.IsNullOrEmpty(check))
+                {
+                    context.Session.SetString("session_test", "hello");
+                    Console.WriteLine("✅ Session initialized.");
+                }
+                else
+                {
+                    Console.WriteLine("✅ Session found: " + check);
+                }
+                await next();
+            });
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
+            app.UseCors("AllowAll");
             app.MapControllers();
-
             app.Run();
         }
     }

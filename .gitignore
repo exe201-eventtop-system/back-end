@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+node_modules/
 ### STS ###
 .apt_generated
 .classpath
@@ -12,13 +12,14 @@ target/
 .settings
 .springBeans
 .sts4-cache
+**/.vs/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-
+.vs
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
