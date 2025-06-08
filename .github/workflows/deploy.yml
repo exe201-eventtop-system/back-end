@@ -1,0 +1,14 @@
+name: Check CI/CD Setup
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Say Hello
+        run: echo "🎉 CI/CD is working for branch dev!"
