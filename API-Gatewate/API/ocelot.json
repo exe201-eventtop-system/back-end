@@ -47,36 +47,30 @@
       "SwaggerKey": "planningService"
     },
     {
-<<<<<<< HEAD
       "DownstreamPathTemplate": "/api/product/{everything}",
       "DownstreamHeaderTransform": {
         "Set-Cookie": "Copy"
       },
-=======
-      "DownstreamPathTemplate": "/api/services/{everything}",
->>>>>>> origin/cart-service
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-<<<<<<< HEAD
           "Port": 5300
         }
       ],
-      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamPathTemplate": "/product/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "HttpHandlerOptions": {
-        "UseCookieContainer": true
-      },
       "SwaggerKey": "productService",
       "UpstreamHeaderTransform": {
         "Cookie": "Copy"
-      },
-      "AddHeadersToRequest": {},
-      "Forwarding": {
-        "PreserveDownstreamCookies": true
       }
-=======
+    },
+    {
+      "DownstreamPathTemplate": "/api/services/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
           "Port": 7035
         }
       ],
@@ -96,7 +90,6 @@
       "UpstreamPathTemplate": "/cart/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "SwaggerKey": "cartService"
->>>>>>> origin/cart-service
     }
   ],
   "SwaggerEndPoints": [
@@ -129,9 +122,6 @@
           "Url": "https://localhost:5100/swagger/v1/swagger.json"
         }
       ]
-<<<<<<< HEAD
-    }     
-=======
     },
     {
       "Key": "feedbackService",
@@ -153,7 +143,6 @@
         }
       ]
     }
->>>>>>> origin/cart-service
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"
