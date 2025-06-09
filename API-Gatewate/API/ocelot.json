@@ -47,14 +47,19 @@
       "SwaggerKey": "planningService"
     },
     {
+<<<<<<< HEAD
       "DownstreamPathTemplate": "/api/product/{everything}",
       "DownstreamHeaderTransform": {
         "Set-Cookie": "Copy"
       },
+=======
+      "DownstreamPathTemplate": "/api/services/{everything}",
+>>>>>>> origin/cart-service
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
+<<<<<<< HEAD
           "Port": 5300
         }
       ],
@@ -71,6 +76,27 @@
       "Forwarding": {
         "PreserveDownstreamCookies": true
       }
+=======
+          "Port": 7035
+        }
+      ],
+      "UpstreamPathTemplate": "/services/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "productService"
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7058
+        }
+      ],
+      "UpstreamPathTemplate": "/cart/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "cartService"
+>>>>>>> origin/cart-service
     }
   ],
   "SwaggerEndPoints": [
@@ -85,6 +111,16 @@
       ]
     },
     {
+      "Key": "cartService",
+      "Config": [
+        {
+          "Name": "Cart Service API",
+          "Version": "v1",
+          "Url": "https://localhost:7058/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
       "Key": "authService",
       "Config": [
         {
@@ -93,7 +129,31 @@
           "Url": "https://localhost:5100/swagger/v1/swagger.json"
         }
       ]
+<<<<<<< HEAD
     }     
+=======
+    },
+    {
+      "Key": "feedbackService",
+      "Config": [
+        {
+          "Name": "Feedback Service API",
+          "Version": "v1",
+          "Url": "http://localhost:3000/api-docs/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "productService",
+      "Config": [
+        {
+          "Name": "Product Service API",
+          "Version": "v1",
+          "Url": "https://localhost:7035/swagger/v1/swagger.json"
+        }
+      ]
+    }
+>>>>>>> origin/cart-service
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"

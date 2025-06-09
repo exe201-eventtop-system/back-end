@@ -1,10 +1,47 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\AuthService\\",
+  "WorkspaceRootPath": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\authservice\\authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\API.csproj|solutionrelative:authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+=======
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|d:\\5.fpt_learning\\cn8\\exe201\\code\\back-end\\authservice\\authservice\\authservice.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{5241A087-8E5E-4C1E-A806-ADC766E03E57}|AuthService\\AuthService.csproj|solutionrelative:authservice\\authservice.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+>>>>>>> origin/cart-service
     }
   ],
   "DocumentGroupContainers": [
@@ -22,16 +59,121 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 0,
+=======
+              "DocumentIndex": 5,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\EmailService.cs",
+              "RelativeDocumentMoniker": "AuthService\\EmailService.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\EmailService.cs",
+              "RelativeToolTip": "AuthService\\EmailService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAQwBIAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:59:30.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmailSettings.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\EmailSettings.cs",
+              "RelativeDocumentMoniker": "AuthService\\EmailSettings.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\EmailSettings.cs",
+              "RelativeToolTip": "AuthService\\EmailSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:58:40.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Program.cs",
+              "RelativeDocumentMoniker": "AuthService\\Program.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Program.cs",
+              "RelativeToolTip": "AuthService\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:05:47.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "AuthService\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "AuthService\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-15T07:55:51.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "AuthService\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "AuthService\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAADwvyEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:35:59.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "AuthService\\ApplicationUser.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\ApplicationUser.cs",
+              "RelativeToolTip": "AuthService\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T09:04:01.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+>>>>>>> origin/cart-service
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\AuthService\\AuthService\\appsettings.json",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\appsettings.json",
               "RelativeDocumentMoniker": "AuthService\\appsettings.json",
-              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\AuthService\\AuthService\\appsettings.json",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\appsettings.json",
               "RelativeToolTip": "AuthService\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+<<<<<<< HEAD
               "WhenOpened": "2025-06-08T16:32:51.81Z",
               "EditorCaption": ""
+=======
+              "WhenOpened": "2025-05-15T09:06:38.955Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterDTO.cs",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\DTO\\RegisterDTO.cs",
+              "RelativeDocumentMoniker": "AuthService\\DTO\\RegisterDTO.cs",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\DTO\\RegisterDTO.cs",
+              "RelativeToolTip": "AuthService\\DTO\\RegisterDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:40:53.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthService.http",
+              "DocumentMoniker": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\AuthService.http",
+              "RelativeDocumentMoniker": "AuthService\\AuthService.http",
+              "ToolTip": "D:\\5.fpt_learning\\CN8\\EXE201\\Code\\back-end\\AuthService\\AuthService\\AuthService.http",
+              "RelativeToolTip": "AuthService\\AuthService.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-05-15T08:23:13.761Z"
+>>>>>>> origin/cart-service
             }
           ]
         }
