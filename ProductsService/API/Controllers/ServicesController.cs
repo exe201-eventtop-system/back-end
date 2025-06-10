@@ -18,7 +18,7 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(PaginationResult<ServiceSummaryDTO>), 200)]
-        public async Task<IActionResult> GetAllAsync([FromQuery] int page, [FromQuery] int page_size, string search = "", string category = "")
+        public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1, [FromQuery] int page_size = 5, string search = "", string category = "")
         {
             ServiceResult<PaginationResult<ServiceSummaryDTO>> result = await _service.GetAllServiceAsync(page, page_size, search, category);
 
