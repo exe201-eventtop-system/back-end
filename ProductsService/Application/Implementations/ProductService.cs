@@ -42,8 +42,8 @@ namespace Application.Implementations
 
         public async Task<ServiceResult<PaginationResult<ServiceSummaryDTO>>> GetAllServiceAsync(int page, int page_size, string name_contain, string category)
         {
-            Expression<Func<Service, bool>> expression = service => service.Name
-                .Contains(name_contain, StringComparison.InvariantCultureIgnoreCase) && service.CategoryNavigation.Name.Equals(category, StringComparison.InvariantCultureIgnoreCase);
+            Expression<Func<Service, bool>> expression = service 
+                => service.Name.ToLower().Contains(name_contain.ToLower()) && service.CategoryNavigation.Name.ToLower().Contains(category.ToLower());
 
             PaginationResult<Service> result = await _unitOfWork.ServiceRepository.GetPaginatedAsync(page, page_size, expression, x=> x.OrderBy(x => x.Name));
 
