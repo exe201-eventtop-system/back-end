@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Contacts.Supplier;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
@@ -22,7 +23,47 @@ namespace Infrastructure.Repositories
         }
         public async Task<bool> CheckEmail(string email)=> await _context.Users.AnyAsync(u => u.Email == email);
 
-        public async Task<User?> GetByIdAsync(Guid userId) => await _context.Users.FindAsync(userId);
+        public async Task<User?> GetByIdAsync(Guid userId) =>
+    await _context.Users
+        .Include(u => u.Addresses)
+        .FirstOrDefaultAsync(u => u.Id == userId);
+
+        public async Task<ICollection<SupplierResponseDTO>> GetListSupplier(List<Guid> userIds)
+        {
+            if (userIds == null || !userIds.Any())
+            {
+                return new List<SupplierResponseDTO>();
+            }
+
+            return await _context.Suppliers
+                .AsNoTracking()
+                .Where(s => userIds.Contains(s.Id))
+                .Select(s => new SupplierResponseDTO
+                {
+                    Id = s.Id,
+                    Name = s.NameOrginazation,
+                    IsActive = s.IsActive
+                })
+                .ToListAsync();
+        }
+
+        public async Task<SupplierResponseDTO?> GetSupplier(Guid userId)
+        {
+            return await _context.Suppliers
+                .AsNoTracking()
+                .Include(s => s.Users)
+                .Where(s => s.Id == userId)
+                .Select(s => new SupplierResponseDTO
+                {
+                    Id = s.Id,
+                    Name = s.NameOrginazation,
+                    Avatar = s.Users.Avatar, // ✅ an toàn
+                    Location = s.Location,
+                    IsActive = s.IsActive
+                })
+                .FirstOrDefaultAsync(); // ✅ có thể trả về null
+        }
+
 
         public async Task<User> SaveUser(User user)
         {
@@ -37,7 +78,7 @@ namespace Infrastructure.Repositories
             if (user == null)
                 return null;
 
-            var isPasswordValid = await _passwordHasher.VerifyPassword(user.Password, password);
+            var isPasswordValid = await _passwordHasher.VerifyPassword(user.HashPassword, password);
             if (!isPasswordValid)
                 return null;
 

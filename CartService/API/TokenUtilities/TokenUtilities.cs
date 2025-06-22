@@ -158,5 +158,36 @@ namespace SharedLibrary.TokenUtilities
         {
             return Convert.ToBase64String(GetHashedBytes(password));
         }
+
+        public Task<Guid> ExtractUserIdFromToken(string rawToken)
+        {
+            if (string.IsNullOrWhiteSpace(rawToken))
+                return Task.FromResult(Guid.Empty);
+
+            // Cắt chuỗi "Bearer " nếu có
+            var token = rawToken.StartsWith("Bearer ") ? rawToken.Substring(7) : rawToken;
+
+            var handler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                var jwtToken = handler.ReadJwtToken(token);
+
+                var userIdClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "Id");
+
+                if (userIdClaim != null && Guid.TryParse(userIdClaim.Value, out var userId))
+                {
+                    return Task.FromResult(userId);
+                }
+            }
+            catch
+            {
+                // Bắt lỗi khi token không hợp lệ hoặc không parse được
+            }
+
+            return Task.FromResult(Guid.Empty);
+        }
+
+
     }
 }

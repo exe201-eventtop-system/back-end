@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Configurations
 {
-    public class PackageEntityConfiguration : IEntityTypeConfiguration<Package>
+    public class PackageEntityConfiguration : IEntityTypeConfiguration<PackageStructureService>
     {
-        public void Configure(EntityTypeBuilder<Package> builder)
+        public void Configure(EntityTypeBuilder<PackageStructureService> builder)
         {
-            builder.HasMany(x => x.ServicesNavigation).WithMany(x => x.PackagesNavigation);
+            //builder.HasMany(x => x.ServicesNavigation).WithMany(x => x.PackagesNavigation);
             builder.HasOne(x => x.PackageStructureNavigation).WithMany(x => x.PackagesNavigation)
                 .HasForeignKey(x => x.StructureId).HasPrincipalKey(x => x.Id);
         }

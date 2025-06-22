@@ -18,11 +18,10 @@ namespace Infrastructure.Repositories.Implementations
         {
             var list = await _context.Services.Include(x => x.ParentServiceNavigation)
                 .Include(x => x.CategoryNavigation)
+                .Include(x => x.PackageStructureServiceNavigation)
+                .ThenInclude(x => x.PackageStructureNavigation)
                 .Include(x => x.ChildServicesNavigation)
                 .ToListAsync();
-
-            Console.WriteLine($"There are {list.Count} item in the final result");
-
             return list;
         }
 
@@ -30,6 +29,9 @@ namespace Infrastructure.Repositories.Implementations
         {
             var item = await _context.Services.Include(x => x.ParentServiceNavigation)
                 .Include(x => x.CategoryNavigation)
+                .Include(x => x.ImagesNavigation)
+                .Include(x => x.PackageStructureServiceNavigation) 
+                .ThenInclude(x => x.PackageStructureNavigation)
                 .Include(x => x.ChildServicesNavigation)
                 .FirstOrDefaultAsync(x => x.Id == id);
 

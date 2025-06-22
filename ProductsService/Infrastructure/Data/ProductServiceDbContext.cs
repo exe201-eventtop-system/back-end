@@ -15,7 +15,7 @@ namespace Infrastructure.Data
 
         public DbSet<Service> Services { get; set; }
         
-        public DbSet<Package> Packages {  get; set; }
+        public DbSet<PackageStructureService> PackageStructureServices {  get; set; }
 
         public DbSet<ServiceImage> ServiceImages { get; set; }
 

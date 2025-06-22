@@ -114,28 +114,5 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<Result<User>> ViewProfile(Guid userId)
-        {
-            try
-            {
-                var user = await _userRepository.GetByIdAsync(userId);
-
-                if (user == null)
-                {
-                    return Result<User>.Failure(
-                        ServiceError.NotFoundError($"User with ID {userId} was not found.")
-                    );
-                }
-
-                return Result<User>.Success(user);
-            }
-            catch (Exception ex)
-            {
-                return Result<User>.Failure(
-                    ServiceError.UnhandledException($"Unexpected error occurred while retrieving profile: {ex.Message}")
-                );
-            }
-        }
-
     }
 }

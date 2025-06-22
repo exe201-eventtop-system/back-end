@@ -10,6 +10,7 @@ namespace Services
     {
         CartService CartService { get; }
         CartItemSevice CartItemSevice { get; }
+        ScheduleService ScheduleService { get; }
     }
 
 
@@ -17,6 +18,7 @@ namespace Services
     {
         private CartService _cartService;
         private CartItemSevice _cartItemSevice;
+        private ScheduleService _scheduleService;
 
         public ServiceProviders() { }
 
@@ -35,6 +37,13 @@ namespace Services
                 return _cartItemSevice ??= new CartItemSevice();
             }
         }
+        public ScheduleService ScheduleService
+        {
+            get
+            {
+                return _scheduleService ??= new ScheduleService();
+            }
 
+        }
     }
 }

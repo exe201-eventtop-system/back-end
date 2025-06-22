@@ -8,7 +8,7 @@ namespace Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Service> builder)
         {
-            builder.Property(x => x.Price).HasPrecision(10, 2);
+            //builder.Property(x => x.Price).HasPrecision(10, 2);
 
             builder.HasMany(x => x.ImagesNavigation).WithOne(x => x.ServiceNavigation);
             builder.HasOne(x => x.ParentServiceNavigation).WithMany(x => x.ChildServicesNavigation)

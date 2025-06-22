@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ProductServiceDbContext))]
-    [Migration("20250610145044_minhtri")]
-    partial class minhtri
+    [Migration("20250618134336_AddNoteAndIsFavoriteToCartItem")]
+    partial class AddNoteAndIsFavoriteToCartItem
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,49 +68,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Package", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime")
-                        .HasColumnName("created_at");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("StructureId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime")
-                        .HasColumnName("last_modified_at");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StructureId");
-
-                    b.ToTable("Packages");
-                });
-
             modelBuilder.Entity("Domain.Entities.PackageStructure", b =>
                 {
                     b.Property<Guid>("Id")
@@ -124,6 +81,10 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime")
                         .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
@@ -143,6 +104,52 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PackageStructures");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PackageStructureService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
+
+                    b.Property<decimal?>("HourlySurcharge")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<int>("MinimumHours")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StructureId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("last_modified_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("StructureId");
+
+                    b.ToTable("PackageStructureServices");
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
@@ -177,10 +184,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<Guid?>("ParentServiceId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
 
                     b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
@@ -261,21 +264,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("SystemLogs");
                 });
 
-            modelBuilder.Entity("PackageService", b =>
-                {
-                    b.Property<Guid>("PackagesNavigationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServicesNavigationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PackagesNavigationId", "ServicesNavigationId");
-
-                    b.HasIndex("ServicesNavigationId");
-
-                    b.ToTable("PackageService");
-                });
-
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.HasOne("Domain.Entities.Category", "ParentCategoriesNavigation")
@@ -285,8 +273,14 @@ namespace Infrastructure.Migrations
                     b.Navigation("ParentCategoriesNavigation");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Package", b =>
+            modelBuilder.Entity("Domain.Entities.PackageStructureService", b =>
                 {
+                    b.HasOne("Domain.Entities.Service", "ServicesNavigation")
+                        .WithMany("PackageStructureServiceNavigation")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.PackageStructure", "PackageStructureNavigation")
                         .WithMany("PackagesNavigation")
                         .HasForeignKey("StructureId")
@@ -294,6 +288,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("PackageStructureNavigation");
+
+                    b.Navigation("ServicesNavigation");
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
@@ -325,21 +321,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("ServiceNavigation");
                 });
 
-            modelBuilder.Entity("PackageService", b =>
-                {
-                    b.HasOne("Domain.Entities.Package", null)
-                        .WithMany()
-                        .HasForeignKey("PackagesNavigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesNavigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.Navigation("ChildCategoriesNavigation");
@@ -357,6 +338,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("ChildServicesNavigation");
 
                     b.Navigation("ImagesNavigation");
+
+                    b.Navigation("PackageStructureServiceNavigation");
                 });
 #pragma warning restore 612, 618
         }

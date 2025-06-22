@@ -34,21 +34,9 @@ namespace AuthService.Controllers
             _jwtService = jwtService;
         }
 
-        [HttpPost("sign-in")]
+        [HttpPost("sign-up")]
         public async Task<IActionResult> SignIn(RegisterDTO dto)
         => (await _authUseCase.SignInAsync(dto)).ToActionResult();
-
-        [HttpGet("profile")]
-        public async Task<IActionResult> Profile()
-        {
-            var token = HttpContext.Request.Headers["Authorization"].ToString();
-
-            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
-
-            var result = await _authUseCase.ViewProfile(userId);
-
-            return result.ToActionResult();
-        }
 
 
         [HttpPost("confirm-email")]
@@ -56,7 +44,7 @@ namespace AuthService.Controllers
                 => (await _authUseCase.VerifyEmail(token)).ToActionResult();
 
        
-        [HttpPost("sign-up")]
+        [HttpPost("sign-in")]
         public async Task<IActionResult> SignUp( LoginDTO request)=> ( await _authUseCase.SignUpAsync(request)).ToActionResult();
 
         [HttpGet("signin-google")]

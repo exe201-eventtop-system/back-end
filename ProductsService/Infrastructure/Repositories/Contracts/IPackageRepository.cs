@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories.Contracts
 {
-    public interface IPackageRepository: IGenericRepository<Package, Guid>
+    public interface IPackageRepository: IGenericRepository<PackageStructureService, Guid>
     {
     }
 }

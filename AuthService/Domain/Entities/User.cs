@@ -2,22 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class User
+    public class User : BaseEntities
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        public string UserName { get; set; } 
-        public string Email { get; set; } 
-        public string Password { get; set; }
-        public string Address { get; set; }
+        [Column("user_name")]
+        public string? UserName { get; set; }
+
+        [Column("email")]
+        public string? Email { get; set; }
+
+        [Column("hash_password")]
+        public string? HashPassword { get; set; }
+
+        [Column("avatar")]
         public string? Avatar { get; set; }
+
+        [Column("role")]
         public UserRole Role { get; set; }
 
+        public virtual ICollection<Address>? Addresses { get; set; }
+        public virtual Supplier? Suppliers { get; set; }
     }
 }

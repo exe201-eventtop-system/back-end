@@ -27,10 +27,8 @@ namespace Domain.Entities
 
         public string ThumbnailUrl { get; set; }
 
-        public decimal Price { get; set; }
-
         public virtual List<ServiceImage> ImagesNavigation { get; set; }
-        public virtual List<Package> PackagesNavigation { get; set; }
+        public virtual List<PackageStructureService> PackageStructureServiceNavigation { get; set; }
         public virtual Category CategoryNavigation { get; set; }
         public virtual Service ParentServiceNavigation { get; set; }
         public virtual List<Service> ChildServicesNavigation { get; set; }

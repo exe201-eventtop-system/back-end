@@ -15,7 +15,6 @@ namespace Application.Interfaces
     {
         Task<Result> SignInAsync(RegisterDTO registerDTO);
         Task<Result<ResponseToken>> SignUpAsync(LoginDTO loginDTO);
-        Task<Result<User>> ViewProfile(Guid userId);
         //Task<string> RefreshToken(string token, string refreshToken);
         //Task Logout(string token);
         Task<Result<ResponseToken>> VerifyEmail(TokenDTO token);

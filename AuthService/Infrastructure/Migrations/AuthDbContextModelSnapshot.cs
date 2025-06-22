@@ -22,37 +22,205 @@ namespace Infrastructure.SqlServer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("customer_id");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("location");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_at");
+
+                    b.Property<Guid?>("UsersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OrginazationImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("image_url");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("supplier_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("OrginazationImages");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Supplier", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_active");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("location_orginazation");
+
+                    b.Property<string>("NameOrginazation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name_organization");
+
+                    b.Property<string>("TaxCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("tax_code");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_at");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
+                });
+
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
 
                     b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("avatar");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_at");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("email");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("HashPassword")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("hash_password");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
 
                     b.Property<int>("Role")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("role");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_at");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("user_name");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "Users")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UsersId");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OrginazationImage", b =>
+                {
+                    b.HasOne("Domain.Entities.Supplier", "Supplier")
+                        .WithMany("OrginazationImages")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Supplier", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "Users")
+                        .WithOne("Suppliers")
+                        .HasForeignKey("Domain.Entities.Supplier", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Supplier", b =>
+                {
+                    b.Navigation("OrginazationImages");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Suppliers");
                 });
 #pragma warning restore 612, 618
         }

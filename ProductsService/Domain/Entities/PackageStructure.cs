@@ -14,9 +14,10 @@ namespace Domain.Entities
         public Guid AdminId { get; set; }
 
         public string Name { get; set; }
+        public string Description { get; set; }
 
         public PackageType Type {  get; set; }
 
-        public virtual List<Package> PackagesNavigation { get; set; }
+        public virtual List<PackageStructureService> PackagesNavigation { get; set; }
     }
 }

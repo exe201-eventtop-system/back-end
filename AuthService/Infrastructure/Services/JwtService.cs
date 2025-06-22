@@ -127,14 +127,27 @@ namespace Infrastructure.Services
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
 
-            var user = new User();
-            user.UserName = principal.FindFirst("UserName")?.Value ?? string.Empty;
-            user.Email = principal.FindFirst("Email")?.Value ?? string.Empty;
-            user.Address = principal.FindFirst("Address")?.Value ?? string.Empty;
-            user.Password = await _passwordHasher.HashPassword(principal.FindFirst("Password")?.Value ?? string.Empty);
-            user.Role = UserRole.Customer;
+            var user = new User
+            {
+                UserName = principal.FindFirst("UserName")?.Value ?? string.Empty,
+                Email = principal.FindFirst("Email")?.Value ?? string.Empty,
+                Addresses = new List<Address>
+        {
+            new Address
+            {
+                Location = principal.FindFirst("Address")?.Value ?? string.Empty
+            }
+        },
+                Role = UserRole.Customer
+            };
+
+            user.HashPassword = await _passwordHasher.HashPassword(
+                principal.FindFirst("Password")?.Value ?? string.Empty
+            );
+
             return user;
         }
+
         public Task<Guid> ExtractUserIdFromToken(string rawToken)
         {
             if (string.IsNullOrWhiteSpace(rawToken))

@@ -8,5 +8,6 @@
         Dictionary<string, string> GetDataDictionaryFromJwt(string token);
         bool ValidateJwt(string token);
         public string? ValidateBase64RefreshToken(string token);
+        Task<Guid> ExtractUserIdFromToken(string token);
     }
 }

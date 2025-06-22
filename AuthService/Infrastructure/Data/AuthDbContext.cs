@@ -14,9 +14,20 @@ namespace Infrastructure.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<OrginazationImage> OrginazationImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);           
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+        .HasOne(u => u.Suppliers)
+        .WithOne(s => s.Users)
+        .HasForeignKey<Supplier>(s => s.Id); 
+            modelBuilder.Entity<Supplier>()
+                .HasKey(s => s.Id);
         }
     }
 }

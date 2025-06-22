@@ -48,18 +48,6 @@ namespace Infrastructure.UoW
             }
         }
 
-        public IPackageRepository PackageRepository 
-        {
-            get
-            {
-                if (_serviceRepo == null)
-                {
-                    _packageRepo = new PackageRepository(_context);
-                }
-                return _packageRepo;
-            }
-        }
-
         public ICategoryRepository CategoryRepository 
         {
             get

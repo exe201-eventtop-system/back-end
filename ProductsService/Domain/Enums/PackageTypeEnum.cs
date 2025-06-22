@@ -8,11 +8,8 @@ namespace Domain.Enums
 {
     public enum PackageType
     {
-        OneTime,
         Hourly,
         Daily,
-        Weekly,
-        Monthly,
-        Yearly,
+        Cycle,
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Helper;
+using Application.Interfaces;
 using Application.UseCases;
 using AuthService;
 using Domain.Interfaces;
@@ -31,7 +32,9 @@ namespace API.Extentions
             services.AddScoped<IPasswordHasher, PasswordHasherService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddAutoMapper(typeof(Program));
+            services.AddScoped<IUserUseCase, UserUseCase>();
+            services.AddAutoMapper(typeof(Mapping));
+
 
             // Session & Cache
             services.AddDistributedMemoryCache();
@@ -41,8 +44,6 @@ namespace API.Extentions
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
-
-            // CORS
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -53,8 +54,6 @@ namespace API.Extentions
                            .AllowCredentials();
                 });
             });
-
-            // Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -64,7 +63,6 @@ namespace API.Extentions
                 });
             });
 
-            // Authentication (Cookie + Google + JWT)
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

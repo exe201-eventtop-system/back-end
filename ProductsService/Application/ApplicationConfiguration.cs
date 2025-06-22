@@ -22,7 +22,11 @@ namespace Application
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IPackageService, PackageService>();
-
+            services.AddHttpClient("AuthService", client =>
+            {
+                client.BaseAddress = new Uri(configuration["AuthService:BaseUrl"]);
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
             return services;
         }
     }

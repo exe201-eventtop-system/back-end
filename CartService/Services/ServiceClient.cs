@@ -23,18 +23,13 @@ namespace Services
         public async Task<ServiceDTO?> GetServiceByIdAsync(Guid id)
         {
             var endpoint = $"services/{id}";
-            Console.WriteLine("Calling API: " + _httpClient.BaseAddress + endpoint);
-
             try
             {
                 var response = await _httpClient.GetAsync(endpoint);
-                Console.WriteLine("StatusCode: " + response.StatusCode);
-
                 if (!response.IsSuccessStatusCode)
                     return null;
 
                 var content = await response.Content.ReadAsStringAsync();
-
                 var baseResponse = JsonSerializer.Deserialize<ApiResponse<ServiceDTO>>(content, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true

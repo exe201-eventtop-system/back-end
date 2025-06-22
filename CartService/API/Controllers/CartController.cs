@@ -15,31 +15,27 @@ namespace API.Controllers
     public class CartController : BaseController
     {
         private readonly IServiceProviders _serviceProviders;
+        private readonly ITokenUtilities _tokenUtils;   
         public CartController(ITokenUtilities tokenUtilities, IServiceProviders serviceProviders) 
         {
+            _tokenUtils = tokenUtilities;
             _serviceProviders = serviceProviders;
         }
 
-        [HttpGet()]
+        [HttpGet]
         [ProducesResponseType<ApiResponse<CartRespondeDTO>>(StatusCodes.Status200OK)]
         [ProducesResponseType<ApiResponse>(StatusCodes.Status400BadRequest)]
         [ProducesResponseType<ApiResponse>(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<ICollection<CartRespondeDTO>>> GetCart(Guid customerId)
+        public async Task<ActionResult<ICollection<CartRespondeDTO>>> GetCart()
         {
 
-            //var token = Request.Headers.Authorization.Single()?.Split()[1];
-            //var claims = _tokenUtils.GetDataDictionaryFromJwt(token!);
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            //if (!claims.TryGetValue("customer_id", out var customerIdString) || !Guid.TryParse(customerIdString, out Guid customerId))
-            //{
-            //    return Unauthorized(ApiResponse.Failed("Unauthorized: Token missing or invalid customer_id"));
-            //}
+            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<ICollection<CartRespondeDTO>>(async () =>
             {
-                Console.WriteLine(customerId);
-                var cart = await _serviceProviders.CartService.GetCartByCustomerIdAsync(customerId);
-                Console.WriteLine(cart);    
+                var cart = await _serviceProviders.CartService.GetCartByCustomerIdAsync(userId);   
                 return ServiceResult.Success(cart);
             });
         }
@@ -47,17 +43,53 @@ namespace API.Controllers
         [HttpPost("items")]
         [ProducesResponseType(typeof(ApiResponse<AddCartItemResponseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> AddCartService([FromBody] AddCartItemRequestDTO request, Guid customerId)
+        public async Task<IActionResult> AddCartService([FromBody] AddCartItemRequestDTO request)
         {
-            //var token = Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last();
-            //var data = _tokenUtils.GetDataDictionaryFromJwt(token!);
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            //if (!Guid.TryParse(data["id"], out Guid customerId))
-            //    return Unauthorized(new ApiResponse(false, "Token không hợp lệ", null, "unauthorized"));
+            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
             {
-                return await _serviceProviders.CartItemSevice.AddCartServiceAsync(customerId, request.ProductId);
+                return await _serviceProviders.CartItemSevice.AddCartServiceAsync(userId, request.ProductId);
+            });
+        }
+        [HttpGet("total-cart")]
+        [ProducesResponseType(typeof(ApiResponse<AddCartItemResponseDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCartService()
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+
+            return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
+            {
+                return await _serviceProviders.CartItemSevice.GetTotalCartAsync(userId);
+            });
+        }
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(ApiResponse<AddCartItemResponseDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteCart(Guid id)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+
+            return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
+            {
+                return await _serviceProviders.CartItemSevice.DeleteCartAsync(userId,id);
+            });
+        }
+        [HttpGet("{id}/schedule-supplier")]
+        public async Task<IActionResult> GetScheduleSupplier(Guid id)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+
+            return await HandleServiceCall< List<TimeSlotDto>>(async () =>
+            {
+                return await _serviceProviders.ScheduleService.GetScheduleAsync(id);
             });
         }
     }

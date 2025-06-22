@@ -21,18 +21,32 @@ namespace Repositories
 
         public async Task<List<CartItem>> GetCartItemsByCartIdAsync(Guid cartId)
         {
-            return await _context.CartItems.Where(ci => ci.CartId == cartId).ToListAsync();
+            return await _context.CartItems.Where(c => c.IsDeleted == false).Where(ci => ci.CartId == cartId).ToListAsync();
         }
 
         public async Task<int> CountItemsByCartIdAsync(Guid cartId)
         {
             var result =  await _context.CartItems
-            .Where(ci => ci.CartId == cartId)
+            .Where(ci => ci.CartId == cartId && ci.IsDeleted == false)
             .CountAsync();
-            Console.WriteLine("repo: " + result);
             return result;
         }
-       
+
+        public async Task<bool> Delete(Guid cartItemId)
+        {
+            var cart = await _context.CartItems.FirstOrDefaultAsync(ci => ci.Id == cartItemId);
+
+            if (cart == null)
+            {
+                return false;
+            }
+
+            cart.IsDeleted = true;
+            _context.CartItems.Update(cart);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
 
 
     }

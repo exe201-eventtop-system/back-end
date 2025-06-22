@@ -19,10 +19,8 @@ namespace Services
 
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:5000/") // Vì API Gateway chạy ở cổng 5000
+                BaseAddress = new Uri("http://localhost:5000/") 
             };
-
-            Console.WriteLine("HttpClient BaseAddress: " + httpClient.BaseAddress);
 
             _serviceClient = new ServiceClient(httpClient);
         }
@@ -47,10 +45,22 @@ namespace Services
 
                 content.Add(new CartItemResponse
                 {
+                    CartItem = item.Id,
                     ServiceId = item.ServiceId,
                     ServiceName = service?.Name ?? "Không tìm thấy",
+                    SupllierName = service?.SupllierName ?? "Không tìm thấy",
+                    SupllierId = service.SupllierId,
+                    Thumbnail = service?.Thumbnail ?? "",
                     Price = service?.Price ?? 0,
                     Category = service?.Category ?? "",
+                    RentalOptions = service?.Packages.Select(ro => new RentalOptionDto
+                    {
+                        PackageName = ro.PackageName,
+                        Price = ro.Price ?? 0,
+                        HourlySurcharge = ro.HourlySurcharge ?? 0,
+                        MinimumHours = ro.MinimumHours
+
+                    }).ToList() ?? new List<RentalOptionDto>()
                 });
             }
 

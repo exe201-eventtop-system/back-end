@@ -9,21 +9,19 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Package: AuditableEntity<Guid>
+    public class PackageStructureService: AuditableEntity<Guid>
     {
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public Guid SupplierId { get; set; }
-
         [ForeignKey(nameof(PackageStructure))]
         public Guid StructureId { get; set; }
-
+        [ForeignKey(nameof(Service))]
+        public Guid ServiceId { get; set; }
+        public decimal Price { get; set; }
+        public int MinimumHours { get; set; }
+        public decimal? HourlySurcharge { get; set; }
         public bool IsActive {  get; set; }
 
         public virtual PackageStructure PackageStructureNavigation { get; set; }
-        public virtual List<Service> ServicesNavigation { get; set; }
+        public virtual Service ServicesNavigation { get; set; }
 
     }
 }

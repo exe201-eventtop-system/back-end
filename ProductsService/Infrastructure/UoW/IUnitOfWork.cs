@@ -12,8 +12,6 @@ namespace Infrastructure.UoW
     {
         public IServiceRepository ServiceRepository { get; }
 
-        public IPackageRepository PackageRepository { get; }
-
         public ICategoryRepository CategoryRepository { get; }
 
         public IPackageStructureRepository PackageStructureRepository { get; }

@@ -14,21 +14,43 @@
       ],
       "UpstreamPathTemplate": "/auth/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "HttpHandlerOptions": {
-        "UseCookieContainer": true
+      "SwaggerKey": "authService"
+    },
+    {
+      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
       },
-      "SwaggerKey": "authService",
-      "UpstreamHeaderTransform": {
-        "Cookie": "Copy"
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5100
+        }
+      ],
+      "UpstreamPathTemplate": "/user/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "authService"
+    },
+    {
+      "DownstreamPathTemplate": "/api/suppliers/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
       },
-      "AddHeadersToRequest": {},
-      "Forwarding": {
-        "PreserveDownstreamCookies": true
-      }
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5100
+        }
+      ],
+      "UpstreamPathTemplate": "/suppliers/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "authService"
     },
     {
       "DownstreamPathTemplate": "/api/planning/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -47,7 +69,7 @@
       "SwaggerKey": "planningService"
     },
     {
-      "DownstreamPathTemplate": "/api/product/{everything}",
+      "DownstreamPathTemplate": "/api/services/{everything}",
       "DownstreamHeaderTransform": {
         "Set-Cookie": "Copy"
       },
@@ -58,7 +80,7 @@
           "Port": 5300
         }
       ],
-      "UpstreamPathTemplate": "/product/{everything}",
+      "UpstreamPathTemplate": "/services/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "SwaggerKey": "productService",
       "UpstreamHeaderTransform": {
@@ -66,25 +88,12 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/services/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7035
-        }
-      ],
-      "UpstreamPathTemplate": "/services/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
-      "SwaggerKey": "productService"
-    },
-    {
       "DownstreamPathTemplate": "/api/cart/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7058
+          "Port": 5500
         }
       ],
       "UpstreamPathTemplate": "/cart/{everything}",
@@ -109,7 +118,7 @@
         {
           "Name": "Cart Service API",
           "Version": "v1",
-          "Url": "https://localhost:7058/swagger/v1/swagger.json"
+          "Url": "https://localhost:5500/swagger/v1/swagger.json"
         }
       ]
     },
@@ -124,22 +133,12 @@
       ]
     },
     {
-      "Key": "feedbackService",
-      "Config": [
-        {
-          "Name": "Feedback Service API",
-          "Version": "v1",
-          "Url": "http://localhost:3000/api-docs/swagger.json"
-        }
-      ]
-    },
-    {
       "Key": "productService",
       "Config": [
         {
           "Name": "Product Service API",
           "Version": "v1",
-          "Url": "https://localhost:7035/swagger/v1/swagger.json"
+          "Url": "https://localhost:5300/swagger/v1/swagger.json"
         }
       ]
     }

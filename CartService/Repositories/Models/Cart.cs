@@ -5,15 +5,8 @@ using System.Collections.Generic;
 
 namespace Repositories.Models;
 
-public partial class Cart
+public partial class Cart : BaseModel
 {
-    public Guid Id { get; set; }
-
     public Guid CustomerId { get; set; }
-
-    public DateTime CreateAt { get; set; }
-
-    public DateTime UpdateDate { get; set; }
-
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 }

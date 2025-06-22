@@ -21,10 +21,22 @@ namespace Application.Models.DTO.Service
         [JsonPropertyName("category")]
         public string Category { get; set; }
 
-        [JsonPropertyName("price")]
-        public decimal Price { get; set; }
-
         [JsonPropertyName("thumbnail")]
         public string ThumbnailUrl { get; set; }
+
+        [JsonPropertyName("supplier_name")]
+        public string SupplierName { get; set; }
+        [JsonPropertyName("is_active")]
+        public bool IsActive{ get; set; }
+        [JsonPropertyName("packages")]
+        public List<RentalOptionDto> RentalOptionListDto { get; set; } = new();
+    }
+    public class RentalOptionListDto
+    {
+        [JsonPropertyName("package_name")]
+        public string PackageName { get; set; } = string.Empty;
+
+        [JsonPropertyName("price")]
+        public decimal Price { get; set; }
     }
 }

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.SqlServer", "Infrastructure\Infrastructure.SqlServer.csproj", "{08D06694-E5E3-4846-A7C1-8A6D9ED8034D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "..\API-Gatewate\Contacts\Contacts.csproj", "{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{08D06694-E5E3-4846-A7C1-8A6D9ED8034D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D06694-E5E3-4846-A7C1-8A6D9ED8034D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08D06694-E5E3-4846-A7C1-8A6D9ED8034D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
