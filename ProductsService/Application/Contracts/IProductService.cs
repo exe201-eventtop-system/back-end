@@ -18,6 +18,13 @@ namespace Application.Contracts
         public Task<ServiceResult<PaginationResult<ServiceSummaryDTO>>> GetAllServiceAsync(int page, int page_size, string name_contain, string category);
 
         /// <summary>
+        ///     Get all services using service id.
+        /// </summary>
+        /// <param name="service_ids">list of service ids</param>
+        /// <returns>A <see cref="List{ServiceSummaryDTO}"/> containing found services.</returns>
+        public Task<ServiceResult<List<ServiceSummaryDTO>>> GetAllServiceAsync(List<Guid> service_ids);
+
+        /// <summary>
         ///     Get a specific record of service through it's id.
         /// </summary>
         /// <param name="Service_id">the service id of type <see cref="Guid"/></param>

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,9 +22,16 @@ namespace Infrastructure.Repositories.Implementations
                 .Include(x => x.ChildServicesNavigation)
                 .ToListAsync();
 
-            Console.WriteLine($"There are {list.Count} item in the final result");
-
             return list;
+        }
+
+        public override async Task<List<Service>> GetAllAsync(Expression<Func<Service, bool>> filter, Func<IQueryable<Service>, IOrderedQueryable<Service>> orderBy)
+        {
+            var list = _context.Services.Include(x => x.ParentServiceNavigation)
+                .Include(x => x.CategoryNavigation)
+                .Include(x => x.ChildServicesNavigation).Where(filter);
+
+            return await orderBy(list).ToListAsync();
         }
 
         public override async Task<Service?> GetByIdAsync(Guid id)
