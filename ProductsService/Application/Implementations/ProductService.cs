@@ -107,6 +107,18 @@ namespace Application.Implementations
 
             return ServiceResult<PaginationResult<ServiceSummaryDTO>>.Success(mapped_result);
         }
+
+        public async Task<ServiceResult<List<ServiceSummaryDTO>>> GetAllServiceAsync(List<Guid> service_ids)
+        {
+            List<Service> result = await _unitOfWork.ServiceRepository.GetAllAsync(x => service_ids.Contains(x.Id), x => x.OrderBy(x => x.Name));
+
+            Console.WriteLine(result[0].CategoryNavigation.Name);
+
+            List<ServiceSummaryDTO> mapped_result = _mapper.Map<List<ServiceSummaryDTO>>(result);
+
+            return ServiceResult<List<ServiceSummaryDTO>>.Success(mapped_result);
+        }
+
         public async Task<ServiceResult<ServiceDetailDTO>> GetServiceAsync(Guid service_id)
         {
             //Service? result = await _unitOfWork.ServiceRepository.GetByIdAsync(service_id); 

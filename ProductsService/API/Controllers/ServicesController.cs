@@ -31,6 +31,21 @@ namespace API.Controllers
             });
         }
 
+        [HttpPost("ids")]
+        [ProducesResponseType(typeof(List<ServiceSummaryDTO>), 200)]
+        public async Task<IActionResult> GetAllWithIdListAsync([FromBody] List<Guid> product_ids)
+        {
+            ServiceResult<List<ServiceSummaryDTO>> result = await _service.GetAllServiceAsync(product_ids);
+
+            return Ok(new ApiResponse<List<ServiceSummaryDTO>>
+            {
+                IsSuccess = true,
+                ErrorCode = null,
+                Message = "Success",
+                Data = result.Value
+            });
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(PaginationResult<ServiceDetailDTO>), 200)]
         [ProducesResponseType(typeof(PaginationResult<object>), 404)]

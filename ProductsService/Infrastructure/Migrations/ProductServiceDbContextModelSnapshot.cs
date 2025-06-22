@@ -65,6 +65,52 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("Domain.Entities.Package", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_deleted");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StructureId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime")
+                        .HasColumnName("last_modified_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StructureId");
+
+                    b.ToTable("Packages");
+                });
+
+>>>>>>> 76932c7e0af62aefd772d4dbb30ce0bc2f69df75
             modelBuilder.Entity("Domain.Entities.PackageStructure", b =>
                 {
                     b.Property<Guid>("Id")
