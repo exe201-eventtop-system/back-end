@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -108,9 +108,9 @@ namespace Infrastructure.Migrations
                     SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StructureId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime", nullable: false),
-                    last_modified_at = table.Column<DateTime>(type: "datetime", nullable: false)
+                    last_modified_at = table.Column<DateTime>(type: "datetime", nullable: false),
+                    is_deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
