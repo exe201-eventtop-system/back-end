@@ -1,5 +1,5 @@
 ﻿using Application.Commons;
-using Application.DTOs;
+using Application.Commons.DTOs;
 using Contacts.Supplier;
 using Domain.Entities;
 using System;
@@ -12,7 +12,7 @@ namespace Application.Interfaces
 {
     public interface IUserUseCase
     {
-        Task<Result<UserProfileDto>> GetProfile(Guid userId);
+        Task<Result<UserProfileDTO>> GetProfile(Guid userId);
         Task<ICollection<SupplierResponseDTO>> GetListSupllier(List<Guid> supplierIds);
         Task<SupplierResponseDTO> GetSupllier(Guid supplierId);
     }

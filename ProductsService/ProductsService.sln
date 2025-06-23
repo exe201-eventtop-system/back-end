@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "..\API-Gatewate\Contacts\Contacts.csproj", "{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "..\API-Gateway\SharedLibrary\SharedLibrary.csproj", "{1D8C1B08-550A-47F2-A032-3506134A627A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5333EE87-E91D-F1CA-2DDB-6D39A4FCA7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8C1B08-550A-47F2-A032-3506134A627A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8C1B08-550A-47F2-A032-3506134A627A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8C1B08-550A-47F2-A032-3506134A627A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8C1B08-550A-47F2-A032-3506134A627A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

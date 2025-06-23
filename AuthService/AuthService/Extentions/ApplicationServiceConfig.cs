@@ -1,16 +1,19 @@
-﻿using Application.Helper;
+﻿using Application.Commons.DTOs;
 using Application.Interfaces;
 using Application.UseCases;
-using AuthService;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Repositories;
-using Infrastructure.Services;
-using Infrastructure.SqlServer.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SharedLibrary.DTOs.User;
+using SharedLibrary.Email;
+using SharedLibrary.Jwt;
+using SharedLibrary.Password;
 using System.Security.Claims;
 using System.Text;
 
@@ -27,13 +30,15 @@ namespace API.Extentions
             });
 
             // Dependency Injection
-            services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthUseCase, AuthUseCase>();
-            services.AddScoped<IPasswordHasher, PasswordHasherService>();
-            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserUseCase, UserUseCase>();
-            services.AddAutoMapper(typeof(Mapping));
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<EmailService>();
+            services.AddScoped<JwtService>();
+            services.AddScoped<IPasswordHasher<UserToHashPassword>, PasswordHasher<UserToHashPassword>>();
+            services.AddScoped<PasswordHasherService>();
 
 
             // Session & Cache
@@ -90,19 +95,6 @@ namespace API.Extentions
                 googleOptions.ClaimActions.MapJsonKey(ClaimTypes.Surname, "family_name");
                 googleOptions.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
                 googleOptions.ClaimActions.MapJsonKey("urn:google:picture", "picture");
-            })
-            .AddJwtBearer("Bearer", options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(config["Jwt:Secret"])
-                    )
-                };
             });
 
             services.AddAuthorization();

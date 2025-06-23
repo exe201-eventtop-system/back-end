@@ -14,7 +14,6 @@ namespace Infrastructure.Data
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<OrginazationImage> OrginazationImages { get; set; }

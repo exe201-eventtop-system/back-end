@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using Services.Commons;
-using SharedLibrary.TokenUtilities;
 using ShareLibary.Model;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -9,14 +8,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 public class BaseController : ControllerBase
 {
     private const string ERORR_MESSAGE = "An error has occurred:";
-    protected readonly ITokenUtilities _tokenUtils;
 
     public BaseController() { }
-
-    public BaseController( ITokenUtilities tokenUtilities)
-    {
-        _tokenUtils = tokenUtilities;
-    }
 
     private ActionResult? HandleError(ServiceResult result)
     {
@@ -43,29 +36,6 @@ public class BaseController : ControllerBase
         return null;
     }
 
-    protected string GetUserIdFromJwt()
-    {
-        string? jwt = Request.Headers.Authorization.First();
-
-        // Throw an error when this method is used with an endpoint does not requires authentication.
-        if (jwt == null)
-        {
-            throw new InvalidOperationException("Can not use this method with endpoint allows anonymous access.");
-        }
-
-        // Split the bearer token ("Bearer adfbnenofcsa...") into two parts and take the jwt part to decode and get the user id.
-        return _tokenUtils.GetDataDictionaryFromJwt(jwt.Split()[1])["id"];
-    }
-    protected string GetUserRoleFromJwt()
-    {
-        string? jwt = Request.Headers.Authorization.First();
-        if (jwt == null)
-        {
-            throw new InvalidOperationException("Can not use this method with endpoint allows anonymous access.");
-        }
-
-        return _tokenUtils.GetDataDictionaryFromJwt(jwt.Split()[1])["role"];
-    }
     protected async Task<IActionResult> HandleApiCallAsync<T>(Func<Task<T>> func)
     {
         try

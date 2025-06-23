@@ -1,14 +1,16 @@
 ﻿using Application.Commons;
-using Application.DTOs;
-using Application.Helper;
-using Application.Helper.Token;
+using Application.Commons.DTOs;
 using Application.Interfaces;
-using AuthService.DTO;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
+using SharedLibrary.DTOs.Token;
+using SharedLibrary.Email;
+using SharedLibrary.Enum;
+using SharedLibrary.Jwt;
+using SharedLibrary.Password;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,19 +23,21 @@ namespace Application.UseCases
     public class AuthUseCase : IAuthUseCase
     {
         private readonly IMapper _mapper;
-        public readonly IEmailService _emailService;
+        public readonly EmailService _emailService;
         private readonly IUserRepository _userRepository;
-        private readonly IJwtService _jwtService;
+        private readonly PasswordHasherService _passwordHasher;
+        private readonly JwtService _jwtService;
         private readonly IConfiguration _configuration;
-        public AuthUseCase(IMapper mapper, IEmailService emailService,IUserRepository userRepository,IJwtService jwtService,IConfiguration configuration)
+        public AuthUseCase(IMapper mapper, EmailService emailService,IUserRepository userRepository,JwtService jwtService,IConfiguration configuration,PasswordHasherService passwordHasherService)
         {
             _mapper = mapper;
             _emailService = emailService;
             _userRepository = userRepository;
             _jwtService = jwtService;
             _configuration = configuration; 
+            _passwordHasher = passwordHasherService;
         }
-        public async Task<Result> SignInAsync(RegisterDTO registerDTO)
+        public async Task<Result> SignInAsync(SignUpDTO registerDTO)
         {
             if (await _userRepository.CheckEmail(registerDTO.Email))
             {
@@ -54,65 +58,79 @@ namespace Application.UseCases
         }
 
 
-        public async Task<Result<ResponseToken>> VerifyEmail(TokenDTO tokenDto)
+        public async Task<Result<TokenDTO>> VerifyEmail(TokenDTO tokenDto)
         {
             try
             {
                 var principal = await _jwtService.ValidateToken(tokenDto);
                 if (principal == null)
                 {
-                    return Result<ResponseToken>.Failure(new ServiceError("InvalidToken", "Invalid or expired token."));
+                    return Result<TokenDTO>.Failure(new ServiceError("InvalidToken", "Invalid or expired token."));
                 }
 
-                var user = await _jwtService.MapClaimsToUser(principal);
+                var user = await MapClaimsToUser(principal);
                 if (user == null)
                 {
-                    return Result<ResponseToken>.Failure(new ServiceError("InvalidUser", "User could not be identified."));
+                    return Result<TokenDTO>.Failure(new ServiceError("InvalidUser", "User could not be identified."));
                 }
 
                 var savedUser = await _userRepository.SaveUser(user);
                 var token = await _jwtService.GenerateToken(savedUser);
-                var refreshToken = await _jwtService.GenerateRefreshToken();
+                var responseToken = new TokenDTO { AccessToken = token};
 
-                var responseToken = new ResponseToken { AccessToken = token, RefreshToken = refreshToken };
-
-                return Result<ResponseToken>.Success(responseToken);
+                return Result<TokenDTO>.Success(responseToken);
             }
             catch (Exception ex)
             {
-                return Result<ResponseToken>.Failure(new ServiceError("UnhandledError", $"An error occurred: {ex.Message}"));
+                return Result<TokenDTO>.Failure(new ServiceError("UnhandledError", $"An error occurred: {ex.Message}"));
             }
         }
 
 
-        public async Task<Result<ResponseToken>> SignUpAsync(LoginDTO loginDTO)
+        public async Task<Result<TokenDTO>> SignUpAsync(SignInDTO loginDTO)
         {
             try
             {
                 var user = await _userRepository.VerifyAccount(loginDTO.Email, loginDTO.Password);
                 if (user == null)
                 {
-                    return Result<ResponseToken>.Failure(ServiceError.ValidationFailed("Invalid email or password."));
+                    return Result<TokenDTO>.Failure(ServiceError.ValidationFailed("Invalid email or password."));
                 }
 
                 var accessToken = await _jwtService.GenerateToken(user);
-                var refreshToken = await _jwtService.GenerateRefreshToken();
 
-                var responseToken = new ResponseToken
+                var responseToken = new TokenDTO
                 {
                     AccessToken = accessToken,
-                    RefreshToken = refreshToken
                 };
 
-                return Result<ResponseToken>.Success(responseToken);
+                return Result<TokenDTO>.Success(responseToken);
             }
             catch (Exception ex)
             {
-                return Result<ResponseToken>.Failure(
+                return Result<TokenDTO>.Failure(
                     ServiceError.UnhandledException($"Unexpected error occurred during sign-in: {ex.Message}")
                 );
             }
         }
+        private async Task<User> MapClaimsToUser(ClaimsPrincipal principal)
+        {
+            if (principal == null)
+                throw new ArgumentNullException(nameof(principal));
 
+            var user = new User
+            {
+                UserName = principal.FindFirst("UserName")?.Value ?? string.Empty,
+                Email = principal.FindFirst("Email")?.Value ?? string.Empty,
+                Address = principal.FindFirst("Address")?.Value ?? string.Empty,
+                Role = UserRole.Customer
+            };
+
+            user.HashPassword = await _passwordHasher.HashPassword(
+                principal.FindFirst("Password")?.Value ?? string.Empty
+            );
+
+            return user;
+        }
     }
 }

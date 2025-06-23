@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|c:\\users\\admin\\documents\\exe201\\back-end\\productsservice\\application\\implementations\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\implementations\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\implementations\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|c:\\users\\admin\\documents\\exe201\\back-end\\productsservice\\infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|c:\\users\\admin\\documents\\exe201\\back-end\\productsservice\\infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\systemlogger\\systemlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\systemlogger\\systemlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\implementations\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\implementations\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:1:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:1:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:2:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\implementations\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,63 +42,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\GenericRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\GenericRepository.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwDMAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T06:52:59.759Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "API\\appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\API\\appsettings.json",
-              "RelativeToolTip": "API\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T05:09:28.236Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IProductService.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Application\\Contracts\\IProductService.cs",
-              "RelativeDocumentMoniker": "Application\\Contracts\\IProductService.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Application\\Contracts\\IProductService.cs",
-              "RelativeToolTip": "Application\\Contracts\\IProductService.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBcAAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T02:59:29.264Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ServiceRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T04:01:20.604Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -86,37 +54,98 @@
               "Title": "ProductService.cs",
               "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\ProductService.cs",
               "RelativeDocumentMoniker": "Application\\Implementations\\ProductService.cs",
-              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\ProductService.cs",
-              "RelativeToolTip": "Application\\Implementations\\ProductService.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAYwC0AAACTAAAAAAAAAA==",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\ProductService.cs*",
+              "RelativeToolTip": "Application\\Implementations\\ProductService.cs*",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAowEEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T11:03:24.55Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "API\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "API\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-14T13:45:51.056Z",
+              "WhenOpened": "2025-06-23T17:11:36.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\GenericRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\EXE201\\back-end\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\GenericRepository.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAwF0AAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T04:01:11.82Z",
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "API\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-23T07:50:45.919Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SystemLogger.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "RelativeToolTip": "Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T07:39:39.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\CategoryService.cs",
+              "RelativeDocumentMoniker": "Application\\Implementations\\CategoryService.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\CategoryService.cs",
+              "RelativeToolTip": "Application\\Implementations\\CategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T07:39:33.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Common\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "API\\Common\\ApiResponse.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Common\\ApiResponse.cs",
+              "RelativeToolTip": "API\\Common\\ApiResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-23T07:39:18.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T04:01:20.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\GenericRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvygAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T04:01:11.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T06:52:59.759Z"
             }
           ]
         }

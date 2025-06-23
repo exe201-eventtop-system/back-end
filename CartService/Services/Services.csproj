@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Repositories\Repositories.csproj" />
-    <ProjectReference Include="..\ShareLibary\ShareLibary.csproj" />
   </ItemGroup>
 
 </Project>

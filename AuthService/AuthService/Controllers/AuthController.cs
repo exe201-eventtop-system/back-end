@@ -1,7 +1,6 @@
 ﻿using Application.Commons;
-using Application.DTOs;
+using Application.Commons.DTOs;
 using Application.Interfaces;
-using AuthService.DTO;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -9,13 +8,12 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
+using SharedLibrary.DTOs.Token;
+using SharedLibrary.Jwt;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
 using Vonage;
 using Vonage.Messaging;
 using Vonage.Request;
@@ -27,15 +25,15 @@ namespace AuthService.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthUseCase _authUseCase;
-        private readonly IJwtService _jwtService;
-        public AuthController(IAuthUseCase authUseCase,IJwtService jwtService)
+        private readonly JwtService _jwtService;
+        public AuthController(IAuthUseCase authUseCase,JwtService jwtService)
         {
             _authUseCase = authUseCase;
             _jwtService = jwtService;
         }
 
         [HttpPost("sign-up")]
-        public async Task<IActionResult> SignIn(RegisterDTO dto)
+        public async Task<IActionResult> SignIn(SignUpDTO dto)
         => (await _authUseCase.SignInAsync(dto)).ToActionResult();
 
 
@@ -45,7 +43,7 @@ namespace AuthService.Controllers
 
        
         [HttpPost("sign-in")]
-        public async Task<IActionResult> SignUp( LoginDTO request)=> ( await _authUseCase.SignUpAsync(request)).ToActionResult();
+        public async Task<IActionResult> SignUp(SignInDTO request)=> ( await _authUseCase.SignUpAsync(request)).ToActionResult();
 
         [HttpGet("signin-google")]
         public IActionResult SignInGoogle()

@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Jwt;
 
 namespace API.Controllers
 {
@@ -10,8 +11,8 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserUseCase _useCase;
-        private readonly IJwtService _jwtService;
-        public UserController(IUserUseCase useCase, IJwtService jwtService)
+        private readonly JwtService _jwtService;
+        public UserController(IUserUseCase useCase, JwtService jwtService)
         {
             _useCase = useCase;
             _jwtService = jwtService;

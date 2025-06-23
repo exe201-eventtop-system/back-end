@@ -1,6 +1,6 @@
 ﻿
 using Application.Commons;
-using Application.DTOs;
+using Application.Commons.DTOs;
 using Application.Interfaces;
 using AutoMapper;
 using Contacts.Supplier;
@@ -29,10 +29,9 @@ namespace Application.UseCases
         public Task<SupplierResponseDTO> GetSupllier(Guid supplierId)
         {
             return _userRepository.GetSupplier(supplierId);
-
         }
 
-        public async Task<Result<UserProfileDto>> GetProfile(Guid userId)
+        public async Task<Result<UserProfileDTO>> GetProfile(Guid userId)
         {
             try
             {
@@ -40,18 +39,18 @@ namespace Application.UseCases
 
                 if (user == null)
                 {
-                    return Result<UserProfileDto>.Failure(
+                    return Result<UserProfileDTO>.Failure(
                         ServiceError.NotFoundError($"User with ID {userId} was not found.")
                     );
                 }
 
-                var dto = _mapper.Map<UserProfileDto>(user);
+                var dto = _mapper.Map<UserProfileDTO>(user);
 
-                return Result<UserProfileDto>.Success(dto);
+                return Result<UserProfileDTO>.Success(dto);
             }
             catch (Exception ex)
             {
-                return Result<UserProfileDto>.Failure(
+                return Result<UserProfileDTO>.Failure(
                     ServiceError.UnhandledException($"Unexpected error occurred while retrieving profile: {ex.Message}")
                 );
             }

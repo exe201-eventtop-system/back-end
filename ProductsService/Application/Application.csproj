@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\API-Gatewate\Contacts\Contacts.csproj" />
+    <ProjectReference Include="..\..\API-Gateway\SharedLibrary\SharedLibrary.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 

@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories.Models;
 using Services.Commons;
 using Services.DTOs;
-using SharedLibrary.TokenUtilities;
 using Services;
 using ShareLibary.Model;
+using SharedLibrary.Jwt;
 
 namespace API.Controllers
 {
@@ -15,11 +15,11 @@ namespace API.Controllers
     public class CartController : BaseController
     {
         private readonly IServiceProviders _serviceProviders;
-        private readonly ITokenUtilities _tokenUtils;   
-        public CartController(ITokenUtilities tokenUtilities, IServiceProviders serviceProviders) 
+        private readonly JwtService _jwtService;
+        public CartController( IServiceProviders serviceProviders,JwtService jwtService) 
         {
-            _tokenUtils = tokenUtilities;
             _serviceProviders = serviceProviders;
+            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace API.Controllers
 
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<ICollection<CartRespondeDTO>>(async () =>
             {
@@ -47,7 +47,7 @@ namespace API.Controllers
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
             {
@@ -60,7 +60,7 @@ namespace API.Controllers
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
             {
@@ -73,7 +73,7 @@ namespace API.Controllers
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall<AddCartItemResponseDTO>(async () =>
             {
@@ -85,7 +85,7 @@ namespace API.Controllers
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
-            Guid userId = await _tokenUtils.ExtractUserIdFromToken(token);
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
             return await HandleServiceCall< List<TimeSlotDto>>(async () =>
             {

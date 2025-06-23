@@ -45,7 +45,6 @@ namespace Services
 
             int totalItems = await _unitOfWork.CartItemRepository
                 .CountItemsByCartIdAsync(cart.Id);
-            Console.WriteLine(totalItems);
 
             return ServiceResult<AddCartItemResponseDTO>.Success(
                 new AddCartItemResponseDTO { TotalCartItem = totalItems }

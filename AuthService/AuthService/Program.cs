@@ -26,16 +26,6 @@ namespace AuthService
             app.UseSession();
             app.Use(async (context, next) =>
             {
-                var check = context.Session.GetString("session_test");
-                if (string.IsNullOrEmpty(check))
-                {
-                    context.Session.SetString("session_test", "hello");
-                    Console.WriteLine("✅ Session initialized.");
-                }
-                else
-                {
-                    Console.WriteLine("✅ Session found: " + check);
-                }
                 await next();
             });
             app.UseHttpsRedirection();

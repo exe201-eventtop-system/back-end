@@ -17,48 +17,10 @@ namespace Infrastructure.SqlServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("create_at");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customer_id");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("location");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("update_at");
-
-                    b.Property<Guid?>("UsersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("Addresses");
-                });
 
             modelBuilder.Entity("Domain.Entities.OrginazationImage", b =>
                 {
@@ -143,6 +105,10 @@ namespace Infrastructure.SqlServer.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("address");
+
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("avatar");
@@ -180,15 +146,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Address", b =>
-                {
-                    b.HasOne("Domain.Entities.User", "Users")
-                        .WithMany("Addresses")
-                        .HasForeignKey("UsersId");
-
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Domain.Entities.OrginazationImage", b =>
                 {
                     b.HasOne("Domain.Entities.Supplier", "Supplier")
@@ -218,8 +175,6 @@ namespace Infrastructure.SqlServer.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Suppliers");
                 });
 #pragma warning restore 612, 618
