@@ -150,7 +150,7 @@
           "Port": 5600
         }
       ],
-      "UpstreamPathTemplate": "/cart/{everything}",
+      "UpstreamPathTemplate": "/blogs/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "SwaggerKey": "blogsService"
     }

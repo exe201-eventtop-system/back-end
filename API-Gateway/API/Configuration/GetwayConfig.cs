@@ -33,6 +33,15 @@ namespace API.Configuration
                         ClockSkew = TimeSpan.Zero 
                     };
                 });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             return services;
         }
