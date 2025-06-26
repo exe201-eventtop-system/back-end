@@ -11,7 +11,7 @@ namespace Application.Commons.DTOs
     public class PlanningFilterDTO
     {
         [FromQuery(Name = "page")]
-        public int Page { get; set; } = 0;
+        public int Page { get; set; } = 1;
 
         [FromQuery(Name = "size")]
         public int Size { get; set; } = 10;

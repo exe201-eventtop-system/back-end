@@ -25,7 +25,7 @@ namespace Domain.Entities
         public string? Description { get; set; }
 
         [Column("status")]
-        public PlanningStatus? Status { get; set; }
+        public PlanningStatus? Status { get; set; } = PlanningStatus.Draft;
 
         [Column("location", TypeName = "text")]
         public string? Location { get; set; }

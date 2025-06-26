@@ -12,7 +12,10 @@ namespace Infrastructure.SqlServer.Data
     {
         public DbSet<Planning> Plannings { get; set; }
         public DbSet<SesstionService> SesstionServices { get; set; }
-
+        public PlanningServiceDbContext(DbContextOptions<PlanningServiceDbContext> options)
+        : base(options)
+        {
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

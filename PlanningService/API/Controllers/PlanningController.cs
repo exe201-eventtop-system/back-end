@@ -1,20 +1,23 @@
-﻿using Application.Commons.DTOs;
+﻿using Application.Commons;
+using Application.Commons.DTOs;
 using Application.Interfaces;
-using Application.Commons;
+using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Jwt;
+using System.Globalization;
+using System.Text.Json;
 
 namespace API.Controllers
 {
     [Route("api/planning")]
-    [Authorize]
     [ApiController]
     public class PlanningController : ControllerBase
     {
         private readonly IPlanningUseCase _planningUseCase;
+        private readonly IAIGennerateUseCase _aIGennerateUseCase;
         private readonly JwtService _jwtService;
 
         public PlanningController(IPlanningUseCase planningUseCase, JwtService jwtService)
@@ -51,7 +54,7 @@ namespace API.Controllers
         [HttpDelete("{planningId}")]
         public async Task<IActionResult> DeletePlanAsync(Guid planningId)=>  await _planningUseCase.DeletePlanAsync(planningId).ToActionResult();
 
-        [HttpGet("count")]
+        [HttpGet("total-planning")]
         public async Task<IActionResult> GetNumberPlanningAsync()
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
@@ -64,5 +67,12 @@ namespace API.Controllers
 
         [HttpDelete("delete-service/{sessionId}")]
         public async Task<IActionResult> DeleteServiceAsync(Guid sessionId)=> await _planningUseCase.DeleteService(sessionId).ToActionResult();
+        [HttpPost("generate")]
+        public async Task<IActionResult> GeneratePlanning([FromBody] string script)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+            return await _aIGennerateUseCase.GenerateScriptAsync(userId,script).ToActionResult();
+        }
     }
 }

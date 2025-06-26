@@ -6,6 +6,7 @@ using Infrastructure.SqlServer.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using SharedLibrary.DTOs.User;
 using SharedLibrary.Jwt;
 
 namespace API.Extentions
@@ -19,6 +20,7 @@ namespace API.Extentions
             services.AddScoped<IPlanningRepository, PlanningRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<JwtService>();
+            services.AddScoped(typeof(IPasswordHasher<UserToHashPassword>), typeof(PasswordHasher<UserToHashPassword>));
 
             return services;
         }

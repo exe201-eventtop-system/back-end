@@ -71,9 +71,6 @@
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       },
-      "RouteClaimsRequirement": {
-        "Role": "Customer"
-      },
       "SwaggerKey": "planningService"
     },
     //================================================================================================================
@@ -180,7 +177,7 @@
         {
           "Name": "Planning Service API",
           "Version": "v1",
-          "Url": "http://localhost:5200/v3/api-docs"
+          "Url": "https://localhost:5200/swagger/v1/swagger.json"
         }
       ]
     },

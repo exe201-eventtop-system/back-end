@@ -1,25 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Options;
-using Services.DTOs;
-using Services.Interfaces;
+﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Services.Implementations
+namespace SharedLibrary.AIGenerate
 {
-    public class GeminiClient : IEventScriptGenerator
+    public class GeminiClient
     {
         private readonly HttpClient _httpClient;
         private readonly string _geminiUrl;
-
-        // ✅ Đặt key và Gemini URI tại đây
-
 
         public GeminiClient(HttpClient httpClient, IOptions<GeminiSettings> settings)
         {
@@ -83,10 +76,6 @@ namespace Services.Implementations
             if (!response.IsSuccessStatusCode)
                 throw new Exception($"Gemini API Error: {response.StatusCode} - {json}");
 
-            // Log nội dung trả về
-            Console.WriteLine("Gemini Response:");
-            Console.WriteLine(json);
-
 
             //// Parse JSON an toàn
             //using var document = JsonDocument.Parse(json);
@@ -107,7 +96,6 @@ namespace Services.Implementations
 
         public string ExtractJson(string responseText)
         {
-            // Gỡ bỏ các thẻ markdown nếu có
             responseText = responseText.Replace("```json", "").Replace("```", "").Trim();
 
             var match = Regex.Match(responseText, @"\{(?:[^{}]|(?<open>\{)|(?<-open>\}))+(?(open)(?!))\}");
