@@ -11,8 +11,8 @@ namespace Repositories
     {
         CartItemRepository CartItemRepository { get; }
         CartRepository CartRepository { get; }
-       ScheduleRepository ScheduleRepository { get; }
-
+        UsedServiceRepository UsedServiceRepository { get; }
+        TransactionRepository TransactionRepository { get; }
         int SaveChangesWithTransaction();
 
         Task<int> SaveChangesWithTransactionAsync();
@@ -25,8 +25,8 @@ namespace Repositories
 
         private CartItemRepository _cartItemRepository;
         private CartRepository _cartRepository;
-        private ScheduleRepository _scheduleRepository;
-
+        private UsedServiceRepository _usedServiceRepository;
+        private TransactionRepository _transactionRepository;
         public UnitOfWork() => _context = new CartServiceDBContext();
         public CartItemRepository CartItemRepository
         {
@@ -43,11 +43,18 @@ namespace Repositories
             }
         }
 
-        public ScheduleRepository ScheduleRepository
+        public UsedServiceRepository UsedServiceRepository
         {
             get
             {
-                return _scheduleRepository ??= new ScheduleRepository(_context);
+                return _usedServiceRepository ??= new UsedServiceRepository(_context);
+            }
+        }
+        public TransactionRepository TransactionRepository
+        {
+            get
+            {
+                return _transactionRepository ??= new TransactionRepository(_context);
             }
         }
         public void Dispose() => _context.Dispose();

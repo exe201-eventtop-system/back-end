@@ -1,8 +1,10 @@
-﻿using Repositories;
+﻿using Microsoft.AspNetCore.Http;
+using Repositories;
 using Services.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,17 +15,29 @@ namespace Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ServiceClient _serviceClient;
 
-        public CartService()
+        public CartService(IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = new UnitOfWork();
 
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:5000/") 
+                BaseAddress = new Uri("http://localhost:5000/")
             };
+
+            var token = httpContextAccessor.HttpContext?
+                            .Request.Headers["Authorization"]
+                            .ToString()
+                            ?.Replace("Bearer ", "");
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                httpClient.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
+            }
 
             _serviceClient = new ServiceClient(httpClient);
         }
+
 
         public CartService(IUnitOfWork unitOfWork, ServiceClient serviceClient)
         {

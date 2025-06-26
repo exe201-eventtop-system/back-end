@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,23 +11,27 @@ namespace Services
     {
         CartService CartService { get; }
         CartItemSevice CartItemSevice { get; }
-        ScheduleService ScheduleService { get; }
+        UsedServices UsedService { get; }
     }
 
 
     public class ServiceProviders : IServiceProviders
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private CartService _cartService;
         private CartItemSevice _cartItemSevice;
-        private ScheduleService _scheduleService;
+        private UsedServices _usedService;
 
-        public ServiceProviders() { }
+        public ServiceProviders(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         public CartService CartService
         {
             get
             {
-                return _cartService ??= new CartService();
+                return _cartService ??= new CartService(_httpContextAccessor);
             }
         }
 
@@ -37,11 +42,11 @@ namespace Services
                 return _cartItemSevice ??= new CartItemSevice();
             }
         }
-        public ScheduleService ScheduleService
+        public UsedServices UsedService
         {
             get
             {
-                return _scheduleService ??= new ScheduleService();
+                return _usedService ??= new UsedServices();
             }
 
         }

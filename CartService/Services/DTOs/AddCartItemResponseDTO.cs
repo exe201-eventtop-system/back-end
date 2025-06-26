@@ -12,4 +12,8 @@ namespace Services.DTOs
         [JsonPropertyName("total_cart_item")]
         public int TotalCartItem { get; set; }
     }
+    public class PaymentRes
+    {
+        public string Url { get; set; }
+    }
 }

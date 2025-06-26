@@ -54,6 +54,22 @@ namespace API.Controllers
                 return await _serviceProviders.CartItemSevice.AddCartServiceAsync(userId, request.ProductId);
             });
         }
+        [HttpPost("payment")]
+        public async Task<IActionResult> CheckOut(UsedServiceDto usedServiceDto)
+        {
+            return await HandleServiceCall<PaymentRes>(async () =>
+            {
+                return await _serviceProviders.UsedService.SaveUsedService(usedServiceDto);
+            });
+        }
+        [HttpPost("payment-callback")]
+        public async Task<IActionResult> PaymentCallBack(UsedServiceDto usedServiceDto)
+        {
+            return await HandleServiceCall<PaymentRes>(async () =>
+            {
+                return await _serviceProviders.UsedService.SaveUsedService(usedServiceDto);
+            });
+        }
         [HttpGet("total-cart")]
         [ProducesResponseType(typeof(ApiResponse<AddCartItemResponseDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCartService()
@@ -89,7 +105,7 @@ namespace API.Controllers
 
             return await HandleServiceCall< List<TimeSlotDto>>(async () =>
             {
-                return await _serviceProviders.ScheduleService.GetScheduleAsync(id);
+                return await _serviceProviders.UsedService.GetScheduleAsync(id);
             });
         }
     }

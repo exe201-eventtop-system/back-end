@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using SharedLibrary.Email;
+using SharedLibrary.PaymentServices;
 using System.Text;
 
 namespace API.Configuration
@@ -11,6 +12,7 @@ namespace API.Configuration
         {
             services.AddOcelot(config);
             services.AddSwaggerForOcelot(config);
+            services.Configure<PayOSSettings>(config.GetSection("PayOS"));
 
             var jwtSettings = config.GetSection("Jwt");
             var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
