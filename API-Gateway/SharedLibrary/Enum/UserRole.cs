@@ -12,6 +12,13 @@ namespace SharedLibrary.Enum
         Inspector,
         Suplier,
         Customer,
+    }
 
+    public static class UserRoleText
+    {
+        public const string Admin = "Admin";
+        public const string Inspector = "Inspector";
+        public const string Suplier = "Suplier";
+        public const string Customer = "customer";
     }
 }

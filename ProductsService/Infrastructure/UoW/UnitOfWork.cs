@@ -1,22 +1,16 @@
-﻿using Domain.Common;
-using Infrastructure.Data;
+﻿using Application.Commons.UoW;
+using Domain.Repositories;
+using Infrastructure.Context;
 using Infrastructure.Repositories;
-using Infrastructure.Repositories.Contracts;
-using Infrastructure.Repositories.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.UoW
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly ProductServiceDbContext _context;
-        
+        private readonly ProductDbContext _context;
 
-        private IServiceRepository _serviceRepo;
+
+        private IProductRepository _serviceRepo;
 
         private IPackageStructureRepository _packageStructureRepo;
 
@@ -24,13 +18,13 @@ namespace Infrastructure.UoW
 
         private ICategoryRepository _categoryRepo;
 
-        public IServiceRepository ServiceRepository 
-        { 
+        public IProductRepository ProductRepository
+        {
             get
             {
                 if (_serviceRepo == null)
                 {
-                    _serviceRepo = new ServiceRepository(_context);
+                    _serviceRepo = new ProductRepository(_context);
                 }
                 return _serviceRepo;
             }
@@ -48,7 +42,7 @@ namespace Infrastructure.UoW
             }
         }
 
-        public ICategoryRepository CategoryRepository 
+        public ICategoryRepository CategoryRepository
         {
             get
             {
@@ -59,9 +53,21 @@ namespace Infrastructure.UoW
                 return _categoryRepo;
             }
         }
-        
-        public UnitOfWork(ProductServiceDbContext context) => _context = context;
-        
+
+        public IPackageRepository PackageRepository
+        {
+            get
+            {
+                if (_packageRepo == null)
+                {
+                    _packageRepo = new PackageRepository(_context);
+                }
+                return _packageRepo;
+            }
+        }
+
+        public UnitOfWork(ProductDbContext context) => _context = context;
+
         public async Task CommitAsync()
         {
             await _context.SaveChangesAsync();
@@ -71,7 +77,7 @@ namespace Infrastructure.UoW
         {
             _context.ChangeTracker.Clear();
         }
-        
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)

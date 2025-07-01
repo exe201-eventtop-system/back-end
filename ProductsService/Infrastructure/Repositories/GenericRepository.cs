@@ -1,44 +1,27 @@
-﻿using Domain.Common;
-using Infrastructure.Commons;
-using Infrastructure.Data;
+﻿using Domain.Repositories;
+using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
-    public class GenericRepository<T, Tid> : IGenericRepository<T, Tid> where T : BaseEntity<Tid> where Tid : struct
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly ProductServiceDbContext _context;
+        protected readonly ProductDbContext _context;
 
-        public GenericRepository(ProductServiceDbContext context)
+        public GenericRepository(ProductDbContext context) => _context = context;
+
+        public async Task<int> CommitChangesAsync()
         {
-            _context = context;
+            return await _context.SaveChangesAsync();
         }
 
-        public virtual async Task<T> CreateAsync(T id)
+        public virtual async Task<T> CreateAsync(T entity)
         {
-            var tracker = await _context.AddAsync(id);
+            var tracker = await _context.Set<T>().AddAsync(entity);
+            await CommitChangesAsync();
+            await tracker.ReloadAsync();
             return tracker.Entity;
-        }
-
-        public virtual bool Remove(T item)
-        {
-            var tracker = _context.Set<T>().Remove(item);
-            return true;
-        }
-
-        public virtual bool Remove(Tid id)
-        {
-            var item = _context.Set<T>().Find(id);
-
-            if (item == null)
-            {
-                return false;
-            }
-
-            _context.Set<T>().Remove(item);
-            return true;
         }
 
         public virtual Task<List<T>> GetAllAsync()
@@ -46,68 +29,47 @@ namespace Infrastructure.Repositories
             return _context.Set<T>().ToListAsync();
         }
 
-        public virtual Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        public virtual Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy)
         {
-            var result = _context.Set<T>().Where(filter);
-            return orderBy(result).ToListAsync();
+            var query = _context.Set<T>().Where(filter);
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            return query.ToListAsync();
         }
 
-        public virtual async Task<T?> GetByIdAsync(Tid id)
+        public virtual async Task<T?> GetByIdAsync<Tid>(Tid id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public virtual async Task<PaginationResult<T>> GetPaginatedAsync(int page, int page_size)
+        public async Task<bool> Remove<Tid>(Tid id)
         {
-            var item_list = await GetAllAsync();
+            var entity = await _context.Set<T>().FindAsync(id);
 
-            var result = new PaginationResult<T>
+            if (entity == null)
             {
-                ItemCount = item_list.Count,
-                PageSize = page_size,
-                CurrentPage = page,
-                PageCount = (int)Math.Ceiling((float)item_list.Count() / (float)page_size),
-                Items = item_list.Skip((page - 1) * page_size).Take(page_size).ToList(),
-            };
+                return false;
+            }
 
-            return result;
+            var tracker = _context.Set<T>().Remove(entity);
+
+            await CommitChangesAsync();
+            await tracker.ReloadAsync();
+
+            return tracker.State == EntityState.Detached;
         }
 
-        public virtual async Task<PaginationResult<T>> GetPaginatedAsync(int page, int page_size, Expression<Func<T, bool>> filter)
+        public async Task<T> Update(T entity)
         {
-            var item_list = (await GetAllAsync()).Where(filter.Compile());
+            var tracker = _context.Set<T>().Update(entity);
 
-            var result = new PaginationResult<T>
-            {
-                ItemCount = item_list.Count(),
-                PageSize = page_size,
-                CurrentPage = page,
-                PageCount = (int)Math.Ceiling((float)item_list.Count() / (float)page_size),
-                Items = item_list.Skip((page -1) * page_size).Take(page_size).ToList(),
-            };
+            await CommitChangesAsync();
+            await tracker.ReloadAsync();
 
-            return result;
-        }
-
-        public virtual async Task<PaginationResult<T>> GetPaginatedAsync(int page, int page_size, Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
-        {
-            var item_list = (await GetAllAsync()).Where(filter.Compile());
-
-            var result = new PaginationResult<T>
-            {
-                ItemCount = item_list.Count(),
-                PageSize = page_size,
-                CurrentPage = page,
-                PageCount = (int)Math.Ceiling((float)item_list.Count() / (float)page_size),
-                Items = orderBy(item_list.AsQueryable()).Skip((page - 1) * page_size).Take(page_size).ToList(),
-            };
-
-            return result;
-        }
-
-        public virtual T Update(T item)
-        {
-            var tracker = _context.Set<T>().Update(item);
             return tracker.Entity;
         }
     }

@@ -10,6 +10,8 @@ namespace Domain.Enums
     {
         Hourly,
         Daily,
+        Weekly,
+        Monthly,
         Cycle,
     }
 }
