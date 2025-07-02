@@ -23,6 +23,8 @@ namespace Domain.Entities.Products
 
         public DateTime CreatedAt { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public DateTime LastModifiedAt { get; set; }
 
         public virtual List<ProductImage> ImagesNavigation { get; set; }
