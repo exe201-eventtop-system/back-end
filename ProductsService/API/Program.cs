@@ -17,27 +17,22 @@ namespace API
 
             // Configuring infrastructure layer's services.
             builder.Services.ConfigureInfrastructure(configuration);
-            
-            // NOTE: THIS CUSTOM LOGGING MODULE IS BROKEN
-            // Configuring custom system loggings
-            //builder.Logging.AddSystemLoggingProvider();
-
-            // Configuring application layer's services
-            builder.Services.ConfigureApplication(configuration);
             builder.Services.AddControllers();
 
             // Configuring authentication and authorization with Jwt.
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("default_scheme", option =>
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, option =>
             {
                 option.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
+                    ValidateIssuer = false,
                     ValidateLifetime = true,
-                    ValidateAudience = true,
-                    ValidateIssuerSigningKey = true,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = false,
+                    ValidateActor = false,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SigningKey"])),
-                    ValidAudiences = configuration.GetSection("Jwt:ValidAudiences").Get<List<string>>(),
-                    ValidIssuers = configuration.GetSection("Jwt:ValidIssuers").Get<string[]>()
+                    //ValidAudiences = configuration.GetSection("Jwt:ValidAudiences").Get<List<string>>(),
+                    //ValidIssuers = configuration.GetSection("Jwt:ValidIssuers").Get<string[]>()
                 };
             });
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Contacts.Supplier
+namespace SharedLibrary.DTOs.Supplier
 {
     public class SupplierResponseDTO
     {
