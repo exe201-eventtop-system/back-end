@@ -12,9 +12,7 @@ namespace Repositories
 {
     public class CartRepository: GenericRepository<Cart>
     {
-        public CartRepository()
-        {
-        }
+        
 
         public CartRepository(CartServiceDBContext context) => _context = context;
 

@@ -6,13 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Repositories.Migrations
 {
     /// <inheritdoc />
-    public partial class addtransaction : Migration
+    public partial class adddb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ScheduledEvents");
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    update_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    is_deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Transactions",
@@ -21,7 +33,7 @@ namespace Repositories.Migrations
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderCode = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     IsPayment = table.Column<bool>(type: "bit", nullable: false),
                     create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     update_at = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -30,6 +42,28 @@ namespace Repositories.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    cart_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    service_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    update_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    is_deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_cart_id",
+                        column: x => x.cart_id,
+                        principalTable: "Carts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,8 +82,8 @@ namespace Repositories.Migrations
                     DeliveredTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ReturnTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DamageType = table.Column<int>(type: "int", nullable: false),
-                    InitialConditionDescription = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    ReturnedConditionDescription = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    InitialConditionDescription = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ReturnedConditionDescription = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     UnitPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     update_at = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -67,6 +101,11 @@ namespace Repositories.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartItems_cart_id",
+                table: "CartItems",
+                column: "cart_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UsedServices_TransactionId",
                 table: "UsedServices",
                 column: "TransactionId");
@@ -76,36 +115,16 @@ namespace Repositories.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
                 name: "UsedServices");
 
             migrationBuilder.DropTable(
-                name: "Transactions");
+                name: "Carts");
 
-            migrationBuilder.CreateTable(
-                name: "ScheduledEvents",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AboutNumberPeople = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AboutStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EventStatus = table.Column<int>(type: "int", nullable: false),
-                    is_deleted = table.Column<bool>(type: "bit", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TagMainColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TypeOfEvent = table.Column<int>(type: "int", nullable: false),
-                    update_at = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ScheduledEvents", x => x.id);
-                });
+            migrationBuilder.DropTable(
+                name: "Transactions");
         }
     }
 }

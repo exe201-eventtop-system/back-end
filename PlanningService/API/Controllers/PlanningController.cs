@@ -20,10 +20,11 @@ namespace API.Controllers
         private readonly IAIGennerateUseCase _aIGennerateUseCase;
         private readonly JwtService _jwtService;
 
-        public PlanningController(IPlanningUseCase planningUseCase, JwtService jwtService)
+        public PlanningController(IPlanningUseCase planningUseCase, JwtService jwtService, IAIGennerateUseCase aIGennerateUseCase)
         {
             _planningUseCase = planningUseCase;
             _jwtService = jwtService;
+            _aIGennerateUseCase = aIGennerateUseCase;
         }
 
         [HttpPost("step1")]
@@ -35,7 +36,7 @@ namespace API.Controllers
 
             return await _planningUseCase.CreateStep1Async(dto, userId).ToActionResult();
         }
-        [HttpPost("step2")]
+        [HttpPut("step2")]
         public async Task<IActionResult> CreateStep2Async([FromBody] PlanningStep2DTO dto)=> await _planningUseCase.CreateStep2Async(dto).ToActionResult();
 
         [HttpGet]
@@ -73,6 +74,18 @@ namespace API.Controllers
             var token = HttpContext.Request.Headers["Authorization"].ToString();
             Guid userId = await _jwtService.ExtractUserIdFromToken(token);
             return await _aIGennerateUseCase.GenerateScriptAsync(userId,script).ToActionResult();
+        }
+        [HttpPost("chat")]
+        public async Task<IActionResult> Chatbox([FromBody] string script)
+        {
+            return await _aIGennerateUseCase.GeneratChat(script).ToActionResult();
+        }
+        [HttpPut("{planningid}/accept")]
+        public async Task<IActionResult> AcceptPlanning(Guid planningid)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+            return await _aIGennerateUseCase.AcceptPlanning(planningid, userId).ToActionResult();
         }
     }
 }

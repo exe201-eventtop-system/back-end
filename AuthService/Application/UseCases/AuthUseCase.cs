@@ -1,5 +1,6 @@
 ﻿using Application.Commons;
 using Application.Commons.DTOs;
+using Application.Commons.DTOs.User;
 using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
@@ -37,7 +38,7 @@ namespace Application.UseCases
             _configuration = configuration; 
             _passwordHasher = passwordHasherService;
         }
-        public async Task<Result> SignInAsync(SignUpDTO registerDTO)
+        public async Task<Result> SignUpAsync(SignUpDTO registerDTO)
         {
             if (await _userRepository.CheckEmail(registerDTO.Email))
             {
@@ -46,8 +47,9 @@ namespace Application.UseCases
 
             try
             {
-                var token = await _jwtService.GenerateToken(registerDTO);
-                await _emailService.SendEmailAsync(registerDTO.Email, token);
+                var userMap = _mapper.Map<UserTokenDTO>(registerDTO);
+                var token = await _jwtService.GenerateToken(userMap);
+                await _emailService.SendEmailAsync(registerDTO.Email, token,EmailType.Register);
 
                 return Result.Success();
             }
@@ -62,6 +64,7 @@ namespace Application.UseCases
         {
             try
             {
+
                 var principal = await _jwtService.ValidateToken(tokenDto);
                 if (principal == null)
                 {
@@ -69,6 +72,10 @@ namespace Application.UseCases
                 }
 
                 var user = await MapClaimsToUser(principal);
+                if (await _userRepository.CheckEmail(user.Email))
+                {
+                    return Result<TokenDTO>.Failure(ServiceError.ExistedError("Email already exists."));
+                }
                 if (user == null)
                 {
                     return Result<TokenDTO>.Failure(new ServiceError("InvalidUser", "User could not be identified."));
@@ -87,7 +94,7 @@ namespace Application.UseCases
         }
 
 
-        public async Task<Result<TokenDTO>> SignUpAsync(SignInDTO loginDTO)
+        public async Task<Result<TokenDTO>> SignInAsync(SignInDTO loginDTO)
         {
             try
             {
@@ -97,11 +104,12 @@ namespace Application.UseCases
                     return Result<TokenDTO>.Failure(ServiceError.ValidationFailed("Invalid email or password."));
                 }
 
-                var accessToken = await _jwtService.GenerateToken(user);
+                var userMap = _mapper.Map<UserTokenDTO>(user);
+                var token = await _jwtService.GenerateToken(userMap);
 
                 var responseToken = new TokenDTO
                 {
-                    AccessToken = accessToken,
+                    AccessToken = token,
                 };
 
                 return Result<TokenDTO>.Success(responseToken);

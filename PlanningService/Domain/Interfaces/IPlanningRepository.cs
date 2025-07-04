@@ -11,6 +11,7 @@ namespace Domain.Interfaces
     public interface IPlanningRepository
     {
         Task<Planning> CreateStep1Async(Planning planning, Guid userId);
+        Task<Planning> Accept(Guid planningid,Guid userid);
         Task<Planning> CreateStep2Async(Planning planning);
         Task<(IEnumerable<Planning> Items, int TotalCount)> GetAllPlansAsync(int page, int size, PlanningStatus status, string? keyword, Guid userId);
         Task<Planning> GetPlanByIdAsync(Guid planningId);

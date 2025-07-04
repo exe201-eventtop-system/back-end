@@ -23,6 +23,7 @@ namespace Repositories.Models
 
         public DateTime RentEndTime { get; set; }
         public DateTime? DeliveredTime { get; set; }
+        public string? Status{ get; set; }
 
         public DateTime? ReturnTime { get; set; }
 
@@ -37,7 +38,8 @@ namespace Repositories.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal UnitPrice { get; set; }
         [ForeignKey(nameof(TransactionId))]
-        public  Transaction? Transaction { get; set; } = new Transaction();
+        public Transaction? Transaction { get; set; }
+
 
     }
 }

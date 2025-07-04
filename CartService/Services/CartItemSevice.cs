@@ -13,9 +13,6 @@ namespace Services
     public class CartItemSevice
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CartItemSevice() {
-            _unitOfWork ??= new UnitOfWork();
-        }
         public CartItemSevice(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -55,7 +52,12 @@ namespace Services
             var cart = await _unitOfWork.CartRepository
                 .GetCartByCustomerIdAsync(customerId);
 
-
+            if (cart == null)
+            {
+                return ServiceResult<AddCartItemResponseDTO>.Success(
+                    new AddCartItemResponseDTO { TotalCartItem = 0 }
+                );
+            }
             int totalItems = await _unitOfWork.CartItemRepository
                 .CountItemsByCartIdAsync(cart.Id);
 

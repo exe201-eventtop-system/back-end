@@ -20,6 +20,8 @@ namespace Domain.Entities
 
         [Column("avatar")]
         public string? Avatar { get; set; }
+        [Column("phone_number")]
+        public string? PhoneNumber { get; set; }
 
         [Column("role")]
         public UserRole Role { get; set; }

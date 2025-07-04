@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.SqlServer.Migrations
 {
     /// <inheritdoc />
-    public partial class minhtri : Migration
+    public partial class audb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,13 @@ namespace Infrastructure.SqlServer.Migrations
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     location_orginazation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     name_organization = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    about = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    business_license = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    inspector_id = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     tax_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    contract = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    thumnnail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     is_active = table.Column<bool>(type: "bit", nullable: false),
                     create_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     update_at = table.Column<DateTime>(type: "datetime2", nullable: false),

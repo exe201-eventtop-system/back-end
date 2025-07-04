@@ -16,5 +16,25 @@ namespace SharedLibrary.Password
 
         public Task<bool> VerifyPassword(string hashedPassword, string providedPassword) =>
              Task.FromResult(_passwordHasher.VerifyHashedPassword(null!, hashedPassword, providedPassword) == PasswordVerificationResult.Success);
+        public Task<(string PlainPassword, string HashedPassword)> GenerateAndHashPassword(int length = 10)
+        {
+            var plainPassword = GenerateRandomPassword(length);
+            var hashed = _passwordHasher.HashPassword(null!, plainPassword);
+
+            return Task.FromResult((plainPassword, hashed));
+        }
+        private string GenerateRandomPassword(int length)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*";
+            var sb = new StringBuilder();
+            var rnd = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(valid[rnd.Next(valid.Length)]);
+            }
+
+            return sb.ToString();
+        }
     }
 }

@@ -27,7 +27,11 @@ namespace Repositories
         private CartRepository _cartRepository;
         private UsedServiceRepository _usedServiceRepository;
         private TransactionRepository _transactionRepository;
-        public UnitOfWork() => _context = new CartServiceDBContext();
+        public UnitOfWork(CartServiceDBContext context)
+        {
+            _context = context;
+        }
+
         public CartItemRepository CartItemRepository
         {
             get

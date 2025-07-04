@@ -11,6 +11,7 @@ namespace Application.Interfaces
     public interface IAIGennerateUseCase
     {
         Task<Result<Planning>> GenerateScriptAsync(Guid userId,string script);
-        Task<bool> AcceptPlanning(Guid planningId);
+        Task<Result<string>> GeneratChat( string script);
+        Task<Result<Planning>> AcceptPlanning(Guid planningId, Guid userid);
     }
 }

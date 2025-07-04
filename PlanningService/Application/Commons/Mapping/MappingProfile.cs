@@ -17,7 +17,10 @@ namespace Application.Commons.Mapping
         {
             CreateMap<Planning, PlanningStep1DTO>().ReverseMap();
             CreateMap<Planning, PlanningStep2DTO>().ReverseMap();
-            CreateMap<SesstionService, ActionServiceDTO>();
+            CreateMap<SesstionService, ActionServiceDTO>().ReverseMap();
+            CreateMap<Planning, PlanningDto>();
+            CreateMap<SesstionService, SesstionServiceDto>();
+
             CreateMap<PlanningAIResponseDTO, Planning>()
      .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
      .ForMember(dest => dest.CustomerId, opt => opt.Ignore()) // set thủ công từ token

@@ -11,7 +11,8 @@ namespace Domain.Entities.Products
         public Guid ProductId { get; set; }
 
         public decimal Price { get; set; }
-
+        public decimal OvertimePrice { get; set; }
+        public int MinimumHour { get; set; }
         public bool IsActive { get; set; }
 
         public DateTime CreatedAt { get ; set; }

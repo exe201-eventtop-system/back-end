@@ -9,19 +9,17 @@ namespace Services.DTOs
 {
     public class CartRespondeDTO
     {
-        public string CartId { get; set; } = string.Empty;
         public List<CartItemResponse> Content { get; set; } = new();
         
     }
     public class CartItemResponse
     {
-        public Guid SupllierId { get; set; } = Guid.Empty;
+        public Guid? SupllierId { get; set; } = Guid.Empty;
         public Guid CartItem { get; set; } = Guid.Empty;
         public Guid ServiceId { get; set; } = Guid.Empty;
         public string Thumbnail { get; set; } = string.Empty;
         public string ServiceName { get; set; } = string.Empty;
         public string SupllierName { get; set; } = string.Empty;
-        public decimal Price { get; set; }
         public string Category { get; set; } = string.Empty;
 
         public List<RentalOptionDto> RentalOptions { get; set; } = new();
@@ -29,11 +27,12 @@ namespace Services.DTOs
     public class RentalOptionDto
     {
         [JsonPropertyName("package_name")]
-        public int? PackageName{ get; set; }
+        public string? PackageName{ get; set; }
         public decimal Price { get; set; }
         [JsonPropertyName("minimum_hours")]
         public int MinimumHours { get; set; }
-        [JsonPropertyName("hourly_surcharge")]
-        public decimal? HourlySurcharge { get; set; }
+        [JsonPropertyName("overtime_price")]
+        public decimal? OvertimePrice { get; set; }
+
     }
 }

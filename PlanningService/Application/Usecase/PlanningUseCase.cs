@@ -22,18 +22,18 @@ namespace Application.Usecase
             _planningRepository = planningRepository;
             _mapper = mapper;
         }
-        public async Task<Result<Guid>> AddService(ActionServiceDTO actionService)
+        public async Task<Result<bool>> AddService(ActionServiceDTO actionService)
         {
             var sesstionServiceMapping = _mapper.Map<SesstionService>(actionService);
             try
             {
                 var result = await _planningRepository.AddService(sesstionServiceMapping);
 
-                return Result<Guid>.Success(result);
+                return Result<bool>.Success(true);
             }
             catch (Exception ex)
             {
-                return Result<Guid>.Failure(new ServiceError("UnhandledError", $"An error occurred: {ex.Message}"));
+                return Result<bool>.Success(false);
             }
         }
 
@@ -86,7 +86,7 @@ namespace Application.Usecase
         {
             try
             {
-                var result = await _planningRepository.DeletePlanAsync(sesstionId);
+                var result = await _planningRepository.DeleteService(sesstionId);
 
                 return Result<bool>.Success(result);
             }
@@ -96,7 +96,7 @@ namespace Application.Usecase
             }
         }
 
-        public async Task<Result<PaginationResult<Planning>>> GetAllPlansAsync(PlanningFilterDTO planningFilterDTO, Guid userId)
+        public async Task<Result<PaginationResult<PlanningDto>>> GetAllPlansAsync(PlanningFilterDTO planningFilterDTO, Guid userId)
         {
 
             var planningResult = await _planningRepository.GetAllPlansAsync(
@@ -108,17 +108,17 @@ namespace Application.Usecase
             );
 
             var pageCount = (int)Math.Ceiling((double)planningResult.TotalCount / planningFilterDTO.Size);
-
-            var paginationResult = new PaginationResult<Planning>
+            var planningDtos = _mapper.Map<List<PlanningDto>>(planningResult.Items);
+            var paginationResult = new PaginationResult<PlanningDto>
             {
                 CurrentPage = planningFilterDTO.Page,
                 PageSize = planningFilterDTO.Size,
                 ItemCount = planningResult.TotalCount,
                 PageCount = pageCount,
-                Items = planningResult.Items.ToList()
+                Items = planningDtos
             };
 
-            return Result<PaginationResult<Planning>>.Success(paginationResult);
+            return Result<PaginationResult<PlanningDto>>.Success(paginationResult);
         }
 
         public async Task<Result<int>> GetNumberPlanningAsync(Guid userId)

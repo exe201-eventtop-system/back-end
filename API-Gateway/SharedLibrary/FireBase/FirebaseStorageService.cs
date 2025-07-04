@@ -55,5 +55,18 @@ namespace SharedLibrary.FireBase
 
             return $"https://storage.googleapis.com/{_bucketName}/{fileName}";
         }
+        public async Task<List<string>> UploadMultipleAsync(ICollection<IFormFile> files)
+        {
+            var urls = new List<string>();
+
+            foreach (var file in files)
+            {
+                var url = await Upload(file); 
+                urls.Add(url);
+            }
+
+            return urls;
+        }
+
     }
 }

@@ -74,7 +74,7 @@ namespace Application.Products.Queries
 
     public class SupplierResponse
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName("supplier_id")]
         public Guid Id { get; set; }
 
         [JsonPropertyName("name")]

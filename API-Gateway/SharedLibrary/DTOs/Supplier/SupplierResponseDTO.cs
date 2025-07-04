@@ -9,7 +9,7 @@ namespace SharedLibrary.DTOs.Supplier
 {
     public class SupplierResponseDTO
     {
-        [JsonPropertyName("id")]
+        [JsonPropertyName("supplier_id")]
         public Guid Id { get; set; }
 
         [JsonPropertyName("name")]

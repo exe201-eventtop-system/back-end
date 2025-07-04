@@ -12,8 +12,8 @@ using Repositories.DBContext;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(CartServiceDBContext))]
-    [Migration("20250625132309_addtransactionss")]
-    partial class addtransactionss
+    [Migration("20250701104905_update-price")]
+    partial class updateprice
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,8 +164,8 @@ namespace Repositories.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")
@@ -185,8 +185,8 @@ namespace Repositories.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("update_at");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

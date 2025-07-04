@@ -1,5 +1,6 @@
 ﻿using Contacts.Supplier;
 using Domain.Entities;
+using SharedLibrary.DTOs.Supplier;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,14 @@ namespace Domain.Interfaces
     public interface IUserRepository
     {
         Task<bool> CheckEmail(string Email);
+        Task<User> CreateUser(User user);
+        Task<List<User>> GetAllUser();
+        Task<bool> DeleteUser(Guid userId);
         Task<User> VerifyAccount(string email, string password);
         Task<User?> GetByIdAsync(Guid userId);
         Task<User> SaveUser(User user);
         Task<ICollection<SupplierResponseDTO>> GetListSupplier(List<Guid> userIds);
         Task<SupplierResponseDTO> GetSupplier(Guid userIds);
+        Task<User> UpdateUser(User user);
     }
 }

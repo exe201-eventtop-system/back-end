@@ -19,6 +19,15 @@ namespace Infrastructure.Data.Configurations
                 .HasColumnType("DECIMAL")
                 .HasPrecision(10, 2)
                 .IsRequired();
+            builder.Property(x => x.OvertimePrice)
+                .HasColumnName("overtime_price")
+                .HasColumnType("DECIMAL")
+                .HasPrecision(10, 2)
+                .IsRequired();
+            builder.Property(x => x.MinimumHour)
+    .HasColumnName("minimum_hour") 
+    .HasColumnType("int")
+    .IsRequired();
 
             builder.Property(x => x.ProductId)
                 .HasColumnName("service_id")

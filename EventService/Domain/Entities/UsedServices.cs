@@ -2,16 +2,18 @@
 using Domain.Constants.UsedServices;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Domain.Entities
 {
     public class UsedServices
     {
         public Guid Id { get; set; }
-
+        public Guid TransactionId { get; set; }
         public Guid SessionId { get; set; }
 
         public Guid ServiceId { get; set; }
@@ -39,5 +41,10 @@ namespace Domain.Entities
         public DateTime CreatedAt { get; set; }
 
         public DateTime LastModifiedAt { get; set; }
+
+        [ForeignKey(nameof(TransactionId))]
+        public Transaction? Transaction { get; set; }
+
+
     }
 }

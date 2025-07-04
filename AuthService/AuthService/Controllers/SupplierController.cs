@@ -1,6 +1,9 @@
-﻿using Application.Interfaces;
+﻿using Application.Commons.DTOs.Supplier;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Jwt;
+using Application.Commons;
 
 namespace API.Controllers
 {
@@ -9,9 +12,11 @@ namespace API.Controllers
     public class SupplierController : ControllerBase
     {
         private readonly IUserUseCase _useCase;
-        public SupplierController(IUserUseCase useCase)
+        private readonly JwtService _jwtService;
+        public SupplierController(IUserUseCase useCase, JwtService jwtService)
         {
             _useCase = useCase;
+            _jwtService = jwtService;
         }
         [HttpPost("batch")]
         public async Task<IActionResult> GetSuppliersBatch([FromBody] List<Guid> supplierIds)
@@ -25,5 +30,38 @@ namespace API.Controllers
             var supplier = await _useCase.GetSupllier(id);
             return Ok(supplier);
         }
+        //[HttpPost("sign-up")]
+        //public async Task<IActionResult> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
+        //{
+        //    var supplier = await _useCase.SignUpSupplier(signUpSupplierDTO);
+        //    return Ok(supplier);
+        //}
+        [HttpGet]
+        public async Task<IActionResult> GetSuppliers([FromQuery] SupplierFilterDto filter) => (await _useCase.GetSuppliers(filter)).ToActionResult();
+
+
+        //[HttpGet("inspector")]
+        //public async Task<IActionResult> GetSuppliersInspect([FromQuery] SupplierFilterPagingDTO filter)
+        //{
+        //    var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+        //    Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+        //    var supplier = await _useCase.GetSuppliersInspect(userId);
+        //    return Ok(supplier);
+        //}
+        [HttpPost("process-request/admin")]
+        public async Task<IActionResult> ProcessRequestAdmin(ProcessRequestDTO processRequestDTO)
+        {
+            var supplier = await _useCase.ProcessRequestAsync(processRequestDTO);
+            return Ok(supplier);
+        }
+
+        [HttpPost("process-request/inspector")]
+        public async Task<IActionResult> ProcessRequestInspector(ProcessRequestInspectorDTO processRequestDTO)
+        {
+            var supplier = await _useCase.ProcessRequestInspectorAsync(processRequestDTO);
+            return Ok(supplier);
+        }
+
     }
 }

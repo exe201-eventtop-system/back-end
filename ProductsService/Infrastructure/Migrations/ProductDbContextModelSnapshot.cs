@@ -131,6 +131,15 @@ namespace Infrastructure.Migrations
                         .HasColumnName("last_modified_at")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<int>("MinimumHour")
+                        .HasColumnType("int")
+                        .HasColumnName("minimum_hour");
+
+                    b.Property<decimal>("OvertimePrice")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("DECIMAL")
+                        .HasColumnName("overtime_price");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(10, 2)
                         .HasColumnType("DECIMAL")

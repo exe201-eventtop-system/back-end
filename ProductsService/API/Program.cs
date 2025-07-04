@@ -1,4 +1,3 @@
-
 using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,14 +11,16 @@ namespace API
     {
         public static void Main(string[] args)
         {
+            DotNetEnv.Env.Load("../../.env");
             var builder = WebApplication.CreateBuilder(args);
+            builder.Configuration.AddEnvironmentVariables();
             var configuration = builder.Configuration;
+            builder.Configuration["ConnectionStrings:DefaultDatabase"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_SERVICECONNECTION");
+
 
             // Configuring infrastructure layer's services.
             builder.Services.ConfigureInfrastructure(configuration);
             builder.Services.AddControllers();
-
-            // Configuring authentication and authorization with Jwt.
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, option =>
             {

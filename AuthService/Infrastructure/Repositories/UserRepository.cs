@@ -5,6 +5,8 @@ using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SharedLibrary.DTOs.Supplier;
+using SharedLibrary.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,27 @@ namespace Infrastructure.Repositories
         public async Task<bool> CheckEmail(string email) =>
             await _context.Users.AnyAsync(u => u.Email == email);
 
+        public Task<User> CreateUser(User user)
+        {
+            _context.Users.Add(user);
+            user.Role = UserRole.Customer;
+            return _context.SaveChangesAsync().ContinueWith(_ => user);
+        }
+
+        public Task<List<User>> GetAllUser()
+        {
+            return _context.Users
+                .Where(u => u.IsDeleted == false && u.Role != UserRole.Admin)
+                .ToListAsync();
+        }
+        public Task<bool> DeleteUser(Guid userId)
+        {
+            var user = _context.Users.Find(userId);
+            if (user == null)
+                return Task.FromResult(false);
+            user.IsDeleted = true;
+            return _context.SaveChangesAsync().ContinueWith(_ => true); 
+        }
         public async Task<User?> GetByIdAsync(Guid userId) =>
             await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -41,6 +64,7 @@ namespace Infrastructure.Repositories
                 {
                     Id = s.Id,
                     Name = s.NameOrginazation,
+                    Location = s.Location,
                     IsActive = s.IsActive
                 })
                 .ToListAsync();
@@ -70,6 +94,19 @@ namespace Infrastructure.Repositories
             return user;
         }
 
+        public async Task<User> UpdateUser(User user)
+        {
+            var existingUser = await _context.Users.FindAsync(user.Id);
+
+                existingUser.UserName = user.UserName;
+                existingUser.Email = user.Email;
+                existingUser.Address = user.Address;
+                existingUser.Avatar = user.Avatar;
+
+            await _context.SaveChangesAsync();
+            return existingUser;
+        }
+
         public async Task<User?> VerifyAccount(string email, string password)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
@@ -77,10 +114,12 @@ namespace Infrastructure.Repositories
                 return null;
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.HashPassword, password);
+
             if (result == PasswordVerificationResult.Failed)
                 return null;
 
             return user;
         }
+
     }
 }

@@ -12,8 +12,8 @@ namespace Application.Interfaces
 {
     public interface IAuthUseCase
     {
-        Task<Result> SignInAsync(SignUpDTO registerDTO);
-        Task<Result<TokenDTO>> SignUpAsync(SignInDTO loginDTO);
+        Task<Result> SignUpAsync(SignUpDTO registerDTO);
+        Task<Result<TokenDTO>> SignInAsync(SignInDTO loginDTO);
         //Task<string> RefreshToken(string token, string refreshToken);
         //Task Logout(string token);
         Task<Result<TokenDTO>> VerifyEmail(TokenDTO token);

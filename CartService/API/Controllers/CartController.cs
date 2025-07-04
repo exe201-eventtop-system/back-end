@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Models;
+using Services;
 using Services.Commons;
 using Services.DTOs;
-using Services;
-using ShareLibary.Model;
 using SharedLibrary.Jwt;
+using ShareLibary.Model;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -39,7 +40,20 @@ namespace API.Controllers
                 return ServiceResult.Success(cart);
             });
         }
+        [HttpGet("used-service")]
+        public async Task<ActionResult<ICollection<BookingHistoryDTO>>> UsedService()
+        {
 
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+            
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+
+            return await HandleServiceCall<ICollection<BookingHistoryDTO>>(async () =>
+            {
+                var cart = await _serviceProviders.CartService.GetUsedServiceByCustomerIdAsync(userId);
+                return ServiceResult.Success(cart);
+            });
+        }
         [HttpPost("items")]
         [ProducesResponseType(typeof(ApiResponse<AddCartItemResponseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
@@ -57,17 +71,20 @@ namespace API.Controllers
         [HttpPost("payment")]
         public async Task<IActionResult> CheckOut(UsedServiceDto usedServiceDto)
         {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
             return await HandleServiceCall<PaymentRes>(async () =>
             {
-                return await _serviceProviders.UsedService.SaveUsedService(usedServiceDto);
+                return await _serviceProviders.UsedService.SaveUsedService(usedServiceDto, userId);
             });
         }
         [HttpPost("payment-callback")]
-        public async Task<IActionResult> PaymentCallBack(UsedServiceDto usedServiceDto)
+        public async Task<IActionResult> PaymentCallBack(PaymentParamsDto paymentParamsDto)
         {
-            return await HandleServiceCall<PaymentRes>(async () =>
+            return await HandleServiceCall<bool>(async () =>
             {
-                return await _serviceProviders.UsedService.SaveUsedService(usedServiceDto);
+                return await _serviceProviders.UsedService.ConfirmPayment(long.Parse(paymentParamsDto.OrderCode));
             });
         }
         [HttpGet("total-cart")]
@@ -96,16 +113,34 @@ namespace API.Controllers
                 return await _serviceProviders.CartItemSevice.DeleteCartAsync(userId,id);
             });
         }
-        [HttpGet("{id}/schedule-supplier")]
-        public async Task<IActionResult> GetScheduleSupplier(Guid id)
+        [HttpGet("schedule-supplier")]
+        public async Task<IActionResult> GetBookihgHistorySupplier()
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString();
 
             Guid userId = await _jwtService.ExtractUserIdFromToken(token);
 
-            return await HandleServiceCall< List<TimeSlotDto>>(async () =>
+            return await HandleServiceCall<List<ScheduleSupplier>>(async () =>
+            {
+                return await _serviceProviders.UsedService.GetBookihgHistorySupplier(userId);
+            });
+        }
+        [HttpGet("{id}/schedule-supplier")]
+        public async Task<IActionResult> GetScheduleSupplier(Guid id )
+        {
+
+            return await HandleServiceCall<List<TimeSlotDto>> (async () =>
             {
                 return await _serviceProviders.UsedService.GetScheduleAsync(id);
+            });
+        }
+        [HttpGet("transaction")]
+        public async Task<IActionResult> GetTransaction()
+        {
+
+            return await HandleServiceCall<List<TransactionDTOs>>(async () =>
+            {
+                return await _serviceProviders.UsedService.GetTransactions();
             });
         }
     }

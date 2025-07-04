@@ -29,7 +29,7 @@ namespace SharedLibrary.AIGenerate
 
                 {{
                   ""eventName"": string,
-                  ""eventDate"": string, // đúng định dạng dd/MM/yyyy
+                  ""eventDate"": string, // định dạng dd/MM/yyyy — bắt buộc là ngày TƯƠNG LAI (>= ngày hôm nay) - Ngày tổ chức phải là một ngày hợp lý trong tương lai (không được nhỏ hơn ngày hôm nay).
                   ""location"": string,
                   ""expectedParticipants"": string,
                   ""themeColor"": string,  // Gồm 3 màu chính đại diện cho sự kiện hài hòa và hợp với nhau
@@ -92,6 +92,46 @@ namespace SharedLibrary.AIGenerate
                 .Select(p => p.GetProperty("text").GetString()));
 
             return ExtractJson(responseText);
+        }
+        public async Task<string> ChatWithGeminiAsync(string userInput)
+        {
+            var payload = new
+            {
+                contents = new[]
+                {
+            new
+            {
+                parts = new[]
+                {
+                    new { text = userInput }
+                }
+            }
+        }
+            };
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(_geminiUrl),
+                Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
+            };
+
+            var response = await _httpClient.SendAsync(request);
+            var json = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Gemini API Error: {response.StatusCode} - {json}");
+
+            using var document = JsonDocument.Parse(json);
+            var parts = document.RootElement
+                .GetProperty("candidates")[0]
+                .GetProperty("content")
+                .GetProperty("parts");
+
+            var responseText = string.Join("\n", parts.EnumerateArray()
+                .Select(p => p.GetProperty("text").GetString()));
+
+            return responseText;
         }
 
         public string ExtractJson(string responseText)

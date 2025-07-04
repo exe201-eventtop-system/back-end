@@ -19,6 +19,22 @@ namespace Infrastructure.SqlServer.Repository
             _context = context;
         }
 
+        public async Task<Planning> Accept(Guid planningId, Guid userId)
+        {
+            var planning = await _context.Plannings.FindAsync(planningId);
+
+            if (planning == null)
+                throw new Exception("Không tìm thấy kế hoạch.");
+            planning.CustomerId = userId;
+            planning.Status = PlanningStatus.Confirmed;
+            planning.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            return planning;
+        }
+
+
         public Task<Guid> AddService(SesstionService sesstionService)
         {
             _context.SesstionServices.Add(sesstionService);
@@ -31,12 +47,23 @@ namespace Infrastructure.SqlServer.Repository
             return _context.SaveChangesAsync().ContinueWith(t => planning);
         }
 
-        public Task<Planning> CreateStep2Async(Planning planning)
+        public async Task<Planning> CreateStep2Async(Planning planning)
         {
-            planning.UpdatedAt = DateTime.UtcNow;
-            _context.Plannings.Update(planning);
-            return _context.SaveChangesAsync().ContinueWith(t => planning);
+            planning.UpdatedAt = DateTime.Now;
+            _context.Plannings.Attach(planning);
+            _context.Entry(planning).Property(x => x.UpdatedAt).IsModified = true;
+            _context.Entry(planning).Property(x => x.Name).IsModified = true;
+            _context.Entry(planning).Property(x => x.Description).IsModified = true;
+            _context.Entry(planning).Property(x => x.Location).IsModified = true;
+            _context.Entry(planning).Property(x => x.AboutNumberPeople).IsModified = true;
+            _context.Entry(planning).Property(x => x.TypeOfEvent).IsModified = true;
+            _context.Entry(planning).Property(x => x.Budget).IsModified = true;
+            _context.Entry(planning).Property(x => x.MainColor).IsModified = true;
+            _context.Entry(planning).Property(x => x.DateOfEvent).IsModified = true;
+            await _context.SaveChangesAsync();
+            return planning;
         }
+
 
         public async Task<bool> DeletePlanAsync(Guid planningId)
         {
@@ -66,7 +93,7 @@ namespace Infrastructure.SqlServer.Repository
 
         public async Task<(IEnumerable<Planning> Items, int TotalCount)> GetAllPlansAsync(int page, int size, PlanningStatus status, string? keyword, Guid userId)
         {
-            var query = _context.Plannings
+            var query = _context.Plannings.Include(p => p.SesstionServices.Where(s => !s.IsDeleted))
        .Where(p => !p.IsDeleted && p.CustomerId == userId);
 
             if (Enum.IsDefined(typeof(PlanningStatus), status))

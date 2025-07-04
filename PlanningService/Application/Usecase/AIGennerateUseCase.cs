@@ -27,9 +27,16 @@ namespace Application.Usecase
             _planningRepository = planningRepository;
         }
 
-        public Task<bool> AcceptPlanning(Guid planningId)
+        public async Task<Result<Planning>> AcceptPlanning(Guid planningId, Guid userid)
         {
-            throw new NotImplementedException();
+           var planning = await _planningRepository.Accept(planningId, userid);
+            return Result<Planning>.Success(planning);
+        }
+
+        public async Task<Result<string>> GeneratChat( string script)
+        {
+            var jsonResponse = await _geminiClient.ChatWithGeminiAsync(script);
+            return Result<string>.Success(jsonResponse);
         }
 
         public async Task<Result<Planning>> GenerateScriptAsync(Guid userId, string script)
@@ -48,5 +55,6 @@ namespace Application.Usecase
 
 
         }
+
     }
 }

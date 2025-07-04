@@ -2,75 +2,120 @@
 using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using SharedLibrary.Enum;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
-using static SharedLibrary.Email.EmailService;
 
 namespace SharedLibrary.Email
 {
-        public class EmailService 
+    public class EmailService
+    {
+        private readonly IConfiguration _configuration;
+
+        public EmailService(IConfiguration configuration)
         {
-            private readonly IConfiguration _configuration;
+            _configuration = configuration;
+        }
 
-            public EmailService(IConfiguration configuration)
-            {
-                _configuration = configuration;
-            }
+        public async Task SendEmailAsync(string toEmail, string? token, EmailType emailType, string? plainPassword = null)
+        {
+            var emailSettings = GetEmailSettings();
 
-            public async Task SendEmailAsync(string toEmail, string token)
+            string emailBody = emailType switch
             {
-                var emailSettings = GetEmailSettings();
-                var confirmLink = GenerateConfirmLink(token);
-                var emailBody = LoadEmailBodyTemplate(toEmail, confirmLink);
-                var emailMessage = BuildEmailMessage(toEmail, emailBody, emailSettings);
+                EmailType.Register => LoadEmailBodyTemplate(toEmail, GenerateConfirmLink(token)),
 
-                await SendEmailViaSmtp(emailMessage, emailSettings);
-            }
-            private IConfigurationSection GetEmailSettings()
-            {
-                return _configuration.GetSection("Email");
-            }
-            private string GenerateConfirmLink(string token)
-            {
-                return $"{_configuration["App:FrontendBaseUrl"]}/confirm?token={Uri.EscapeDataString(token)}";
-            }
+                EmailType.SupplierRequest => $"""
+            <p>Chào {toEmail},</p>
+            <p>Yêu cầu đăng ký trở thành nhà cung cấp của bạn đã được tiếp nhận.</p>
+            <p>Chúng tôi sẽ liên hệ lại sau khi kiểm duyệt thông tin.</p>
+            """,
 
-            private string LoadEmailBodyTemplate(string email, string confirmLink)
-            {
-                var basePath = AppDomain.CurrentDomain.BaseDirectory;
+                EmailType.ForgotPassword => $"""
+            <p>Chào {toEmail},</p>
+            <p>Bạn đã yêu cầu đặt lại mật khẩu. Vui lòng nhấn vào liên kết sau:</p>
+            <a href="{GenerateConfirmLink(token)}">{GenerateConfirmLink(token)}</a>
+            """,
+
+                EmailType.ApprovalNotice => $"""
+            <p>Chào {toEmail},</p>
+            <p>Tài khoản của bạn đã được duyệt. Bạn có thể đăng nhập và sử dụng hệ thống.</p>
+            """,
+
+                EmailType.ProvideAccountSupplier => $"""
+            <p>Chào {toEmail},</p>
+            <p>Tài khoản nhà cung cấp của bạn đã được duyệt.</p>
+            <p>Thông tin đăng nhập:</p>
+            <ul>
+                <li><strong>Email:</strong> {toEmail}</li>
+                <li><strong>Mật khẩu:</strong> {plainPassword}</li>
+            </ul>
+            <p>Vui lòng đăng nhập và đổi mật khẩu ngay sau khi sử dụng lần đầu.</p>
+            """,
+
+                _ => "<p>Xin chào, chúng tôi đã nhận được yêu cầu từ bạn.</p>"
+            };
+
+            var emailMessage = BuildEmailMessage(toEmail, emailBody, emailSettings, emailType);
+            await SendEmailViaSmtp(emailMessage, emailSettings);
+        }
+
+
+        private IConfigurationSection GetEmailSettings()
+        {
+            return _configuration.GetSection("Email");
+        }
+
+        private string GenerateConfirmLink(string token)
+        {
+            var baseUrl = _configuration["App:FrontendBaseUrl"] ?? "https://your-default-domain.com";
+            return $"{baseUrl}/confirm?token={Uri.EscapeDataString(token)}";
+        }
+
+        private string LoadEmailBodyTemplate(string email, string confirmLink)
+        {
             var templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Email", "Templates", "ConfirmEmail.html");
 
+            if (!File.Exists(templatePath))
+                throw new FileNotFoundException("Email template not found", templatePath);
 
             var htmlTemplate = File.ReadAllText(templatePath);
 
-                return htmlTemplate
-                    .Replace("{{username}}", email)
-                    .Replace("{{confirm_link}}", confirmLink);
-            }
-
-            private MimeMessage BuildEmailMessage(string toEmail, string body, IConfigurationSection emailSettings)
-            {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(emailSettings["SenderName"], emailSettings["SenderEmail"]));
-                message.To.Add(new MailboxAddress("", toEmail));
-                message.Subject = "Xác nhận email đăng ký tài khoản EVENTOP";
-
-                var bodyBuilder = new BodyBuilder { HtmlBody = body };
-                message.Body = bodyBuilder.ToMessageBody();
-
-                return message;
-            }
-            private async Task SendEmailViaSmtp(MimeMessage message, IConfigurationSection emailSettings)
-            {
-                using var client = new SmtpClient();
-                await client.ConnectAsync(emailSettings["SmtpServer"], int.Parse(emailSettings["SmtpPort"]), SecureSocketOptions.StartTls);
-                await client.AuthenticateAsync(emailSettings["SenderEmail"], emailSettings["SenderPassword"]);
-                await client.SendAsync(message);
-                await client.DisconnectAsync(true);
-            }
+            return htmlTemplate
+                .Replace("{{username}}", email)
+                .Replace("{{confirm_link}}", confirmLink);
         }
-    
+
+        private MimeMessage BuildEmailMessage(string toEmail, string body, IConfigurationSection emailSettings, EmailType emailType)
+        {
+            var subject = emailType switch
+            {
+                EmailType.Register => "Xác nhận email đăng ký tài khoản EVENTOP",
+                EmailType.SupplierRequest => "Yêu cầu trở thành nhà cung cấp",
+                EmailType.ForgotPassword => "Khôi phục mật khẩu EVENTOP",
+                EmailType.ApprovalNotice => "Tài khoản của bạn đã được duyệt",
+                _ => "Thông báo từ EVENTOP"
+            };
+
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(emailSettings["SenderName"], emailSettings["SenderEmail"]));
+            message.To.Add(new MailboxAddress("", toEmail));
+            message.Subject = subject;
+
+            var bodyBuilder = new BodyBuilder { HtmlBody = body };
+            message.Body = bodyBuilder.ToMessageBody();
+
+            return message;
+        }
+
+        private async Task SendEmailViaSmtp(MimeMessage message, IConfigurationSection emailSettings)
+        {
+            using var client = new SmtpClient();
+            await client.ConnectAsync(emailSettings["SmtpServer"], int.Parse(emailSettings["SmtpPort"]), SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(emailSettings["SenderEmail"], emailSettings["SenderPassword"]);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
+        }
+    }
 }

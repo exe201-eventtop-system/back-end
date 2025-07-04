@@ -18,6 +18,11 @@ namespace SharedLibrary.PaymentServices
         public PayOSService(IOptions<PayOSSettings> payOSSettings)
         {
             _payOSSettings = payOSSettings.Value;
+            Console.WriteLine("== PayOS Settings ==");
+            Console.WriteLine($"ClientId: {_payOSSettings.ClientId}");
+            Console.WriteLine($"ApiKey: {_payOSSettings.ApiKey}");
+            Console.WriteLine($"ChecksumKey: {_payOSSettings.ChecksumKey}");
+
         }
 
         public async Task<string> CreateLink(PaymentDTO paymentDTO)
@@ -39,8 +44,8 @@ namespace SharedLibrary.PaymentServices
                 amount: paymentDTO.UnitPrice,
                 description: "Thanh toán đơn hàng",
                 items: payOSItems,
-                returnUrl: domain + "/payment-success",
-                cancelUrl: domain + "/payment-cancel"
+                returnUrl: domain + "payment-success",
+                cancelUrl: domain + "payment-cancel"
             );
 
             var response = await payOS.createPaymentLink(paymentLinkRequest);

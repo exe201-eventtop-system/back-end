@@ -17,6 +17,8 @@ namespace Application.Products.Queries
     {
         [JsonPropertyName("name")]
         public string SupplierName { get; set; }
+        [JsonPropertyName("supplier_id")]
+        public string SupplierId{ get; set; }
 
         [JsonPropertyName("is_active")]
         public bool IsActive { get; set; }
@@ -32,10 +34,14 @@ namespace Application.Products.Queries
     {
         [JsonPropertyName("package_name")]
         public string PackageName { get; set; }
+        [JsonPropertyName("minimum_hours")]
+        public int MinimumHours { get; set; }
+        [JsonPropertyName("overtime_price")]
+        public decimal OverTimePrice { get; set; }
 
         [JsonPropertyName("package_type")]
         public PackageType PackageType { get; set; }
-   
+
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
     }
@@ -115,12 +121,13 @@ namespace Application.Products.Queries
                 try
                 {
                     var httpClient = httpClientFactory.CreateClient("AuthService");
-                    var response = await httpClient.GetAsync($"api/suppliers/{result.SupplierId}");
+                    var responseSup = await httpClient.GetAsync($"api/suppliers/{result.SupplierId}");
 
-                    if (response.IsSuccessStatusCode)
+                    if (responseSup.IsSuccessStatusCode)
                     {
-                        supplierInfo = await response.Content.ReadFromJsonAsync<ProductDetailSupplier>();
+                        supplierInfo = await responseSup.Content.ReadFromJsonAsync<ProductDetailSupplier>();
                     }
+                    var responseCus = await httpClient.GetAsync($"api/user/{result.SupplierId}");
                 }
                 catch (Exception ex)
                 {
@@ -153,6 +160,8 @@ namespace Application.Products.Queries
                 {
                     PackageName = package.PackageStructureNavigation.Name,
                     PackageType = package.PackageStructureNavigation.Type,
+                    MinimumHours = package.MinimumHour,
+                    OverTimePrice= package.OvertimePrice,
                     Price = package.Price,
                 }).ToList(),
             });

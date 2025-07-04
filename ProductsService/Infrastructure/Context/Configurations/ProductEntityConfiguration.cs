@@ -50,6 +50,12 @@ namespace Infrastructure.Data.Configurations
                 .HasColumnType("NVARCHAR(512)")
                 .IsRequired(false);
 
+            builder.Property(x => x.IsDeleted)
+                .HasColumnName("is_deleted")
+                .HasColumnType("BIT")
+                .HasDefaultValue(false)
+                .IsRequired(false);
+
             builder.Property(x => x.CreatedAt)
                 .HasColumnName("created_at")
                 .HasColumnType("DATETIME")

@@ -21,13 +21,18 @@ namespace Repositories
 
         public async Task<List<CartItem>> GetCartItemsByCartIdAsync(Guid cartId)
         {
-            return await _context.CartItems.Where(c => c.IsDeleted == false).Where(ci => ci.CartId == cartId).ToListAsync();
+            var cartItems = await _context.CartItems
+                .Where(ci => ci.CartId == cartId && !ci.IsDeleted)
+                .ToListAsync();
+
+            return cartItems;
         }
+
 
         public async Task<int> CountItemsByCartIdAsync(Guid cartId)
         {
             var result =  await _context.CartItems
-            .Where(ci => ci.CartId == cartId && ci.IsDeleted == false)
+            .Where(ci => ci.CartId == cartId && ci.IsDeleted == false )
             .CountAsync();
             return result;
         }

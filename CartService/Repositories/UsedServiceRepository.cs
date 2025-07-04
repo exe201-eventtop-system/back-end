@@ -25,24 +25,24 @@ namespace Repositories
 
             return usedServices.Select(us => us.Id).ToList();
         }
-        public async Task<bool> UpdatePayment(List<Guid> usedServiceIds)
-        {
-            var servicesToUpdate = await _context.UsedServices
-                .Where(us => usedServiceIds.Contains(us.Id))
-                .ToListAsync();
-
-            foreach (var service in servicesToUpdate)
-            {
-                service.Transaction.IsPayment = true;
-            }
-
-            await _context.SaveChangesAsync();
-            return true;
-        }
         public async Task<List<UsedService>> GetScheduleIdAsync(Guid supplierId)
         {
             return await _context.UsedServices
-                .Where(us => us.SupplierId == supplierId && us.IsDeleted == false && us.Transaction.IsPayment == true)
+                .Where(us => us.SupplierId == supplierId && us.IsDeleted == false)
+                .ToListAsync();
+        }
+        public async Task<List<UsedService>> GetUsedServicesByCustomerIdAsync(Guid customerId)
+        {
+            return await _context.UsedServices
+                .Include(us => us.Transaction)
+                .Where(us => us.CustomerId == customerId && us.Transaction.IsPayment)
+                .ToListAsync();
+        }
+        public async Task<List<Transaction>> GetAllTransaction()
+        {
+            return await _context.Transactions
+                .Include(us => us.UsedServices)
+                .OrderByDescending(t => t.CreatedAt)
                 .ToListAsync();
         }
 

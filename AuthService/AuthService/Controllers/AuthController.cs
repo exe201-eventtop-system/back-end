@@ -33,8 +33,8 @@ namespace AuthService.Controllers
         }
 
         [HttpPost("sign-up")]
-        public async Task<IActionResult> SignIn(SignUpDTO dto)
-        => (await _authUseCase.SignInAsync(dto)).ToActionResult();
+        public async Task<IActionResult> SignUp(SignUpDTO dto)
+        => (await _authUseCase.SignUpAsync(dto)).ToActionResult();
 
 
         [HttpPost("confirm-email")]
@@ -43,18 +43,19 @@ namespace AuthService.Controllers
 
        
         [HttpPost("sign-in")]
-        public async Task<IActionResult> SignUp(SignInDTO request)=> ( await _authUseCase.SignUpAsync(request)).ToActionResult();
+        public async Task<IActionResult> SignIn(SignInDTO request)=> ( await _authUseCase.SignInAsync(request)).ToActionResult();
 
         [HttpGet("signin-google")]
         public IActionResult SignInGoogle()
         {
+            var redirectUri = $"{Request.Scheme}://{Request.Host}/api/auth/google-callback";
 
             var properties = new AuthenticationProperties
             {
-                RedirectUri = "/api/auth/google-callback"
+                RedirectUri = redirectUri
             };
-
             return Challenge(properties, "Google");
+
         }
 
         [HttpGet("google-callback")]

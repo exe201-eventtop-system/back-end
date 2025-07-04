@@ -1,54 +1,809 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\",
+  "Documents": [],
+=======
+  "WorkspaceRootPath": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\application\\products\\commands\\addproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\commands\\addproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\products\\queries\\getproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\queries\\getproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\application\\products\\commands\\removeproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\commands\\removeproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\repositories\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\entities\\products\\package.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\products\\package.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\entities\\products\\productimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\products\\productimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\entities\\packagesstructures\\packagestructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\packagesstructures\\packagestructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\entities\\categories\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\categories\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\controllers\\packagestructurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\controllers\\packagestructurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\products\\queries\\getproductsummarylist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\queries\\getproductsummarylist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\context\\configurations\\packageentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\configurations\\packageentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\context\\configurations\\packagestructureentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\configurations\\packagestructureentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\context\\configurations\\productimageentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\configurations\\productimageentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\context\\configurations\\categoryentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\configurations\\categoryentityconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\context\\productdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\context\\productdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\enums\\packagetypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\enums\\packagetypeenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\migrations\\20250702111117_initdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250702111117_initdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\models\\dto\\service\\servicesummarydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\models\\dto\\service\\servicesummarydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\dependenciesinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dependenciesinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\applicationservices\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\applicationservices\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\commons\\dispatchers\\commands\\icommanddispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\commons\\dispatchers\\commands\\icommanddispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\packagestructures\\queries\\getallstructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\packagestructures\\queries\\getallstructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\packagestructures\\commands\\createnewstructrure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\packagestructures\\commands\\createnewstructrure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\uow\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\uow\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\dispatchers\\commanddispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dispatchers\\commanddispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\domain\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17529708-85EC-48C4-AADF-6A962F391DC5}|Domain\\Domain.csproj|solutionrelative:domain\\repositories\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\commons\\results\\error.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\commons\\results\\error.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\commons\\interfaces\\jwthelper\\ijwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\commons\\interfaces\\jwthelper\\ijwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\application\\commons\\handlers\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\commons\\handlers\\icommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\extensions\\resultextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\extensions\\resultextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\packagestructurerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\packagestructurerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\packagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\packagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\dispatchers\\querydispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dispatchers\\querydispatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\PackagesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:API\\Controllers\\PackagesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ServicesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:API\\Controllers\\ServicesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\CategoriesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:API\\Controllers\\CategoriesController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\PackageService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Implementations\\PackageService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\CategoryService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Implementations\\CategoryService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Commons\\PaginationResult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Commons\\PaginationResult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\SystemLogger\\SystemLogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\SystemLogger\\SystemLogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Common\\ApiResponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:API\\Common\\ApiResponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:1:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:1:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\migrations\\20250702130749_addminiumhour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250702130749_addminiumhour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|d:\\coursewarefpt\\semester-8\\exe201\\project\\eventtop-backend\\productsservice\\infrastructure\\migrations\\20250702113500_changeprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22299719-0385-47A7-8A13-7F4306F0DCCD}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250702113500_changeprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
+>>>>>>> eba1471 (WIP: commit trước khi pull)
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedWidth": 158,
+          "SelectedChildIndex": -1,
+=======
+          "DockedWidth": 200,
           "SelectedChildIndex": 2,
+>>>>>>> eba1471 (WIP: commit trước khi pull)
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+<<<<<<< HEAD
+=======
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RemoveProductPackage.cs",
-              "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Commands\\RemoveProductPackage.cs",
-              "RelativeDocumentMoniker": "Application\\Products\\Commands\\RemoveProductPackage.cs",
-              "ToolTip": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Commands\\RemoveProductPackage.cs",
-              "RelativeToolTip": "Application\\Products\\Commands\\RemoveProductPackage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T03:31:37.282Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "API\\appsettings.json",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\appsettings.json",
+              "RelativeToolTip": "API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-02T14:59:01.491Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AddProductPackage.cs",
-              "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Commands\\AddProductPackage.cs",
-              "RelativeDocumentMoniker": "Application\\Products\\Commands\\AddProductPackage.cs",
-              "ToolTip": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Commands\\AddProductPackage.cs",
-              "RelativeToolTip": "Application\\Products\\Commands\\AddProductPackage.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAswEAAAABrAAAAAAAAAA==",
+              "Title": "GetProductDetail.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Products\\Queries\\GetProductDetail.cs",
+              "RelativeDocumentMoniker": "Application\\Products\\Queries\\GetProductDetail.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Products\\Queries\\GetProductDetail.cs",
+              "RelativeToolTip": "Application\\Products\\Queries\\GetProductDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T03:31:36.689Z",
+              "WhenOpened": "2025-07-02T13:45:49.414Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "API\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCkAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:02.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "API\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBAAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:29:58.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAUwCEAAAB0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T02:31:37.981Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProductImage.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Products\\ProductImage.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Products\\ProductImage.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Products\\ProductImage.cs",
+              "RelativeToolTip": "Domain\\Entities\\Products\\ProductImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T13:45:34.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Repositories\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Repositories\\IProductRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Repositories\\IProductRepository.cs",
+              "RelativeToolTip": "Domain\\Repositories\\IProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:55.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PackageStructureController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\PackageStructureController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\PackageStructureController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\PackageStructureController.cs",
+              "RelativeToolTip": "API\\Controllers\\PackageStructureController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:00.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Package.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Products\\Package.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Products\\Package.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Products\\Package.cs",
+              "RelativeToolTip": "Domain\\Entities\\Products\\Package.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAWwA0AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T13:11:31.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PackageStructure.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\PackagesStructures\\PackageStructure.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\PackagesStructures\\PackageStructure.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\PackagesStructures\\PackageStructure.cs",
+              "RelativeToolTip": "Domain\\Entities\\PackagesStructures\\PackageStructure.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:31:54.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Categories\\Category.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Categories\\Category.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Entities\\Categories\\Category.cs",
+              "RelativeToolTip": "Domain\\Entities\\Categories\\Category.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T13:14:23.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetProductSummaryList.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Products\\Queries\\GetProductSummaryList.cs",
+              "RelativeDocumentMoniker": "Application\\Products\\Queries\\GetProductSummaryList.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Products\\Queries\\GetProductSummaryList.cs",
+              "RelativeToolTip": "Application\\Products\\Queries\\GetProductSummaryList.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAAwGYAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:35:14.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "20250702130749_addMiniumHour.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702130749_addMiniumHour.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250702130749_addMiniumHour.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702130749_addMiniumHour.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250702130749_addMiniumHour.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T13:07:49.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PackageEntityConfiguration.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\PackageEntityConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\Configurations\\PackageEntityConfiguration.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\PackageEntityConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\Configurations\\PackageEntityConfiguration.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAD4vxsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:33:57.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "20250702113500_changePrice.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702113500_changePrice.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250702113500_changePrice.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702113500_changePrice.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250702113500_changePrice.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:35:00.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductImageEntityConfiguration.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\ProductImageEntityConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\Configurations\\ProductImageEntityConfiguration.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\ProductImageEntityConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\Configurations\\ProductImageEntityConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:32:40.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PackageStructureEntityConfiguration.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\PackageStructureEntityConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\Configurations\\PackageStructureEntityConfiguration.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\PackageStructureEntityConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\Configurations\\PackageStructureEntityConfiguration.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwCoAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:32:37.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CategoryEntityConfiguration.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\CategoryEntityConfiguration.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\Configurations\\CategoryEntityConfiguration.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\Configurations\\CategoryEntityConfiguration.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\Configurations\\CategoryEntityConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:32:35.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "20250702111117_initdb.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702111117_initdb.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250702111117_initdb.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Migrations\\20250702111117_initdb.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250702111117_initdb.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T11:11:17.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PackageTypeEnum.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Enums\\PackageTypeEnum.cs",
+              "RelativeDocumentMoniker": "Domain\\Enums\\PackageTypeEnum.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Enums\\PackageTypeEnum.cs",
+              "RelativeToolTip": "Domain\\Enums\\PackageTypeEnum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:49.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ProductDbContext.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\ProductDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Context\\ProductDbContext.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Context\\ProductDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\Context\\ProductDbContext.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:44:11.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ServiceSummaryDTO.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs",
+              "RelativeDocumentMoniker": "Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs",
+              "RelativeToolTip": "Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwBsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T15:33:21.509Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DependenciesInjection.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\DependenciesInjection.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\DependenciesInjection.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\DependenciesInjection.cs",
+              "RelativeToolTip": "Infrastructure\\DependenciesInjection.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAuwB0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:50:12.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "JwtHelper.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\ApplicationServices\\JwtHelper.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\ApplicationServices\\JwtHelper.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\ApplicationServices\\JwtHelper.cs",
+              "RelativeToolTip": "Infrastructure\\ApplicationServices\\JwtHelper.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:38:35.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ICommandDispatcher.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Dispatchers\\Commands\\ICommandDispatcher.cs",
+              "RelativeDocumentMoniker": "Application\\Commons\\Dispatchers\\Commands\\ICommandDispatcher.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Dispatchers\\Commands\\ICommandDispatcher.cs",
+              "RelativeToolTip": "Application\\Commons\\Dispatchers\\Commands\\ICommandDispatcher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:33:55.269Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "GetAllStructure.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\PackageStructures\\Queries\\GetAllStructure.cs",
+              "RelativeDocumentMoniker": "Application\\PackageStructures\\Queries\\GetAllStructure.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\PackageStructures\\Queries\\GetAllStructure.cs",
+              "RelativeToolTip": "Application\\PackageStructures\\Queries\\GetAllStructure.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAwwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:33:42.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CreateNewStructrure.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\PackageStructures\\Commands\\CreateNewStructrure.cs",
+              "RelativeDocumentMoniker": "Application\\PackageStructures\\Commands\\CreateNewStructrure.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\PackageStructures\\Commands\\CreateNewStructrure.cs",
+              "RelativeToolTip": "Application\\PackageStructures\\Commands\\CreateNewStructrure.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:33:39.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CommandDispatcher.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Dispatchers\\CommandDispatcher.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Dispatchers\\CommandDispatcher.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Dispatchers\\CommandDispatcher.cs",
+              "RelativeToolTip": "Infrastructure\\Dispatchers\\CommandDispatcher.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:31:42.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Repositories\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Repositories\\IGenericRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Domain\\Repositories\\IGenericRepository.cs",
+              "RelativeToolTip": "Domain\\Repositories\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:53.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\UoW\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\UoW\\UnitOfWork.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\UoW\\UnitOfWork.cs",
+              "RelativeToolTip": "Infrastructure\\UoW\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:31:44.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Error.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Results\\Error.cs",
+              "RelativeDocumentMoniker": "Application\\Commons\\Results\\Error.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Results\\Error.cs",
+              "RelativeToolTip": "Application\\Commons\\Results\\Error.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:41.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IJwtHelper.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Interfaces\\JwtHelper\\IJwtHelper.cs",
+              "RelativeDocumentMoniker": "Application\\Commons\\Interfaces\\JwtHelper\\IJwtHelper.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Interfaces\\JwtHelper\\IJwtHelper.cs",
+              "RelativeToolTip": "Application\\Commons\\Interfaces\\JwtHelper\\IJwtHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:16.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ICommandHandler.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Handlers\\ICommandHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Commons\\Handlers\\ICommandHandler.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Commons\\Handlers\\ICommandHandler.cs",
+              "RelativeToolTip": "Application\\Commons\\Handlers\\ICommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:13.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ResultExtension.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Extensions\\ResultExtension.cs",
+              "RelativeDocumentMoniker": "API\\Extensions\\ResultExtension.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Extensions\\ResultExtension.cs",
+              "RelativeToolTip": "API\\Extensions\\ResultExtension.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:30:05.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "PackageStructureRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\PackageStructureRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\PackageStructureRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\PackageStructureRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\PackageStructureRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:29:51.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "PackageRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\PackageRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\PackageRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\PackageRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\PackageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:29:50.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\GenericRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAADwvygAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T04:01:11.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "QueryDispatcher.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Dispatchers\\QueryDispatcher.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Dispatchers\\QueryDispatcher.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Dispatchers\\QueryDispatcher.cs",
+              "RelativeToolTip": "Infrastructure\\Dispatchers\\QueryDispatcher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:25:39.505Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "ServicesController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ServicesController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\ServicesController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ServicesController.cs",
+              "RelativeToolTip": "API\\Controllers\\ServicesController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "PackagesController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\PackagesController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\PackagesController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\PackagesController.cs",
+              "RelativeToolTip": "API\\Controllers\\PackagesController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.178Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "API\\Controllers\\CategoriesController.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "API\\Controllers\\CategoriesController.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "PackageService.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\PackageService.cs",
+              "RelativeDocumentMoniker": "Application\\Implementations\\PackageService.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\PackageService.cs",
+              "RelativeToolTip": "Application\\Implementations\\PackageService.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\CategoryService.cs",
+              "RelativeDocumentMoniker": "Application\\Implementations\\CategoryService.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Implementations\\CategoryService.cs",
+              "RelativeToolTip": "Application\\Implementations\\CategoryService.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.345Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "PaginationResult.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Commons\\PaginationResult.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Commons\\PaginationResult.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Commons\\PaginationResult.cs",
+              "RelativeToolTip": "Infrastructure\\Commons\\PaginationResult.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.348Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "SystemLogger.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "RelativeToolTip": "Infrastructure\\SystemLogger\\SystemLogger.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "API\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-23T07:50:45.919Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Common\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "API\\Common\\ApiResponse.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Common\\ApiResponse.cs",
+              "RelativeToolTip": "API\\Common\\ApiResponse.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ToolTip": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\Implementations\\ServiceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T04:23:31.366Z"
+>>>>>>> eba1471 (WIP: commit trước khi pull)
             }
           ]
         }

@@ -18,6 +18,6 @@ namespace Domain.Entities
         [Column("service_id")]
         public Guid? ServiceId { get; set; }
 
-        public virtual Planning  Planning { get; set; } = null!;
+        public virtual Planning?  Planning { get; set; } 
     }
 }
