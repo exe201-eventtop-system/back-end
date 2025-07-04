@@ -3,6 +3,7 @@
 <<<<<<< HEAD
   "WorkspaceRootPath": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\",
   "Documents": [],
+<<<<<<< HEAD
 =======
   "WorkspaceRootPath": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\",
   "Documents": [
@@ -204,6 +205,8 @@
     }
   ],
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -213,14 +216,18 @@
 <<<<<<< HEAD
           "DockedWidth": 158,
           "SelectedChildIndex": -1,
+<<<<<<< HEAD
 =======
           "DockedWidth": 200,
           "SelectedChildIndex": 2,
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
             },
@@ -804,6 +811,8 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T04:23:31.366Z"
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
             }
           ]
         }

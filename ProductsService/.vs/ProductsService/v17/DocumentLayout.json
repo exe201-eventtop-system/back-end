@@ -14,6 +14,7 @@
     {
       "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+<<<<<<< HEAD
 =======
   "WorkspaceRootPath": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\",
   "Documents": [
@@ -213,6 +214,8 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Application\\Models\\DTO\\Service\\ServiceSummaryDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
     }
   ],
   "DocumentGroupContainers": [
@@ -224,10 +227,13 @@
 <<<<<<< HEAD
           "DockedWidth": 158,
           "SelectedChildIndex": 1,
+<<<<<<< HEAD
 =======
           "DockedWidth": 200,
           "SelectedChildIndex": 2,
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
           "Children": [
             {
               "$type": "Bookmark",
@@ -235,6 +241,9 @@
             },
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "GetProductDetail.cs",
@@ -245,6 +254,7 @@
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwCkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T06:17:49.337Z",
+<<<<<<< HEAD
 =======
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -261,12 +271,17 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-02T14:59:01.491Z",
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
               "Title": "GetProductPackage.cs",
               "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Queries\\GetProductPackage.cs",
               "RelativeDocumentMoniker": "Application\\Products\\Queries\\GetProductPackage.cs",
@@ -275,6 +290,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T06:17:46.969Z",
+<<<<<<< HEAD
 =======
               "Title": "GetProductDetail.cs",
               "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\Application\\Products\\Queries\\GetProductDetail.cs",
@@ -285,12 +301,17 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T13:45:49.414Z",
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\API\\Program.cs",
               "RelativeDocumentMoniker": "API\\Program.cs",
@@ -300,6 +321,7 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T05:46:25.128Z",
               "EditorCaption": ""
+<<<<<<< HEAD
 =======
               "Title": "ProductController.cs",
               "DocumentMoniker": "D:\\CoursewareFPT\\Semester-8\\EXE201\\Project\\eventtop-backend\\ProductsService\\API\\Controllers\\ProductController.cs",
@@ -853,6 +875,8 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T04:23:31.366Z"
 >>>>>>> eba1471 (WIP: commit trước khi pull)
+=======
+>>>>>>> eba4102583bc0d8ba3489c8aa721412449bb9ddd
             }
           ]
         }
