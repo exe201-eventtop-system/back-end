@@ -37,12 +37,14 @@ namespace Application.Products.Commands
         {
             var item = await unitOfWork.ProductRepository.GetByIdAsync(command.Id);
 
-            if (item == null)
+            if (item == null || item.IsDeleted)
             {
                 return Result<DeleteProductResult>.Failure(Error.NotFoundError($"can not find service with id {command.Id}"), "Failed while processing request.");
             }
 
-            if (await unitOfWork.ProductRepository.Remove(command.Id))
+            item.IsDeleted = true;
+
+            if (await unitOfWork.ProductRepository.Update(item) != null)
             {
                 return Result<DeleteProductResult>.Success(new DeleteProductResult { Id = command.Id, Removed = true });
             }

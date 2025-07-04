@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\application\\products\\queries\\getproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\queries\\getproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\application\\products\\queries\\getproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF3A0A3B-21A7-463F-A398-B190AE4EABB2}|Application\\Application.csproj|solutionrelative:application\\products\\queries\\getproductpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|e:\\personal\\documents\\fpt\\exe201\\back-end\\productsservice\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C9BA8CD-8D71-474C-A3F4-CD2E5617D179}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 158,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetProductDetail.cs",
+              "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Queries\\GetProductDetail.cs",
+              "RelativeDocumentMoniker": "Application\\Products\\Queries\\GetProductDetail.cs",
+              "ToolTip": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Queries\\GetProductDetail.cs",
+              "RelativeToolTip": "Application\\Products\\Queries\\GetProductDetail.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T06:17:49.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetProductPackage.cs",
+              "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Queries\\GetProductPackage.cs",
+              "RelativeDocumentMoniker": "Application\\Products\\Queries\\GetProductPackage.cs",
+              "ToolTip": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\Application\\Products\\Queries\\GetProductPackage.cs",
+              "RelativeToolTip": "Application\\Products\\Queries\\GetProductPackage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T06:17:46.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "E:\\Personal\\Documents\\FPT\\EXE201\\back-end\\ProductsService\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T05:46:25.128Z",
+              "EditorCaption": ""
             }
           ]
         }

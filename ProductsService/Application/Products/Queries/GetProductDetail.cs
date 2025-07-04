@@ -35,7 +35,7 @@ namespace Application.Products.Queries
 
         [JsonPropertyName("package_type")]
         public PackageType PackageType { get; set; }
-   
+
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
     }
