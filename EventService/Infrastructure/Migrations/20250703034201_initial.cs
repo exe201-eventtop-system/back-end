@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class EventDbInitialMigration : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,6 +20,7 @@ namespace Infrastructure.Migrations
                     thumbnail_url = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
                     name = table.Column<string>(type: "NVARCHAR(64)", nullable: false),
                     description = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
+                    is_deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     last_modified_at = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
@@ -37,16 +38,15 @@ namespace Infrastructure.Migrations
                     name = table.Column<string>(type: "NVARCHAR(128)", nullable: false),
                     description = table.Column<string>(type: "NVARCHAR(2048)", nullable: false),
                     location = table.Column<string>(type: "NVARCHAR(128)", nullable: false),
-                    start_date = table.Column<DateOnly>(type: "DATE", nullable: false),
-                    start_time = table.Column<TimeOnly>(type: "TIME", nullable: false),
-                    end_date = table.Column<DateOnly>(type: "DATE", nullable: false),
-                    end_time = table.Column<TimeOnly>(type: "TIME", nullable: false),
+                    start_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    end_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    event_thumbnail = table.Column<string>(type: "NVARCHAR(256)", nullable: true),
                     number_of_people = table.Column<int>(type: "INT", nullable: false),
                     main_color_hex = table.Column<string>(type: "NVARCHAR(6)", nullable: false),
                     secondary_color_hex = table.Column<string>(type: "NVARCHAR(6)", nullable: false),
-                    event_type_id = table.Column<int>(type: "INT", nullable: true),
+                    event_type_id = table.Column<int>(type: "INT", nullable: false),
                     status = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
-                    IsDeleted = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    is_deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
                     created_at = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValueSql: "GETDATE()"),
                     last_modified_at = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
@@ -58,32 +58,6 @@ namespace Infrastructure.Migrations
                         column: x => x.event_type_id,
                         principalTable: "EventTypes",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EventSessions",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
-                    event_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
-                    name = table.Column<string>(type: "NVARCHAR(64)", nullable: false),
-                    description = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
-                    session_cost = table.Column<decimal>(type: "DECIMAL(10,2)", nullable: false),
-                    session_start_time = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    duration = table.Column<int>(type: "INT", nullable: false),
-                    status = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
-                    created_at = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValueSql: "GETDATE()"),
-                    last_modified_at = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValueSql: "GETDATE()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventSessions", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_EventSessions_Events_event_id",
-                        column: x => x.event_id,
-                        principalTable: "Events",
-                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -92,18 +66,22 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
-                    session_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
+                    event_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
                     service_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
-                    service_name = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
-                    customer_note = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
+                    UNIQUEIDENTIFIER = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    customer_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
+                    supplier_id = table.Column<Guid>(type: "UNIQUEIDENTIFIER", nullable: false),
+                    rent_start_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    rent_end_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    delivered_time = table.Column<DateTime>(type: "DATETIME", nullable: true),
+                    returned_time = table.Column<DateTime>(type: "DATETIME", nullable: true),
+                    customer_note = table.Column<string>(type: "NVARCHAR(256)", nullable: true),
+                    damage_type = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
+                    initial_condition = table.Column<string>(type: "NVARCHAR(256)", nullable: true),
+                    returned_condition = table.Column<string>(type: "NVARCHAR(256)", nullable: true),
+                    status = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
                     unit_price = table.Column<decimal>(type: "DECIMAL(10,2)", nullable: false),
                     quantity = table.Column<int>(type: "INT", nullable: false),
-                    initial_condition = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
-                    returned_condition = table.Column<string>(type: "NVARCHAR(256)", nullable: false),
-                    damage_type = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
-                    status = table.Column<int>(type: "INT", nullable: false, defaultValue: 0),
-                    delivered_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    returned_time = table.Column<DateTime>(type: "DATETIME", nullable: false),
                     created_at = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValueSql: "GETDATE()"),
                     last_modified_at = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValueSql: "GETDATE()")
                 },
@@ -111,9 +89,9 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_UsedSessionServices", x => x.id);
                     table.ForeignKey(
-                        name: "FK_UsedSessionServices_EventSessions_session_id",
-                        column: x => x.session_id,
-                        principalTable: "EventSessions",
+                        name: "FK_UsedSessionServices_Events_event_id",
+                        column: x => x.event_id,
+                        principalTable: "Events",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -124,14 +102,9 @@ namespace Infrastructure.Migrations
                 column: "event_type_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventSessions_event_id",
-                table: "EventSessions",
-                column: "event_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsedSessionServices_session_id",
+                name: "IX_UsedSessionServices_event_id",
                 table: "UsedSessionServices",
-                column: "session_id");
+                column: "event_id");
         }
 
         /// <inheritdoc />
@@ -139,9 +112,6 @@ namespace Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "UsedSessionServices");
-
-            migrationBuilder.DropTable(
-                name: "EventSessions");
 
             migrationBuilder.DropTable(
                 name: "Events");

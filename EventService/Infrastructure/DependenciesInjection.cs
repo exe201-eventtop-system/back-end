@@ -1,25 +1,18 @@
-﻿using Application.Commons.Dispatchers.Commands;
+﻿using Application.Commons.Dispatchers;
+using Application.Commons.Dispatchers.Commands;
 using Application.Commons.Dispatchers.Queries;
 using Application.Commons.Handlers;
 using Application.Commons.Interfaces.ApiCaller;
-using Application.Commons.Interfaces.JwtHelper;
-using Application.Commons.PaginatedLists;
-using Application.Commons.Results;
-using Application.EventTypes.Queries;
-using Application.UsedServices.Queries;
-using Domain.Entities;
-using Domain.Repositories;
+using Application.Commons.UoW;
 using Infrastructure.Context;
-using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Infrastructure.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SharedLibrary.FireBase;
+using SharedLibrary.Jwt;
+using System.Reflection;
 
 namespace Infrastructure
 {
@@ -28,19 +21,68 @@ namespace Infrastructure
         public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ScheduledEventServiceDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("default")));
-            
-            services.AddScoped<IEventTypeRepository, EventTypeRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<IEventSessionRepository, EventSessionRepository>();
 
+            // Add HttpClients
+            services.AddHttpClient("AuthService", client =>
+            {
+                client.BaseAddress = new Uri(configuration["Endpoints:Auth"]);
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+
+            services.AddHttpClient("ProductService", client =>
+            {
+                client.BaseAddress = new Uri(configuration["Endpoints:Product"]);
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+
+            // Add Shared library
+            services.AddScoped<JwtService>();
+
+            // Adding HttpClient used in calling other endpoints
+            services.AddScoped<IApiEndpointCaller, ApiEndpointCaller>();
+
+            // Add Firebase Storage
+            services.AddScoped<FirebaseStorageService>();
+
+            // Configuring unit of work to centralize calling to the databae.
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Add command and query dispatchers
             services.AddScoped<IQueryDispatcher, QueryDispatcher>();
             services.AddScoped<ICommandDispatcher, CommandDispatcher>();
 
-            services.AddScoped<IJwtHelper, JwtHelper>();
-            services.AddScoped<IApiEndpointCaller, ApiEndpointCaller>();
+            // Add command and query handlers
+            // Scan through the assembly to find all command / query handlers.
+            try
+            {
+                var openHandlerInterfaces = new[]
+                {
+                    typeof(ICommandHandler<,>),
+                    typeof(IQueryHandler<,>)
+                };
 
-            services.AddScoped<IQueryHandler<EventTypeQuery, Result<List<EventTypeResult>>>, GetEventTypesHandler>();
-            services.AddScoped<IQueryHandler<GetUsedServiceQuery, Result<PaginatedList<UsedServiceQueryResult>>>, GetUsedServiceHandler>();
+                var types = Assembly.GetAssembly(typeof(ICommandHandler<,>)).GetTypes()
+                    .Where(t => !t.IsAbstract && !t.IsInterface);
+
+                foreach (var impl in types)
+                {
+                    Console.WriteLine(impl.FullName);
+
+                    var matchingInterfaces = impl.GetInterfaces()
+                        .Where(i => i.IsGenericType
+                                    && openHandlerInterfaces.Contains(i.GetGenericTypeDefinition()));
+
+                    foreach (var serviceType in matchingInterfaces)
+                    {
+                        Console.WriteLine($"\t{serviceType.FullName}");
+                        services.AddScoped(serviceType, impl);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to register handlers");
+            }
 
             return services;
         }

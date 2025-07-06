@@ -17,12 +17,15 @@ namespace Infrastructure.Repositories
 
         public override async Task<List<ScheduledEvent>> GetAllAsync()
         {
-            return await _context.Events.Include(x => x.SessionsNavigation).Include(x => x.EventTypeNavigation).ToListAsync();
+            return await _context.Events
+                .Include(x => x.ServicesNavigation)
+                .Include(x => x.EventTypeNavigation)
+                .ToListAsync();
         }
 
         public override async Task<List<ScheduledEvent>> GetAllAsync(Expression<Func<ScheduledEvent, bool>> filter, Func<IQueryable<ScheduledEvent>, IOrderedQueryable<ScheduledEvent>>? orderBy)
         {
-            var query = _context.Events.Include(x => x.SessionsNavigation).Include(x => x.EventTypeNavigation).Where(filter);
+            var query = _context.Events.Include(x => x.ServicesNavigation).Include(x => x.EventTypeNavigation).Where(filter);
 
             if (orderBy != null)
             {
@@ -34,7 +37,10 @@ namespace Infrastructure.Repositories
 
         public async Task<ScheduledEvent?> GetByIdAsync(Guid id)
         {
-            return await _context.Events.Include(x => x.EventTypeNavigation).Include(x => x.SessionsNavigation).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Events
+                .Include(x => x.EventTypeNavigation)
+                .Include(x => x.ServicesNavigation)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

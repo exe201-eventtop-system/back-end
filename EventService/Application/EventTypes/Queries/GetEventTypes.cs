@@ -1,23 +1,17 @@
 ﻿using Application.Commons.Handlers;
-using Application.Commons.Interfaces.JwtHelper;
 using Application.Commons.Results;
-using Domain.Constants.UserRoles;
+using Application.Commons.UoW;
 using Domain.Repositories;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SharedLibrary.Jwt;
 
 namespace Application.EventTypes.Queries
 {
-    public class EventTypeQuery
+    public class GetEventTypesQuery
     {
         public bool IncludeDeleted { get; set; } = false;
-
-        public bool IncludeStatisticalData { get; set; } = false;
-
-        [BindNever]
-        public string? Token { get; set; } = null;
     }
 
-    public class EventTypeResult
+    public class GetEventTypesResult
     {
         public int Id { get; set; }
 
@@ -28,37 +22,22 @@ namespace Application.EventTypes.Queries
         public string Thumbnail { get; set; }
     }
 
-    public class GetEventTypesHandler: IQueryHandler<EventTypeQuery, Result<List<EventTypeResult>>>
+    public class GetEventTypesHandler: IQueryHandler<GetEventTypesQuery, Result<List<GetEventTypesResult>>>
     {
-        private readonly IEventTypeRepository _eventTypeRepository;
-        private readonly IEventRepository _eventRepository;
-        private readonly IJwtHelper _jwtHelper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly JwtService _jwtService;
 
-        public GetEventTypesHandler(IEventTypeRepository eventTypeRepository, IEventRepository eventRepository, IJwtHelper jwtHelper)
+        public GetEventTypesHandler(IUnitOfWork unitOfWork, JwtService jwtService)
         {
-            _eventTypeRepository = eventTypeRepository;
-            _eventRepository = eventRepository;
-            _jwtHelper = jwtHelper;
+            _unitOfWork = unitOfWork;
+            _jwtService = jwtService;
         }
 
-        public async Task<Result<List<EventTypeResult>>> Handle(EventTypeQuery query, CancellationToken cancellationToken)
+        public async Task<Result<List<GetEventTypesResult>>> Handle(GetEventTypesQuery query, CancellationToken cancellationToken)
         {
-            var result = await _eventTypeRepository.GetAllAsync();
+            var result = await _unitOfWork.EventTypeRepository.GetAllAsync();
 
-            if (query.IncludeStatisticalData == true && query.Token != null)
-            {
-                var role = await _jwtHelper.ExtractRoleFromToken(query.Token);
-
-                if (role == null || role == UserRole.Admin)
-                {
-                    return Result<List<EventTypeResult>>.Failure(Error.UnauthorizedError("Administrative permission required")
-                        , "The query was sucessfully executed, but there is an error in permission checking.");
-                }
-
-                // Do statistical data colelcting here
-            }
-
-            return Result<List<EventTypeResult>>.Success(result.Select(x => new EventTypeResult
+            return Result<List<GetEventTypesResult>>.Success(result.Select(x => new GetEventTypesResult
             {
                 Id = x.Id,
                 Name = x.DisplayName,

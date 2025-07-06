@@ -10,7 +10,9 @@ namespace Domain.Constants.UsedServices
     {
         Registered,
         Delivered,
+        Recieved,
         Returned,
+        ReturnedAccepted,
         Canceled
     }
 }

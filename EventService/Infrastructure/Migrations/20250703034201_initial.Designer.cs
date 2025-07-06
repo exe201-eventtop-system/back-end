@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ScheduledEventServiceDbContext))]
-    [Migration("20250622041848_EventDbInitialMigration")]
-    partial class EventDbInitialMigration
+    [Migration("20250703034201_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,64 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.EventSession", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("UNIQUEIDENTIFIER")
-                        .HasColumnName("id");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("DECIMAL(10,2)")
-                        .HasColumnName("session_cost");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("DATETIME")
-                        .HasColumnName("created_at")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(256)")
-                        .HasColumnName("description");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("INT")
-                        .HasColumnName("duration");
-
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("UNIQUEIDENTIFIER")
-                        .HasColumnName("event_id");
-
-                    b.Property<DateTime>("LastModifiedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("DATETIME")
-                        .HasColumnName("last_modified_at")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("session_start_time");
-
-                    b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INT")
-                        .HasDefaultValue(0)
-                        .HasColumnName("status");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(64)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.ToTable("EventSessions");
-                });
 
             modelBuilder.Entity("Domain.Entities.EventType", b =>
                 {
@@ -107,6 +49,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR(64)")
                         .HasColumnName("name");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_deleted");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
@@ -146,12 +94,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("NVARCHAR(2048)")
                         .HasColumnName("description");
 
-                    b.Property<DateOnly>("EndDate")
-                        .HasColumnType("DATE")
-                        .HasColumnName("end_date");
-
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("TIME")
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("end_time");
 
                     b.Property<int>("EventStatus")
@@ -160,14 +104,15 @@ namespace Infrastructure.Migrations
                         .HasDefaultValue(0)
                         .HasColumnName("status");
 
-                    b.Property<int?>("EventTypeId")
+                    b.Property<int>("EventTypeId")
                         .HasColumnType("INT")
                         .HasColumnName("event_type_id");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BIT")
-                        .HasDefaultValue(false);
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_deleted");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
@@ -199,13 +144,13 @@ namespace Infrastructure.Migrations
                         .HasColumnType("NVARCHAR(6)")
                         .HasColumnName("secondary_color_hex");
 
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("DATE")
-                        .HasColumnName("start_date");
-
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("TIME")
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("DATETIME")
                         .HasColumnName("start_time");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("NVARCHAR(256)")
+                        .HasColumnName("event_thumbnail");
 
                     b.HasKey("Id");
 
@@ -214,7 +159,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("Domain.Entities.UsedServices", b =>
+            modelBuilder.Entity("Domain.Entities.UsedService", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,8 +172,11 @@ namespace Infrastructure.Migrations
                         .HasColumnName("created_at")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("UNIQUEIDENTIFIER")
+                        .HasColumnName("customer_id");
+
                     b.Property<string>("CustomerNote")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(256)")
                         .HasColumnName("customer_note");
 
@@ -238,12 +186,15 @@ namespace Infrastructure.Migrations
                         .HasDefaultValue(0)
                         .HasColumnName("damage_type");
 
-                    b.Property<DateTime>("DeliveredTime")
+                    b.Property<DateTime?>("DeliveredTime")
                         .HasColumnType("DATETIME")
                         .HasColumnName("delivered_time");
 
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("UNIQUEIDENTIFIER")
+                        .HasColumnName("event_id");
+
                     b.Property<string>("InitialCondition")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(256)")
                         .HasColumnName("initial_condition");
 
@@ -253,16 +204,27 @@ namespace Infrastructure.Migrations
                         .HasColumnName("last_modified_at")
                         .HasDefaultValueSql("GETDATE()");
 
+                    b.Property<Guid>("PackageId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UNIQUEIDENTIFIER");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("INT")
                         .HasColumnName("quantity");
 
-                    b.Property<DateTime>("ReturnTime")
+                    b.Property<DateTime>("RentEndTime")
+                        .HasColumnType("DATETIME")
+                        .HasColumnName("rent_end_time");
+
+                    b.Property<DateTime>("RentStartTime")
+                        .HasColumnType("DATETIME")
+                        .HasColumnName("rent_start_time");
+
+                    b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("DATETIME")
                         .HasColumnName("returned_time");
 
                     b.Property<string>("ReturnedCondition")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR(256)")
                         .HasColumnName("returned_condition");
 
@@ -270,20 +232,15 @@ namespace Infrastructure.Migrations
                         .HasColumnType("UNIQUEIDENTIFIER")
                         .HasColumnName("service_id");
 
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(256)")
-                        .HasColumnName("service_name");
-
-                    b.Property<Guid>("SessionId")
-                        .HasColumnType("UNIQUEIDENTIFIER")
-                        .HasColumnName("session_id");
-
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INT")
                         .HasDefaultValue(0)
                         .HasColumnName("status");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("UNIQUEIDENTIFIER")
+                        .HasColumnName("supplier_id");
 
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("DECIMAL(10,2)")
@@ -291,47 +248,41 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SessionId");
+                    b.HasIndex("EventId");
 
                     b.ToTable("UsedSessionServices");
-                });
-
-            modelBuilder.Entity("Domain.Entities.EventSession", b =>
-                {
-                    b.HasOne("Domain.Entities.ScheduledEvent", null)
-                        .WithMany("SessionsNavigation")
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.ScheduledEvent", b =>
                 {
                     b.HasOne("Domain.Entities.EventType", "EventTypeNavigation")
-                        .WithMany()
+                        .WithMany("ScheduledEventsNavigation")
                         .HasForeignKey("EventTypeId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("EventTypeNavigation");
                 });
 
-            modelBuilder.Entity("Domain.Entities.UsedServices", b =>
+            modelBuilder.Entity("Domain.Entities.UsedService", b =>
                 {
-                    b.HasOne("Domain.Entities.EventSession", null)
+                    b.HasOne("Domain.Entities.ScheduledEvent", "ScheduledEventNavigation")
                         .WithMany("ServicesNavigation")
-                        .HasForeignKey("SessionId")
+                        .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ScheduledEventNavigation");
                 });
 
-            modelBuilder.Entity("Domain.Entities.EventSession", b =>
+            modelBuilder.Entity("Domain.Entities.EventType", b =>
                 {
-                    b.Navigation("ServicesNavigation");
+                    b.Navigation("ScheduledEventsNavigation");
                 });
 
             modelBuilder.Entity("Domain.Entities.ScheduledEvent", b =>
                 {
-                    b.Navigation("SessionsNavigation");
+                    b.Navigation("ServicesNavigation");
                 });
 #pragma warning restore 612, 618
         }

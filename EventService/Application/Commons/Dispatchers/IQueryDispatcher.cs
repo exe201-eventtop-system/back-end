@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commons.Dispatchers.Queries
+namespace Application.Commons.Dispatchers
 {
     public interface IQueryDispatcher
     {

@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Context.Configurations
 {
@@ -30,6 +25,11 @@ namespace Infrastructure.Context.Configurations
             builder.Property(x => x.ThumbnailUrl)
                 .HasColumnName("thumbnail_url")
                 .HasColumnType("NVARCHAR(256)");
+
+            builder.Property(x => x.IsDeleted)
+                .HasColumnName("is_deleted")
+                .HasColumnType("BIT")
+                .HasDefaultValue(false);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnName("created_at")

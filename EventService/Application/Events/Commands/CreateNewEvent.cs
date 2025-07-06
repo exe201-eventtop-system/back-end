@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Constants.UserRoles
+namespace Application.Events.Commands
 {
-    public enum UserRole
+    public class CreateNewEventCommand
     {
-        Admin,
-        Inspector,
-        Suplier,
-        Customer,
+
+    }
+
+    public class CreateNewEventResult
+    {
+
     }
 }
