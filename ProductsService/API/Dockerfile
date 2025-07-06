@@ -7,27 +7,15 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
-# This stage is used to build the service project
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["API/API.csproj", "API/"]
-COPY ["Application/Application.csproj", "Application/"]
-COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
-COPY ["Domain/Domain.csproj", "Domain/"]
-RUN dotnet restore "./API/API.csproj"
 COPY . .
-WORKDIR "/src/API"
-RUN dotnet build "./API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet restore
+RUN dotnet publish -c Release -o /app/publish
 
-# This stage is used to publish the service project to be copied to the final stage
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
-FROM base AS final
+# Stage 2: Run
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "API.dll"]

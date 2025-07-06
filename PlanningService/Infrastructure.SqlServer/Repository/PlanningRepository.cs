@@ -21,12 +21,12 @@ namespace Infrastructure.SqlServer.Repository
 
         public async Task<Planning> Accept(Guid planningId, Guid userId)
         {
-            var planning = await _context.Plannings.FindAsync(planningId);
+            var planning = await _context.Plannings.FirstOrDefaultAsync(pl => pl.Id == planningId);
 
             if (planning == null)
                 throw new Exception("Không tìm thấy kế hoạch.");
-            planning.CustomerId = userId;
-            planning.Status = PlanningStatus.Confirmed;
+            planning.Status = PlanningStatus.Draft;
+            planning.IsDeleted = false;
             planning.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
@@ -41,11 +41,14 @@ namespace Infrastructure.SqlServer.Repository
             return _context.SaveChangesAsync().ContinueWith(t => sesstionService.Id);
         }
 
-        public Task<Planning> CreateStep1Async(Planning planning, Guid userId)
+        public async Task<Planning> CreateStep1Async(Planning planning, Guid userId)
         {
+            planning.CustomerId = userId;
             _context.Plannings.Add(planning);
-            return _context.SaveChangesAsync().ContinueWith(t => planning);
+            await _context.SaveChangesAsync();
+            return planning;
         }
+
 
         public async Task<Planning> CreateStep2Async(Planning planning)
         {
@@ -93,22 +96,23 @@ namespace Infrastructure.SqlServer.Repository
 
         public async Task<(IEnumerable<Planning> Items, int TotalCount)> GetAllPlansAsync(int page, int size, PlanningStatus status, string? keyword, Guid userId)
         {
-            var query = _context.Plannings.Include(p => p.SesstionServices.Where(s => !s.IsDeleted))
-       .Where(p => !p.IsDeleted && p.CustomerId == userId);
+            var baseQuery = _context.Plannings
+                .Where(p => !p.IsDeleted && p.CustomerId == userId);
 
             if (Enum.IsDefined(typeof(PlanningStatus), status))
             {
-                query = query.Where(p => p.Status == status);
+                baseQuery = baseQuery.Where(p => p.Status == status);
             }
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                query = query.Where(p => p.Name.Contains(keyword));
+                baseQuery = baseQuery.Where(p => p.Name.Contains(keyword));
             }
 
-            var totalCount = await query.CountAsync();
 
-            var items = await query
+            var totalCount = await baseQuery.CountAsync();
+            var items = await baseQuery
+                .Include(p => p.SesstionServices.Where(s => !s.IsDeleted))
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip((page - 1) * size)
                 .Take(size)
@@ -116,6 +120,7 @@ namespace Infrastructure.SqlServer.Repository
 
             return (items, totalCount);
         }
+
 
 
 

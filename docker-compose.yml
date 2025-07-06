@@ -1,21 +1,25 @@
+version: '3.8'
 services:
   apigateway:
     build:
-      context: ./API-Gatewate
-      dockerfile: ./API/Dockerfile
+      context: ./API-Gateway/API
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - auth-service
-      - planning-service
-      - product-service
+      - authservice
+      - planningservice
+      - productservice
+      - blogservice
+      - eventservice
+      - cartservice
     networks:
       - backend
 
   authservice:
     build:
-      context: ./AuthService
-      dockerfile: ./AuthService/Dockerfile
+      context: ./AuthService/AuthService
+      dockerfile: Dockerfile
     ports:
       - "5100:5100"
     networks:
@@ -23,8 +27,8 @@ services:
 
   planningservice:
     build:
-      context: ./PlanningService
-      dockerfile: ./Dockerfile
+      context: ./PlanningService/API
+      dockerfile: Dockerfile
     ports:
       - "5200:5200"
     networks:
@@ -32,12 +36,39 @@ services:
 
   productservice:
     build:
-      context: ./API/Dockerfile
+      context: ./ProductsService/API
+      dockerfile: Dockerfile
     ports:
       - "5300:5300"
     networks:
       - backend
 
+  blogservice:
+    build:
+      context: ./BlogService/API
+      dockerfile: Dockerfile
+    ports:
+      - "5400:5400"
+    networks:
+      - backend
+
+  eventservice:
+    build:
+      context: ./EventService/API
+      dockerfile: Dockerfile
+    ports:
+      - "5500:5500"
+    networks:
+      - backend
+
+  cartservice:
+    build:
+      context: ./CartService/API
+      dockerfile: Dockerfile
+    ports:
+      - "5600:5600"
+    networks:
+      - backend
 
 networks:
   backend:

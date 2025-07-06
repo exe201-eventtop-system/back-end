@@ -12,7 +12,7 @@ namespace Infrastructure
     {
         public static IServiceCollection ConfigureInfratructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<BlogServiceDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("default")));
+            services.AddDbContext<BlogServiceDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("BlogConnection")));
             services.AddScoped<IBlogRepository, BlogRepository>();
 
             return services;

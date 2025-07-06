@@ -29,7 +29,7 @@ namespace Services
                 {
                     CustomerId = customerId,
                 };
-                 var cartResult = await _unitOfWork.CartRepository.CreateAsync(cart);
+                var cartResult = await _unitOfWork.CartRepository.CreateAsync(cart);
             }
 
             var cartItem = new CartItem
@@ -37,7 +37,17 @@ namespace Services
                 CartId = cart.Id,
                 ServiceId = productId,
             };
+            var existingItem = await _unitOfWork.CartItemRepository
+        .IsExistServiceAsync(cart.Id, productId);
 
+            if (existingItem)
+            {
+                return ServiceResult<AddCartItemResponseDTO>.Failed(
+    ServiceError.Existed(
+    "Dịch vụ đã có trong giỏ hàng. Vui lòng chọn thời gian để thanh toán.")
+);
+
+            }
             var cartItemResult = await _unitOfWork.CartItemRepository.CreateAsync(cartItem);
 
             int totalItems = await _unitOfWork.CartItemRepository
@@ -67,7 +77,7 @@ namespace Services
         }
         public async Task<ServiceResult<AddCartItemResponseDTO>> DeleteCartAsync(Guid customerId, Guid cartItemId)
         {
-           await _unitOfWork.CartItemRepository.Delete(cartItemId);
+            await _unitOfWork.CartItemRepository.Delete(cartItemId);
 
             var cart = await _unitOfWork.CartRepository
                 .GetCartByCustomerIdAsync(customerId);

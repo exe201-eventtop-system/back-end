@@ -31,7 +31,7 @@ public static class ResultExtensions
             {
                 Success = true,
                 Message = "Success",
-                Data = result.Value
+                Data = result.Data
             });
         }
 

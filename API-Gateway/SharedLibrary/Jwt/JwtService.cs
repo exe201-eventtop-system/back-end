@@ -113,8 +113,6 @@ namespace SharedLibrary.Jwt
             }
         }
 
-
-
         public Task<Guid> ExtractUserIdFromToken(string rawToken)
         {
             if (string.IsNullOrWhiteSpace(rawToken))

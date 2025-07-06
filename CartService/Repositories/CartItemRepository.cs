@@ -53,6 +53,11 @@ namespace Repositories
             return true;
         }
 
+        public async Task<bool> IsExistServiceAsync(Guid cartId, Guid serviceId)
+        {
+            return await _context.CartItems
+                .AnyAsync(ci => ci.CartId == cartId && ci.ServiceId == serviceId && !ci.IsDeleted);
+        }
 
     }
 }

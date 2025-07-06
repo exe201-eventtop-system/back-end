@@ -32,7 +32,7 @@ namespace Application.Commons.DTOs
         public string Role { get; set; } = string.Empty;
         [JsonPropertyName("phone_number")]
         public string? PhoneNumber { get; set; }
-        public string Addresses { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
     }
 
 }

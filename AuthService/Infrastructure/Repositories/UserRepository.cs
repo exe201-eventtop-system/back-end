@@ -35,12 +35,28 @@ namespace Infrastructure.Repositories
             return _context.SaveChangesAsync().ContinueWith(_ => user);
         }
 
-        public Task<List<User>> GetAllUser()
+        public async Task<(List<User> Items, int TotalItems)> GetAllUserPagingAsync(int pageNumber, int pageSize, string search)
         {
-            return _context.Users
-                .Where(u => u.IsDeleted == false && u.Role != UserRole.Admin)
+            var query = _context.Users  
+                .Where(u => !u.IsDeleted && u.Role != UserRole.Admin);
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                string lowered = search.Trim().ToLower();
+                query = query.Where(u =>
+                    (u.UserName != null && u.UserName.ToLower().Contains(lowered)) ||
+                    (u.Email != null && u.Email.ToLower().Contains(lowered))
+                );
+            }
+            var totalItems = await query.CountAsync();
+
+            var items = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return (items, totalItems);
         }
+
         public Task<bool> DeleteUser(Guid userId)
         {
             var user = _context.Users.Find(userId);

@@ -1,6 +1,7 @@
 ﻿
 using Application.Commons;
 using Application.Commons.DTOs;
+using Application.Commons.DTOs.Pagination;
 using Application.Commons.DTOs.Supplier;
 using Application.Commons.DTOs.User;
 using Application.Interfaces;
@@ -221,12 +222,23 @@ namespace Application.UseCases
             return Result<GetAllUserDTO>.Success(userDto);
         }
 
-        public async Task<Result<List<GetAllUserDTO>>> GetAllUser()
+        public async Task<Result<PaginationResult<GetAllUserDTO>>> GetAllUser(GetAllUserFillerDto dto)
         {
-            var user = await _userRepository.GetAllUser();
-            var userDto = _mapper.Map<List<GetAllUserDTO>>(user);
-            return Result<List<GetAllUserDTO>>.Success(userDto);
+            var (users, totalItems) = await _userRepository.GetAllUserPagingAsync(dto.PageNumber, dto.PageSize,dto.Search);
+            var userDto = _mapper.Map<List<GetAllUserDTO>>(users);
+
+            var result = new PaginationResult<GetAllUserDTO>
+            {
+                CurrentPage = dto.PageNumber,
+                PageSize = dto.PageSize,
+                ItemCount = totalItems,
+                PageCount = (int)Math.Ceiling(totalItems / (double)dto.PageSize),
+                Items = userDto
+            };
+
+            return Result<PaginationResult<GetAllUserDTO>>.Success(result);
         }
+
         public async Task<Result<bool>> DeleteUser(Guid userId)
         {
          var result =  await _userRepository.DeleteUser(userId);

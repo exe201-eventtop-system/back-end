@@ -16,10 +16,9 @@ namespace Domain.Entities
         [Column("customer_id")]
         public Guid CustomerId { get; set; }
 
-        [Required]
         [MaxLength(50)]
         [Column("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Column("description", TypeName = "text")]
         public string? Description { get; set; }
@@ -33,7 +32,7 @@ namespace Domain.Entities
         [Column("date_of_event")]
         public DateTime? DateOfEvent { get; set; }
 
-        [Column("budget", TypeName = "decimal(10,2)")]
+        [Column("budget", TypeName = "decimal(18,2)")]
         public decimal? Budget { get; set; }
 
         [Column("about_number_people")]

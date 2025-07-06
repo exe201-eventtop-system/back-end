@@ -1,5 +1,6 @@
 ﻿using Application.Commons;
 using Application.Commons.DTOs;
+using Application.Commons.DTOs.Pagination;
 using Application.Commons.DTOs.Supplier;
 using Application.Commons.DTOs.User;
 using Contacts.Supplier;
@@ -19,7 +20,7 @@ namespace Application.Interfaces
         Task<UserProfileBookingDTO> GetProfileCustomer(Guid userId);
         Task<Result<GetAllUserDTO>> CreateUser(CreationalUser creationalUser);
         Task<Result<bool>> DeleteUser(Guid userId);
-        Task<Result<List<GetAllUserDTO>>> GetAllUser();
+        Task<Result<PaginationResult<GetAllUserDTO>>> GetAllUser(GetAllUserFillerDto dto);
         Task<ICollection<SupplierResponseDTO>> GetListSupllier(List<Guid> supplierIds);
         Task<SupplierResponseDTO> GetSupllier(Guid supplierId);
         //  Task<Result<bool>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO);

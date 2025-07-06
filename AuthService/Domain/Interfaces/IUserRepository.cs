@@ -13,7 +13,7 @@ namespace Domain.Interfaces
     {
         Task<bool> CheckEmail(string Email);
         Task<User> CreateUser(User user);
-        Task<List<User>> GetAllUser();
+        Task<(List<User> Items, int TotalItems)> GetAllUserPagingAsync(int pageNumber, int pageSize,string search);
         Task<bool> DeleteUser(Guid userId);
         Task<User> VerifyAccount(string email, string password);
         Task<User?> GetByIdAsync(Guid userId);

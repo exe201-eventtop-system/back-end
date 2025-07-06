@@ -128,7 +128,17 @@ namespace Services.Commons
     //=> new(true, ServiceError.NoError, data, message);
 
 
+        private ServiceResult(bool success, ServiceError error, T? Data = default(T), string? message = null)
+     : base(success, error, Data)
+        {
+            IsSuccess = success;
+            Error = error;
+            this.Data = Data;
+            Message = message;
+        }
 
-        new public static ServiceResult<T> Failed(ServiceError error) => new(false, error);
+        public static ServiceResult<T> Failed(ServiceError error, string? message = null)
+            => new(false, error, default, message);
     }
+
 }

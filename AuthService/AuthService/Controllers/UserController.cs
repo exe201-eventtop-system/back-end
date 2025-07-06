@@ -1,4 +1,5 @@
 ﻿using Application.Commons;
+using Application.Commons.DTOs.Pagination;
 using Application.Commons.DTOs.User;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -29,14 +30,6 @@ namespace API.Controllers
 
             return result.ToActionResult();
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateUser(CreationalUser creationalUser)
-        {
-
-            var result = await _useCase.CreateUser(creationalUser);
-
-            return result.ToActionResult();
-        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProfileCustomer(Guid id)
         {
@@ -46,13 +39,12 @@ namespace API.Controllers
             return Ok(result);
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllUser()
+        public async Task<IActionResult> GetAllUser([FromQuery] GetAllUserFillerDto pagination)
         {
-
-            var result = await _useCase.GetAllUser();
-
-            return result.ToActionResult();
+            var result = await _useCase.GetAllUser(pagination);
+            return Ok(result);
         }
+
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateProfile([FromBody] UserTokenDTO userTokenDTO,Guid userId)
         {
@@ -61,14 +53,7 @@ namespace API.Controllers
 
             return result.ToActionResult();
         }
-        [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeleteUser(Guid userId)
-        {
 
-            var result = await _useCase.DeleteUser(userId);
-
-            return result.ToActionResult();
-        }
 
     }
 }

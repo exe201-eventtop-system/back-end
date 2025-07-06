@@ -18,12 +18,12 @@ public class Result
 
 public class Result<T> : Result
 {
-    public T? Value { get; }
+    public T? Data{ get; }
 
     private Result(bool isSuccess, T? value, ServiceError? error)
         : base(isSuccess, error)
     {
-        Value = value;
+        Data = value;
     }
 
     public static Result<T> Success(T value) => new(true, value, null);

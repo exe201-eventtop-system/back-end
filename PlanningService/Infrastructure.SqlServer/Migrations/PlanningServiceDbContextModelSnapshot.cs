@@ -34,7 +34,7 @@ namespace Infrastructure.SqlServer.Migrations
                         .HasColumnName("about_number_people");
 
                     b.Property<decimal?>("Budget")
-                        .HasColumnType("decimal(10,2)")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("budget");
 
                     b.Property<DateTime>("CreatedAt")
@@ -67,7 +67,6 @@ namespace Infrastructure.SqlServer.Migrations
                         .HasColumnName("main_color");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("name");

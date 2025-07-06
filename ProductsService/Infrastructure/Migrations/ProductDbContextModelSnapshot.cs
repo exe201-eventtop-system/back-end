@@ -185,6 +185,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("NVARCHAR(MAX)")
                         .HasColumnName("description");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_deleted");
+
                     b.Property<DateTime>("LastModifiedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("DATETIME")

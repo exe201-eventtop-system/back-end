@@ -53,8 +53,7 @@ namespace Infrastructure.Data.Configurations
             builder.Property(x => x.IsDeleted)
                 .HasColumnName("is_deleted")
                 .HasColumnType("BIT")
-                .HasDefaultValue(false)
-                .IsRequired(false);
+                .HasDefaultValue(false);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnName("created_at")
