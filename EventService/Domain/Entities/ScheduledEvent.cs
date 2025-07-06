@@ -19,13 +19,11 @@ namespace Domain.Entities
 
         public string Location { get; set; }
 
-        public DateOnly StartDate { get; set; }
+        public DateTime StartTime { get; set; }
 
-        public TimeOnly StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
-        public DateOnly EndDate { get; set; }
-
-        public TimeOnly EndTime { get; set; }
+        public string? Thumbnail { get; set; }
 
         public int NumberOfPeople { get; set; }
 
@@ -33,7 +31,7 @@ namespace Domain.Entities
 
         public string SecondaryColorTag { get; set; }
 
-        public int? EventTypeId { get; set; }
+        public int EventTypeId { get; set; }
 
         public ScheduledEventStatus EventStatus { get; set; }
 
@@ -45,6 +43,6 @@ namespace Domain.Entities
 
         public virtual EventType EventTypeNavigation { get; set; }
 
-        public virtual List<EventSession> SessionsNavigation { get; set; }
+        public virtual List<UsedService> ServicesNavigation { get; set; }
     }
 }

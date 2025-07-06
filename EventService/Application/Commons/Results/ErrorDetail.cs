@@ -12,8 +12,8 @@ namespace Application.Commons.Results
     /// <param name="Summary">The summary of this error</param>
     /// <param name="Detail">The detail of the error</param>
     /// <param name="ErrorValue">The value that caused the error</param>
-    /// <param name="ErrorValueType">The type of the value caused the error</param>
-    public sealed record ErrorDetail(string Summary, string Detail, object ErrorValue, Type ErrorValueType)
+    /// <param name="ErrorType">The type of the error</param>
+    public sealed record ErrorDetail(string Summary, string Detail, object? ErrorValue, string ErrorType)
     {
         public object GetValue()
         {

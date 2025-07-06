@@ -11,16 +11,17 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Context.Configurations
 {
-    internal class UsedServiceTypeConfiguration : IEntityTypeConfiguration<UsedServices>
+    internal class UsedServiceTypeConfiguration : IEntityTypeConfiguration<UsedService>
     {
-        public void Configure(EntityTypeBuilder<UsedServices> builder)
+        public void Configure(EntityTypeBuilder<UsedService> builder)
         {
             builder.Property(x => x.Id)
                 .HasColumnName("id")
-                .HasColumnType("UNIQUEIDENTIFIER");
+                .HasColumnType("UNIQUEIDENTIFIER")
+                .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.SessionId)
-                .HasColumnName("session_id")
+            builder.Property(x => x.EventId)
+                .HasColumnName("event_id")
                 .HasColumnType("UNIQUEIDENTIFIER")
                 .IsRequired();
 
@@ -29,25 +30,36 @@ namespace Infrastructure.Context.Configurations
                 .HasColumnType("UNIQUEIDENTIFIER")
                 .IsRequired();
 
-            builder.Property(x => x.ServiceName)
-                .HasColumnName("service_name")
+            builder.Property(x => x.CustomerId)
+                .HasColumnName("customer_id")
+                .HasColumnType("UNIQUEIDENTIFIER")
+                .IsRequired();
+
+
+            builder.Property(x => x.PackageId)
+                .HasColumnName("package_id")
+                .HasColumnType("UNIQUEIDENTIFIER")
+                .IsRequired();
+
+            builder.Property(x => x.SupplierId)
+                .HasColumnName("supplier_id")
+                .HasColumnType("UNIQUEIDENTIFIER")
+                .IsRequired();
+
+            builder.Property(x => x.RentStartTime)
+                .HasColumnName("rent_start_time")
+                .HasColumnType("DATETIME")
+                .IsRequired();
+
+            builder.Property(x => x.RentEndTime)
+                .HasColumnName("rent_end_time")
+                .HasColumnType("DATETIME")
+                .IsRequired();
+
+            builder.Property(x => x.CustomerNote)
+                .HasColumnName("customer_note")
                 .HasColumnType("NVARCHAR(256)")
-                .IsRequired();
-
-            builder.Property(x => x.UnitPrice)
-                .HasColumnName("unit_price")
-                .HasColumnType("DECIMAL(10,2)")
-                .IsRequired();
-
-            builder.Property(x => x.Quantity)
-                .HasColumnName("quantity")
-                .HasColumnType("INT")
-                .IsRequired();
-
-            builder.Property(x => x.Status)
-                .HasColumnName("status")
-                .HasColumnType("INT")
-                .HasDefaultValue(UsedServiceStatus.Registered);
+                .IsRequired(false);
 
             builder.Property(x => x.InitialCondition)
                 .HasColumnName("initial_condition")
@@ -64,6 +76,21 @@ namespace Infrastructure.Context.Configurations
                 .HasColumnType("INT")
                 .HasDefaultValue(ServiceDamageType.None);
 
+            builder.Property(x => x.Status)
+                .HasColumnName("status")
+                .HasColumnType("INT")
+                .HasDefaultValue(UsedServiceStatus.Registered);
+
+            builder.Property(x => x.UnitPrice)
+                .HasColumnName("unit_price")
+                .HasColumnType("DECIMAL(10,2)")
+                .IsRequired();
+
+            builder.Property(x => x.Quantity)
+                .HasColumnName("quantity")
+                .HasColumnType("INT")
+                .IsRequired();
+
             builder.Property(x => x.DeliveredTime)
                 .HasColumnName("delivered_time")
                 .HasColumnType("DATETIME")
@@ -72,11 +99,6 @@ namespace Infrastructure.Context.Configurations
             builder.Property(x => x.ReturnTime)
                 .HasColumnName("returned_time")
                 .HasColumnType("DATETIME")
-                .IsRequired(false);
-
-            builder.Property(x => x.CustomerNote)
-                .HasColumnName("customer_note")
-                .HasColumnType("NVARCHAR(256)")
                 .IsRequired(false);
 
             builder.Property(x => x.CreatedAt)
