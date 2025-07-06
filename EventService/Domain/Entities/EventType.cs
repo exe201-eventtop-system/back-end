@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
     public class EventType
     {
@@ -16,8 +10,12 @@ namespace Domain.Entities
 
         public string Description { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime LastModifiedAt { get; set; }
+
+        public virtual List<ScheduledEvent> ScheduledEventsNavigation { get; set; }
     }
 }

@@ -19,6 +19,12 @@ namespace SharedLibrary.Jwt
         private readonly IConfiguration _configuration;
         private readonly IPasswordHasher<UserToHashPassword> _passwordHasher;
 
+        public JwtService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _passwordHasher = null;
+        }
+
         public JwtService(IConfiguration configuration, IPasswordHasher<UserToHashPassword> passwordHasher)
         {
             _configuration = configuration;

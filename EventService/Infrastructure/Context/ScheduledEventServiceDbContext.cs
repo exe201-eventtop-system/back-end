@@ -16,9 +16,7 @@ namespace Infrastructure.Context
 
         public DbSet<ScheduledEvent> Events { get; set; }
 
-        public DbSet<EventSession> EventSessions { get; set; }
-
-        public DbSet<UsedServices> UsedSessionServices { get; set; }
+        public DbSet<UsedService> UsedSessionServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

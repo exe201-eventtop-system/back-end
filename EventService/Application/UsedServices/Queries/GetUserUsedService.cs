@@ -1,12 +1,15 @@
 ﻿using Application.Commons.Handlers;
-using Application.Commons.Interfaces.ApiCaller;
-using Application.Commons.Interfaces.JwtHelper;
 using Application.Commons.PaginatedLists;
 using Application.Commons.Results;
 using Domain.Repositories;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Configuration;
+using SharedLibrary.Jwt;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Http;
+using Domain.Entities;
+using System.Linq.Expressions;
+using System.Net.Http.Json;
+using System.Text.Json;
+using Application.Commons.UoW;
 
 namespace Application.UsedServices.Queries
 {
@@ -24,19 +27,8 @@ namespace Application.UsedServices.Queries
         [JsonPropertyName("page_size")]
         public int PageSize { get; set; } = 10;
 
-        [BindNever]
         [JsonIgnore]
         public string? Token { get; set; }
-    }
-
-    public class ServiceDTO
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
-        public decimal Price { get; set; }
-        public string Thumbnail { get; set; }
     }
 
     public class UsedServiceQueryResult
@@ -47,58 +39,117 @@ namespace Application.UsedServices.Queries
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
+        [JsonPropertyName("service_id")]
+        public Guid ServiceId { get; set; }
+
+        [JsonPropertyName("supplier_id")]
+        public Guid SupplierId { get; set; }
+
+        //[JsonPropertyName("supplier_name")]
+        //public string SupplierName { get; set;}
+
+        [JsonPropertyName("package_id")]
+        public Guid PackageId { get; set; }
+
+        [JsonPropertyName("package_name")]
+        public string PackageName { get; set; }
 
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
-
-        [JsonPropertyName("category")]
-        public string Category { get; set; }
     }
+
+    #region Product service defined contract
+    public class ProductInfoByIdQuery
+    {
+        [JsonPropertyName("id_list")]
+        public List<Guid> ProductIdList { get; set; }
+    }
+
+    public class ProductPackageInformation
+    {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("structure_id")]
+        public Guid StructureId { get; set; }
+
+        [JsonPropertyName("price")]
+        public decimal Price { get; set; }
+    }
+
+    public class ProductInformation
+    {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("supplier_id")]
+        public Guid SupplierId { get; set; }
+
+        [JsonPropertyName("packages")]
+        public List<ProductPackageInformation> ProductPackages { get; set; }
+    }
+    #endregion
+
 
     public class GetUsedServiceHandler : IQueryHandler<GetUsedServiceQuery, Result<PaginatedList<UsedServiceQueryResult>>>
     {
-        private readonly IEventRepository _eventRepository;
-        private readonly IEventSessionRepository _eventSessionRepository;
-        private readonly IJwtHelper _jwtHelper;
-        private readonly IApiEndpointCaller _apiCaller;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly JwtService _jwtService;
+        
 
-        private string ProductEndpoint;
-
-        public GetUsedServiceHandler(IEventRepository eventRepository, IEventSessionRepository eventSessionRepository, IApiEndpointCaller apiCaller, IJwtHelper jwtHelper, IConfiguration configuration)
+        public GetUsedServiceHandler(IUnitOfWork unitOfWork,  IHttpClientFactory clientFactory, JwtService jwtService)
         {
-            _eventRepository = eventRepository;
-            _eventSessionRepository = eventSessionRepository;
-            _jwtHelper = jwtHelper;
-            _apiCaller = apiCaller;
-
-            ProductEndpoint = configuration["Endpoints:Product"];
+            _unitOfWork = unitOfWork;
+            _httpClientFactory = clientFactory;
+            _jwtService = jwtService;
         }
 
         public async Task<Result<PaginatedList<UsedServiceQueryResult>>> Handle(GetUsedServiceQuery query, CancellationToken cancellationToken)
         {
-            /// TODO: optimize this operation.
+            if (query.Token == null)
+            {
+                ErrorDetail detail = new ErrorDetail(
+                    Summary: typeof(System.Security.Authentication.AuthenticationException).Name,
+                    Detail: "This endpoint requires user to be authenticated.",
+                    ErrorValue: default(object),
+                    ErrorType: typeof(System.Security.Authentication.AuthenticationException).FullName!
+                );
+
+                return Result<PaginatedList<UsedServiceQueryResult>>.Failure(Error.UnauthenticatedError("Unauthenticated request", new List<ErrorDetail> { detail }), "Failed to process the request");
+            }
 
             // Get user id from token
-            Guid UserId = await _jwtHelper.ExtractUserIdFromToken(query.Token);
+            Guid UserId = await _jwtService.ExtractUserIdFromToken(query.Token);
 
-            // Get id of all events belong to the user.
-            var UserEvents = await _eventRepository.GetAllAsync(x => x.CreatorId == UserId, x => x.OrderBy(x => x.CreatedAt));
-            var UserEventIds = UserEvents.Select(x => x.Id);
+            // Get all used services that belongs to the user.
+            Expression<Func<UsedService, bool>> filter = service => service.CustomerId == UserId;
 
-            // Get all session information in each service session.
-            var UserEventSessions = await _eventSessionRepository.GetAllAsync(x => UserEventIds.Contains(x.EventId), null);
+            List<UsedService> usedServices = await _unitOfWork.UsedServiceRepository.GetAllAsync();
 
-            // Get ids of used services in the user event session
-            var UsedServiceIds = UserEventSessions.SelectMany(x => x.ServicesNavigation).Select(x => x.ServiceId);
-
-            Result<List<ServiceDTO>>? RequestResult;
+            Result<List<ProductInformation>>? RequestResult;
 
             try
             {
+                var usedServiceIds = usedServices.Select(x => x.ServiceId).Distinct();
+                var client = _httpClientFactory.CreateClient("ProductService");
+
                 // Using HttpClient to call to product (service) API endpoint
-                RequestResult = await _apiCaller.PostAsync<Result<List<ServiceDTO>>>($"https://{ProductEndpoint}/services/ids", UsedServiceIds.ToList());
+                var result = await client
+                    .PostAsJsonAsync<ProductInfoByIdQuery>($"h/services/list", new ProductInfoByIdQuery
+                    {
+                        ProductIdList = usedServiceIds.ToList()
+                    });
+
+                result.EnsureSuccessStatusCode();
+
+                RequestResult = JsonSerializer.Deserialize<Result<List<ProductInformation>>>(result.Content.ToString());
             }
             catch (HttpRequestException ex)
             {
@@ -110,14 +161,18 @@ namespace Application.UsedServices.Queries
             {
                 CurrentPage = query.Page,
                 PageSize = query.PageSize,
-                TotalCount = RequestResult.Data.Count(),
-                PageContent = RequestResult.Data.Select(x => new UsedServiceQueryResult
+                TotalCount = usedServices.Count,
+                PageContent = usedServices.Select(x => new UsedServiceQueryResult
                 {
                     Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Category = x.Category,
-                    Price = x.Price,
+                    PackageId = x.PackageId,
+                    ServiceId = x.ServiceId,
+                    SupplierId = x.SupplierId,
+                    Name = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).Name,
+                    PackageName = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
+                    .FirstOrDefault(data => data.Id == x.PackageId).Name,
+                    Price = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
+                    .FirstOrDefault(data => data.Id == x.PackageId).Price
                 }).ToList(),
             };
 

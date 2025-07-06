@@ -61,6 +61,14 @@ namespace API.Controllers
             return result.MapToJsonResult();
         }
 
+        [HttpPost("list")]
+        public async Task<IActionResult> GetByIdList([FromBody] GetProductInfoByIdQuery query, CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<GetProductInfoByIdQuery, Result<List<ProductInformation>>>(query, cancellationToken);
+            return result.MapToJsonResult();
+        }
+
+
         [HttpPost("{id}/packages")]
         [Authorize]
         public async Task<IActionResult> AddProductPackage([FromRoute] Guid id, AddProductPackageCommand command, CancellationToken cancellationToken)

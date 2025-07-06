@@ -44,10 +44,11 @@ namespace API.Middlewares
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = false,
-                    ValidIssuers = configuration.GetValue<List<string>>("Jwt:Issuers"),
-                    ValidAudiences = configuration.GetValue<List<string>>("Jwt:Audiences"),
+                    ValidateActor = false,
+                    ValidIssuers = configuration.GetValue<List<string>>("Jwt:ValidIssuers"),
+                    ValidAudiences = configuration.GetValue<List<string>>("Jwt:ValidAudiences"),
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Secret"))
+                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:SigningKey"))
                     )
                 };
             });
