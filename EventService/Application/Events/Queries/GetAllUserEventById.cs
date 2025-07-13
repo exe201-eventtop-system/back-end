@@ -31,7 +31,7 @@ namespace Application.Events.Queries
         public async Task<Result<List<UserEventSummary>>> Handle(GetAllUserEventByIdQuery query, CancellationToken cancellationToken)
         {
 
-            var result = await unitOfWork.EventRepository.GetAllAsync(x => x.CreatorId == query.UserId, x => x.OrderBy(x => x.CreatedAt));
+            var result = await unitOfWork.EventRepository.GetAllAsync(x => x.Customer_Id == query.UserId, x => x.OrderBy(x => x.CreatedAt));
 
             return Result<List<UserEventSummary>>.Success(result.Select(x => new UserEventSummary
             {
@@ -39,9 +39,7 @@ namespace Application.Events.Queries
                 Name = x.Name,
                 Location = x.Location,
                 MainColor = x.MainColorTag,
-                SecondaryColor = x.SecondaryColorTag,
                 NumberOfPeople = x.NumberOfPeople,
-                Thumbnail = x.Thumbnail,
                 Description = x.Description,
                 CreatorId = query.UserId,
                 EndTime = x.EndTime,
@@ -50,7 +48,6 @@ namespace Application.Events.Queries
                 UsedServices = x.ServicesNavigation.Select(y => new UsedServiceDetail
                 {
                     Id = y.Id,
-                    Quantity = y.Quantity,
                     ServiceId = y.ServiceId,
                     PackageId = y.PackageId,
                     SupplierId = y.SupplierId,

@@ -59,7 +59,6 @@ namespace Application.ProductCategories.Queries
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-                ParentId = c.ParentCategoryId
             }).ToList();
 
             var result = new GetProductCategoryListResult

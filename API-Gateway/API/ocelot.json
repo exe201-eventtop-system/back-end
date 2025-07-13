@@ -90,11 +90,49 @@
         }
       ],
       "UpstreamPathTemplate": "/services/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "productService",
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/services/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5300
+        }
+      ],
+      "UpstreamPathTemplate": "/services/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       },
+      "SwaggerKey": "productService",
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5300
+        }
+      ],
+      "UpstreamPathTemplate": "/category/{everything}",
+      "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "productService",
       "UpstreamHeaderTransform": {
         "Cookie": "Copy"

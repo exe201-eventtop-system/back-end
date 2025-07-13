@@ -12,16 +12,25 @@ namespace Infrastructure.Context
     {
         public ScheduledEventServiceDbContext(DbContextOptions<ScheduledEventServiceDbContext> options) : base(options) { }
 
-        public DbSet<EventType> EventTypes { get; set; }
 
         public DbSet<ScheduledEvent> Events { get; set; }
 
-        public DbSet<UsedService> UsedSessionServices { get; set; }
+        public DbSet<UsedService> UsedServices { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<UsedServiceTransaction> UsedServiceTransactions { get; set; }
+        public DbSet<Answer> Answers{ get; set; }
+        public DbSet<SystemQuestionFeedback> SystemQuestionFeedbacks{ get; set; }
+        public DbSet<Transaction> Transactions{ get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ScheduledEventServiceDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Feedback>()
+    .HasOne(f => f.UsedService)
+    .WithOne(us => us.Feedback)
+    .HasForeignKey<Feedback>(f => f.Id);
+
         }
     }
 }

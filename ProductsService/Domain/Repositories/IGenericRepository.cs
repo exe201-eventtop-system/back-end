@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Domain.Entities.Products;
+using System.Linq.Expressions;
 
 namespace Domain.Repositories
 {
@@ -9,7 +10,6 @@ namespace Domain.Repositories
         Task<T> CreateAsync(T entity);
 
         Task<List<T>> GetAllAsync();
-
         Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy);
 
         Task<T?> GetByIdAsync<Tid>(Tid id);

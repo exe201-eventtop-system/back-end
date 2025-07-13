@@ -1,19 +1,15 @@
-﻿namespace Domain.Entities.Products
-{
-    public class ProductImage
-    {
-        public Guid Id { get; set; }
+﻿using SharedLibrary.System.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Domain.Entities.Products
+{
+    public class ProductImage : BaseEntities
+    {
+        [Column("order")]
         public int Order { get; set; }
+        [Column("image_url")]
 
         public string ImageUrl { get; set; }
-
-        public string AlternativeText { get; set; }
-
         public Guid ProductId { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime LastModifiedAt { get; set; }
     }
 }

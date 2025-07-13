@@ -101,16 +101,11 @@ namespace Application.Events.Queries
                 Name = item.Name,
                 Description = item.Description,
                 EventStatus = item.EventStatus,
-                EventType = item.EventTypeId,
-                EventTypeString = item.EventTypeNavigation?.DisplayName,
                 NumberOfPeople = item.NumberOfPeople,
                 Location = item.Location,
-                Thumbnail = item.Thumbnail,
                 MainColor = item.MainColorTag,
-                SecondaryColor = item.SecondaryColorTag,
                 EndTime = item.EndTime,
                 StartTime = item.StartTime,
-                CreatorId = item.CreatorId,
             });
         }
     }

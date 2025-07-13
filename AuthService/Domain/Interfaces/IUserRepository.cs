@@ -12,13 +12,20 @@ namespace Domain.Interfaces
     public interface IUserRepository
     {
         Task<bool> CheckEmail(string Email);
+        Task<bool> CheckPhoneNumber(string phoneNumber);
         Task<User> CreateUser(User user);
         Task<(List<User> Items, int TotalItems)> GetAllUserPagingAsync(int pageNumber, int pageSize,string search);
         Task<bool> DeleteUser(Guid userId);
-        Task<User> VerifyAccount(string email, string password);
+        Task<User> VerifyAccount(string phoneNumber, string password);
         Task<User?> GetByIdAsync(Guid userId);
         Task<User> SaveUser(User user);
         Task<ICollection<SupplierResponseDTO>> GetListSupplier(List<Guid> userIds);
+        Task<ICollection<Supplier>> GetAllSupplier();
+        Task<(List<Supplier> Items, int TotalCount)> GetSuppliers(
+    int pageNumber,
+    int pageSize,
+    string? searchKey,
+    string? address);
         Task<SupplierResponseDTO> GetSupplier(Guid userIds);
         Task<User> UpdateUser(User user);
     }

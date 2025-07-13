@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using SharedLibrary.DTOs.User;
 using SharedLibrary.Email;
 using SharedLibrary.FireBase;
 using SharedLibrary.Jwt;
 using SharedLibrary.Password;
+using SharedLibrary.System.APICall;
 using System.Security.Claims;
 using System.Text;
 
@@ -44,6 +43,7 @@ namespace API.Extentions
             services.AddScoped<IPasswordHasher<UserToHashPassword>, PasswordHasher<UserToHashPassword>>();
             services.AddScoped<PasswordHasherService>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddHttpClient<ApiCaller>();
 
 
             // Session & Cache

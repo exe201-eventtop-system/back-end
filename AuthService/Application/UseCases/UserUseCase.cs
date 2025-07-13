@@ -10,11 +10,13 @@ using Contacts.Supplier;
 using Domain.Entities;
 using Domain.Interfaces;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.Extensions.Configuration;
 using SharedLibrary.DTOs.Supplier;
 using SharedLibrary.Email;
 using SharedLibrary.Enum;
 using SharedLibrary.FireBase;
 using SharedLibrary.Password;
+using SharedLibrary.System.APICall;
 
 namespace Application.UseCases
 {
@@ -22,11 +24,13 @@ namespace Application.UseCases
     {
         private readonly IUserRepository _userRepository;
         private readonly ISupplierRepository _supplierRepository;
+        private readonly IConfiguration _config;
         private readonly PasswordHasherService _passwordHasherService;
+        private readonly ApiCaller _apiCaller;
         private readonly EmailService _emailService;
         private readonly IMapper _mapper;
         private readonly FirebaseStorageService _firebaseStorageService;
-        public UserUseCase(IUserRepository userRepository, IMapper mapper, FirebaseStorageService firebaseStorageService, ISupplierRepository supplierRepository, EmailService emailService, PasswordHasherService passwordHasherService)
+        public UserUseCase(IUserRepository userRepository, IMapper mapper, FirebaseStorageService firebaseStorageService, ISupplierRepository supplierRepository, EmailService emailService, PasswordHasherService passwordHasherService,ApiCaller apiCaller,IConfiguration  configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -34,6 +38,8 @@ namespace Application.UseCases
             _supplierRepository = supplierRepository;
             _emailService = emailService;
             _passwordHasherService = passwordHasherService;
+            _apiCaller = apiCaller;
+            _config = configuration;
         }
 
         public async Task<ICollection<SupplierResponseDTO>> GetListSupllier(List<Guid> userId) => await _userRepository.GetListSupplier(userId);
@@ -192,31 +198,66 @@ namespace Application.UseCases
             userMap.Id = userId;
             var user = await _userRepository.UpdateUser(userMap);
             var userMapRes = _mapper.Map<UserTokenDTO>(user);
-            return  Result<UserTokenDTO>.Success(userMapRes);
+            return Result<UserTokenDTO>.Success(userMapRes);
         }
 
         public async Task<UserProfileBookingDTO> GetProfileCustomer(Guid userId)
         {
-                var user = await _userRepository.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
 
 
-                var dto = _mapper.Map<UserProfileBookingDTO>(user);
+            var dto = _mapper.Map<UserProfileBookingDTO>(user);
 
-                return dto;
+            return dto;
 
 
         }
 
-        public Task<Result<PaginationResult<SupplierDto>>> GetSuppliers(SupplierFilterDto filterDTO)
+        public async Task<Result<PaginationResult<SupplierDto>>> GetSuppliers(SupplierFilterDto filterDTO)
         {
-            throw new NotImplementedException();
+            var (suppliers, totalCount) = await _supplierRepository.GetSuppliers(
+                filterDTO.PageNumber,
+                filterDTO.PageSize,
+                filterDTO.SearchKey,
+                filterDTO.Address
+            );
+
+            // Map entity Supplier → SupplierDto
+            var supplierDtos = suppliers.Select(s => new SupplierDto
+            {
+                Id = s.Id.ToString(),
+                Name = s.NameOrginazation,
+              //  Rating = s.Rating,
+                Description = s.Description,
+                Address = s.Location,
+                //NumberFeedback = s.NumberFeedback,
+                //Thumbnail = s.Thumbnail,
+                //TypeService = s.TypeServices.Select(t => new TypeServiceDto
+                //{
+                //    Name = t.Name
+                //}).ToList()
+            }).ToList();
+
+            // Build pagination response
+            var paginationResult = new PaginationResult<SupplierDto>
+            {
+                CurrentPage = filterDTO.PageNumber,
+                PageSize = filterDTO.PageSize,
+                ItemCount = totalCount,
+                PageCount = (int)Math.Ceiling((double)totalCount / filterDTO.PageSize),
+                Items = supplierDtos
+            };
+
+            return Result<PaginationResult<SupplierDto>>.Success(paginationResult);
         }
+
+
 
         public async Task<Result<GetAllUserDTO>> CreateUser(CreationalUser creationalUser)
         {
             creationalUser.Password = await _passwordHasherService.HashPassword(creationalUser.Password);
             var userMap = _mapper.Map<User>(creationalUser);
-           
+
             var user = await _userRepository.CreateUser(userMap);
             var userDto = _mapper.Map<GetAllUserDTO>(user);
             return Result<GetAllUserDTO>.Success(userDto);
@@ -224,7 +265,7 @@ namespace Application.UseCases
 
         public async Task<Result<PaginationResult<GetAllUserDTO>>> GetAllUser(GetAllUserFillerDto dto)
         {
-            var (users, totalItems) = await _userRepository.GetAllUserPagingAsync(dto.PageNumber, dto.PageSize,dto.Search);
+            var (users, totalItems) = await _userRepository.GetAllUserPagingAsync(dto.PageNumber, dto.PageSize, dto.Search);
             var userDto = _mapper.Map<List<GetAllUserDTO>>(users);
 
             var result = new PaginationResult<GetAllUserDTO>
@@ -241,8 +282,29 @@ namespace Application.UseCases
 
         public async Task<Result<bool>> DeleteUser(Guid userId)
         {
-         var result =  await _userRepository.DeleteUser(userId);
+            var result = await _userRepository.DeleteUser(userId);
             return Result<bool>.Success(result);
+        }
+
+        public async Task<Result<ICollection<SuppliersRatingResDto>>> GetSuppliersByRating()
+        {
+            var baseUrl = _config["EVENTSERVICE:PORT"];
+            var url = $"{baseUrl}/api/feeback/supplier-rating";
+            var apiRes = await _apiCaller.GetFromApiAsync<List<SupplierRatingDto>>(url);
+
+            var result = new List<SuppliersRatingResDto>();
+
+            foreach (var rating in apiRes)
+            {
+                var supplier = await _userRepository.GetByIdAsync(rating.SupplierId);
+                if (supplier != null)
+                {
+                    var dto = _mapper.Map<SuppliersRatingResDto>(supplier);
+                    dto.Rating = rating.AverageRating;
+                    result.Add(dto);
+                }
+            }
+            return Result<ICollection<SuppliersRatingResDto>>.Success(result);
         }
     }
 }

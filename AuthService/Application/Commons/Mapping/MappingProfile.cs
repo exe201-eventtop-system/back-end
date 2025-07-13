@@ -21,6 +21,7 @@ namespace Application.Commons.Mapping
             CreateMap<User, CreationalUser>().ReverseMap();
             CreateMap<User,GetAllUserDTO>().ReverseMap();
             CreateMap<SignInDTO, UserTokenDTO>().ReverseMap();
+            CreateMap<Domain.Entities.Supplier, SuppliersRatingResDto>().ReverseMap();
             CreateMap<SignUpDTO, UserTokenDTO>().ReverseMap();
             CreateMap<User, UserProfileBookingDTO>().ReverseMap();
             CreateMap<User, SignUpSupplierDTO>();

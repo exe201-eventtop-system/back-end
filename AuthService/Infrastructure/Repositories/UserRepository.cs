@@ -123,9 +123,9 @@ namespace Infrastructure.Repositories
             return existingUser;
         }
 
-        public async Task<User?> VerifyAccount(string email, string password)
+        public async Task<User?> VerifyAccount(string phoneNumber, string password)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.PhoneNumber == phoneNumber || u.Email == phoneNumber);
             if (user == null)
                 return null;
 
@@ -137,5 +137,46 @@ namespace Infrastructure.Repositories
             return user;
         }
 
+        public async Task<ICollection<Supplier>> GetAllSupplier()
+        {
+            return  await _context.Suppliers
+                .AsNoTracking()
+                .Include(s => s.Users)
+                .ToListAsync();
+        }
+        public async Task<(List<Supplier> Items, int TotalCount)> GetSuppliers(
+    int pageNumber,
+    int pageSize,
+    string? searchKey,
+    string? address)
+        {
+            var query = _context.Suppliers
+                .AsNoTracking()
+                .Include(s => s.Users)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchKey))
+            {
+                query = query.Where(s => s.NameOrginazation.Contains(searchKey));
+            }
+
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                query = query.Where(s => s.Location.Contains(address));
+            }
+
+            // Đếm tổng số sau khi lọc (trước khi phân trang)
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalCount);
+        }
+
+        public async Task<bool> CheckPhoneNumber(string phoneNumber) =>
+            await _context.Users.AnyAsync(u => u.PhoneNumber == phoneNumber);
     }
 }

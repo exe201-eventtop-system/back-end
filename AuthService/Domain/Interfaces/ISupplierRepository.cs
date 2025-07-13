@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Domain.Interfaces
     {
         public Task<bool> RequestSignInSupplier(Supplier supplier);
         Task<(List<Supplier> Items, int TotalCount)> GetSuppliers(
-int pageSize, int pageNumber, bool? isActive, string? searchKey);
+int pageSize, int pageNumber, string? searchKey, string?address);
         Task<List<Supplier>> GetSuppliersInspect(Guid userId);
         Task<Supplier?> GetByIdAsync(Guid supplierId);
         Task<Supplier> AssignInspector(Guid supplierId,Guid? inspectorId);

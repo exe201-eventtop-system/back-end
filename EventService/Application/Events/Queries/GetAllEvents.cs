@@ -90,21 +90,20 @@ namespace Application.Events.Queries
                 // Check for valid event type
                 List<ErrorDetail> details = new List<ErrorDetail>();
 
-                var eventTypes = (await unitOfWork.EventTypeRepository.GetAllAsync()).Where(x => !x.IsDeleted).Select(x => x.Id);
+             //   var eventTypes = (await unitOfWork.EventTypeRepository.GetAllAsync()).Where(x => !x.IsDeleted).Select(x => x.Id);
 
-                foreach (int type in query.EventType)
-                {
-                    if (!eventTypes.Contains(type))
-                    {
-                        details.Add(new ErrorDetail(
-                            Summary: nameof(System.ArgumentException),
-                            Detail: $"Can not find information for event type of id {type}.",
-                            ErrorValue: type,
-                            ErrorType: nameof(Int32)));
-                    }
-                }
+                //foreach (int type in query.EventType)
+                //{
+                //    if (!eventTypes.Contains(type))
+                //    {
+                //        details.Add(new ErrorDetail(
+                //            Summary: nameof(System.ArgumentException),
+                //            Detail: $"Can not find information for event type of id {type}.",
+                //            ErrorValue: type,
+                //            ErrorType: nameof(Int32)));
+                //    }
+                //}
 
-                events = events.Where(x => x.EventTypeId != null && query.EventType.Contains((int) x.EventTypeId)).ToList();
             }
 
             return Result<PaginatedList<EventSummary>>.Success(new PaginatedList<EventSummary>
@@ -122,8 +121,6 @@ namespace Application.Events.Queries
                     EndTime = x.EndTime,
                     MainColor = x.MainColorTag,
                     NumberOfPeople = x.NumberOfPeople,
-                    Thumbnail = x.Thumbnail,
-                    CreatorId = x.CreatorId,
                     EventStatus = x.EventStatus,
                 }).ToList(),
             }, "Success");

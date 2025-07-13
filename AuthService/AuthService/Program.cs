@@ -10,6 +10,7 @@ namespace AuthService
             DotNetEnv.Env.Load("../../.env");
 
             var builder = WebApplication.CreateBuilder(args);
+            var config = builder.Configuration;
             builder.Configuration.AddEnvironmentVariables();
 
             builder.Configuration["App:FrontendBaseUrl"] = Environment.GetEnvironmentVariable("APP_FRONTEND_BASE_URL");
@@ -31,7 +32,6 @@ namespace AuthService
 
             builder.Configuration["ConnectionStrings:AuthConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_AUTHCONNECTION");
 
-            var config = builder.Configuration;
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

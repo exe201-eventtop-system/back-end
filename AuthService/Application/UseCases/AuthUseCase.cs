@@ -42,9 +42,12 @@ namespace Application.UseCases
         {
             if (await _userRepository.CheckEmail(registerDTO.Email))
             {
-                return Result.Failure(ServiceError.ExistedError("Email already exists."));
+                return Result.Failure(ServiceError.ExistedError("Email đã tồn tại."));
             }
-
+            if (await _userRepository.CheckPhoneNumber(registerDTO.PhoneNumber))
+            {
+                return Result.Failure(ServiceError.ExistedError("Số điện thoại đã tồn tại."));
+            }
             try
             {
                 var userMap = _mapper.Map<UserTokenDTO>(registerDTO);
@@ -98,10 +101,10 @@ namespace Application.UseCases
         {
             try
             {
-                var user = await _userRepository.VerifyAccount(loginDTO.Email, loginDTO.Password);
+                var user = await _userRepository.VerifyAccount(loginDTO.PhoneNumber, loginDTO.Password);
                 if (user == null)
                 {
-                    return Result<TokenDTO>.Failure(ServiceError.ValidationFailed("Invalid email or password."));
+                    return Result<TokenDTO>.Failure(ServiceError.ValidationFailed("Sai số điện thoại hoặc mật khẩu."));
                 }
 
                 var userMap = _mapper.Map<UserTokenDTO>(user);
@@ -130,6 +133,7 @@ namespace Application.UseCases
             {
                 UserName = principal.FindFirst("UserName")?.Value ?? string.Empty,
                 Email = principal.FindFirst("Email")?.Value ?? string.Empty,
+                PhoneNumber = principal.FindFirst("PhoneNumber")?.Value,
                 Address = principal.FindFirst("Address")?.Value ?? string.Empty,
                 Role = UserRole.Customer
             };

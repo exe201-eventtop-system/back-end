@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSummaryList([FromQuery] ProductListQuery query, CancellationToken cancellationToken)
         {
-            var result = await _queryDispatcher.Dispatch<ProductListQuery, Result<PaginatedList<ProductSummaryItem>>>(query, cancellationToken);
+           var result = await _queryDispatcher.Dispatch<ProductListQuery, Result<PaginatedList<ProductSummaryItem>>>(query, cancellationToken);
             return result.MapToJsonResult();
         }
 

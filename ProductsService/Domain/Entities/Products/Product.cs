@@ -1,37 +1,29 @@
 ﻿using Domain.Entities.Categories;
 using Domain.Enums;
+using SharedLibrary.System.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.Products
 {
-    public class Product
+    public class Product : BaseEntities
     {
-        public Guid Id { get; set; }
-
+        [Column("name")]
         public string Name { get; set; }
-
+        [Column("description")]
         public string Description { get; set; }
-
-        public Guid? ParentServiceId { get; set; }
-
-        public Guid? CategoryId { get; set; }
-
+        [Column("category_id")]
+        public Guid CategoryId { get; set; }
+        [Column("supplier_id")]
         public Guid SupplierId { get; set; }
-
+        [Column("location")]
         public string Location { get; set; }
-
+        [Column("thumbnail_url")]
         public string ThumbnailUrl { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime LastModifiedAt { get; set; }
-
-        public virtual List<ProductImage> ImagesNavigation { get; set; }
-        public virtual List<Package> ProductPackagesNavigation { get; set; }
-        public virtual Category CategoryNavigation { get; set; }
-        public virtual Product ParentServiceNavigation { get; set; }
-        public virtual List<Product> ChildServicesNavigation { get; set; }
+        public virtual List<ProductImage>? ImagesNavigation { get; set; }
+        public virtual List<Package> ProductPackagesNavigation { get; set; }=  new List<Package>();
+        [ForeignKey(nameof(CategoryId))]
+        public virtual Category CategoryNavigation { get; set; } = new Category();
 
         public List<Package> GetProductPackageWithType(PackageType type)
         {

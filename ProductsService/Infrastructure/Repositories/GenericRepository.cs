@@ -1,4 +1,5 @@
-﻿using Domain.Repositories;
+﻿using Domain.Entities.Products;
+using Domain.Repositories;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -39,6 +40,11 @@ namespace Infrastructure.Repositories
             }
 
             return query.ToListAsync();
+        }
+
+        public Task<List<Product>> GetAllAsync(Expression<Func<Product, bool>> filter, Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null, int? skip = null, int? take = null)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual async Task<T?> GetByIdAsync<Tid>(Tid id)

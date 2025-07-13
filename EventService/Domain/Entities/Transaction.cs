@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLibrary.System.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace Domain.Entities
 {
     public class Transaction : BaseEntities
     {
+        [Column("order_code")]
         public long OrderCode { get; set; }
-
-        public Guid? UserId { get; set; }
-        [Column(TypeName = "decimal(10,2)")]
+        [Column("user_id")]
+        public Guid UserId { get; set; }
+        [Column("amount", TypeName = "decimal(10,2)")]
         public decimal Amount { get; set; }
+        [Column("is_payment")]
         public bool IsPayment { get; set; } = false;
-        public ICollection<UsedServices> UsedServices { get; set; } = new List<UsedServices>();
+        public ICollection<UsedServiceTransaction>? UsedServiceTransactions{ get; set; }
     }
 }

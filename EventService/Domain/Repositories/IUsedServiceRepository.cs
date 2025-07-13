@@ -9,5 +9,6 @@ namespace Domain.Repositories
 {
     public interface IUsedServiceRepository: IGenericRepository<UsedService>
     {
+        Task<List<UsedService>> GetUsedServicesWithRating();
     }
 }

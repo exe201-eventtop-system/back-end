@@ -110,7 +110,6 @@ namespace Application.UsedServices.Queries
                 .FirstOrDefault(y => y.Id == x.ServiceId)?.ProductPackages
                 .FirstOrDefault(y => y.Id == x.PackageId)?.Name,
                 Price = x.UnitPrice,
-                Quantity = x.Quantity,
                 StartTime = x.RentStartTime,
                 EndTime = x.RentEndTime,
                 Status = x.Status,

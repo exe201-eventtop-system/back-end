@@ -1,13 +1,11 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace SharedLibrary.System.Entities
 {
     public abstract class BaseEntities
     {
@@ -16,7 +14,7 @@ namespace Domain.Entities
         [Column("create_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         [Column("update_at")]
-        public DateTime UpdatedAt { get; set; } 
+        public DateTime UpdatedAt { get; set; }
         [Column("is_deleted")]
         public bool IsDeleted { get; set; } = false;
     }

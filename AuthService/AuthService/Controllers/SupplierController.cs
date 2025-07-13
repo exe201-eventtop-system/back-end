@@ -24,6 +24,13 @@ namespace API.Controllers
             var suppliers = await _useCase.GetListSupllier(supplierIds);
             return Ok(suppliers);
         }
+
+        [HttpGet("by-rating")]
+        public async Task<IActionResult> GetSuppliersByRating()
+        {
+            var supplier = await _useCase.GetSuppliersByRating();
+            return Ok(supplier);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSupplier(Guid id)
         {

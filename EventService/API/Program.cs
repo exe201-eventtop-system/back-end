@@ -1,5 +1,6 @@
 using API.Middlewares;
 using Infrastructure;
+using SharedLibrary.Jwt;
 
 namespace API
 {
@@ -12,6 +13,7 @@ namespace API
             var configuration = builder.Configuration;
 
             builder.Configuration.AddEnvironmentVariables();
+
             builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
             builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
             builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
@@ -21,7 +23,7 @@ namespace API
             builder.Services.ConfigureInfrastructure(configuration)
                 .ConfigureMiddlewares(configuration)
                 .AddControllers();
-
+            builder.Services.AddScoped<JwtService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

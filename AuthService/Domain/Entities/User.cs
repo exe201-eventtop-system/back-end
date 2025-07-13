@@ -1,4 +1,5 @@
 ﻿using SharedLibrary.Enum;
+using SharedLibrary.System.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -1,14 +1,7 @@
-﻿using Domain.Entities;
-using Domain.Entities.Products;
+﻿using Domain.Entities.Products;
 using Domain.Repositories;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -22,30 +15,57 @@ namespace Infrastructure.Repositories
                 .Include(x => x.CategoryNavigation)
                 .Include(x => x.ProductPackagesNavigation)
                 .ThenInclude(x => x.PackageStructureNavigation)
-                .Include(x => x.ChildServicesNavigation)
-                .Include(x => x.ParentServiceNavigation)
                 .ToListAsync();
 
             return list;
         }
 
-        public override async Task<List<Product>> GetAllAsync(Expression<Func<Product, bool>> filter, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy)
-        {
-            var list = _context.Services
-                .Include(x => x.ParentServiceNavigation)
-                .Include(x => x.CategoryNavigation)
-                .Include(x => x.ChildServicesNavigation)
-                .Include(x => x.ProductPackagesNavigation)
-                .ThenInclude(x => x.PackageStructureNavigation)
-                .Where(filter);
 
-            if (orderBy != null)
+        public async Task<(List<Product> Items, int TotalCount)> GetAllAsyncWithPagning(
+     string productNameContain,
+     string? packageName,
+     int page,
+     int pageSize)
+        {
+            string nameFilter = productNameContain?.Trim().ToLower() ?? "";
+            string? packageNameFilter = packageName?.Trim().ToLower();
+            int skip = (page - 1) * pageSize;
+            int take = pageSize;
+
+            var query = _context.Services
+                .Include(p => p.CategoryNavigation)
+                .Include(p => p.ProductPackagesNavigation)
+                    .ThenInclude(pkg => pkg.PackageStructureNavigation)
+                .AsQueryable();
+
+            // Lọc theo tên
+            if (!string.IsNullOrEmpty(nameFilter))
             {
-                list = orderBy(list);
+                query = query.Where(p => p.Name.ToLower().Contains(nameFilter));
             }
 
-            return await list.ToListAsync();
+            // Lọc theo tên gói (package name)
+            if (!string.IsNullOrEmpty(packageNameFilter))
+            {
+                query = query.Where(p =>
+                    p.ProductPackagesNavigation.Any(pkg =>
+                        pkg.PackageStructureNavigation != null &&
+                        pkg.PackageStructureNavigation.Name.ToLower().Contains(packageNameFilter)));
+            }
+
+            // Đếm tổng số dòng thỏa điều kiện
+            var totalCount = await query.CountAsync();
+
+            // Phân trang
+            var items = await query
+                .OrderBy(p => p.Name) 
+                .Skip(skip)
+                .Take(take)
+                .ToListAsync();
+
+            return (items, totalCount);
         }
+
 
         public async Task<Product?> GetByIdAsync(Guid id)
         {
@@ -54,8 +74,6 @@ namespace Infrastructure.Repositories
                 .Include(x => x.ImagesNavigation)
                 .Include(x => x.ProductPackagesNavigation) 
                 .ThenInclude(x => x.PackageStructureNavigation)
-                .Include(x => x.ParentServiceNavigation)
-                .Include(x => x.ChildServicesNavigation)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return item;

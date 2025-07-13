@@ -70,7 +70,6 @@ namespace Application.Products.Commands
                 StructureId = command.PackageStructure,
                 Price = command.Price,
                 ProductId = product.Id,
-                IsActive = true
             });
 
             return Result<AddProductPackageResult>.Success(new AddProductPackageResult

@@ -28,49 +28,6 @@ namespace Services
 
             _serviceClient = new ServiceClient(httpClient); 
         }
-        public async Task<ServiceResult<PaymentRes>> SaveUsedService(UsedServiceDto usedServiceDto,Guid userId)
-        {
-            var transaction = await _unitOfWork.TransactionRepository.AddTransaction(userId,usedServiceDto.UnitPrice);
-
-            var usedServices = usedServiceDto.Services.Select(s => new UsedService
-            {
-                ServiceId = s.ServiceId,
-                ServiceName = s.ServiceName,
-                UnitPrice = s.Price,
-                SupplierId = s.SupplierId,
-                CustomerId = userId,
-                EventId = s.EventId,
-                RentStartTime = s.RentStartTime,
-                RentEndTime = s.RentEndTime,
-            }).ToList();
-
-            foreach (var usedService in usedServices)
-            {
-                usedService.TransactionId = transaction.Item2;
-            }
-            var usedServiceIds = await _unitOfWork.UsedServiceRepository.AddUsedServices(usedServices);
-
-            var paymentDTO = new PaymentDTO
-            {
-                OrderCode = transaction.Item1,
-                UnitPrice = usedServiceDto.UnitPrice,
-                Items = usedServiceDto.Services.Select(s =>
-                    new ItemData(s.ServiceName, 1, s.Price)
-    ).ToList()
-            };
-            var paymentUrl = await _payOSService.CreateLink(paymentDTO);
-            return ServiceResult<PaymentRes>.Success(new PaymentRes
-            {
-                Url = paymentUrl
-            });
-
-        }
-
-        public async Task<ServiceResult<bool>> ConfirmPayment(long orderCode)
-        {
-            var usedServiceIds = await _unitOfWork.TransactionRepository.SaveTransaction(orderCode);
-            return ServiceResult<bool>.Success(usedServiceIds);
-        }
         public async Task<ServiceResult<List<TimeSlotDto>>> GetScheduleAsync(Guid supplierId)
         {
             var schedules = await _unitOfWork.UsedServiceRepository.GetScheduleIdAsync(supplierId);

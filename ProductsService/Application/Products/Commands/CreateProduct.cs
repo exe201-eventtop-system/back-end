@@ -21,7 +21,7 @@ namespace Application.Products.Commands
         public IFormFile? Thumbnail { get; set; }
 
         [JsonPropertyName("category_id")]
-        public Guid? CategoryId { get; set; } = null;
+        public Guid CategoryId { get; set; }
 
         [JsonPropertyName("parent_id")]
         public Guid? ParentId { get; set; } = null;
@@ -100,7 +100,6 @@ namespace Application.Products.Commands
                     ThumbnailUrl = storage_link,
                     CategoryId = command.CategoryId,
                     Location = command.Location,
-                    ParentServiceId = command.ParentId,
                 });
 
                 foreach (var package in packages)

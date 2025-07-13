@@ -23,15 +23,21 @@ namespace Infrastructure.SqlServer.Repositories
             throw new NotImplementedException();
         }
         public async Task<(List<Supplier> Items, int TotalCount)> GetSuppliers(
-    int pageSize, int pageNumber, bool? isActive, string? searchKey)
+    int pageNumber, int pageSize, string? searchKey, string? address)
         {
             var query = _context.Suppliers.AsQueryable();
 
-            if (isActive.HasValue)
-                query = query.Where(s => s.IsActive == isActive.Value);
-
             if (!string.IsNullOrWhiteSpace(searchKey))
-                query = query.Where(s => s.NameOrginazation.Contains(searchKey) || s.Location.Contains(searchKey));
+            {
+                query = query.Where(s =>
+                    s.NameOrginazation.Contains(searchKey) ||
+                    s.Location.Contains(searchKey));
+            }
+
+            if (!string.IsNullOrWhiteSpace(address))
+            {
+                query = query.Where(s => s.Location.Contains(address));
+            }
 
             var total = await query.CountAsync();
 
@@ -42,6 +48,7 @@ namespace Infrastructure.SqlServer.Repositories
 
             return (items, total);
         }
+
 
         public Task<List<Supplier>> GetSuppliersInspect(Guid userId)
         {

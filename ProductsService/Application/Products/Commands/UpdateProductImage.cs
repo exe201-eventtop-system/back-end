@@ -75,7 +75,6 @@ namespace Application.Products.Commands
                 {
                     ImageUrl = url,
                     Order = item.ImagesNavigation.Count,
-                    AlternativeText = current.Name,
                     ProductId = (Guid) command.ProductId,
                 };
 
@@ -90,7 +89,6 @@ namespace Application.Products.Commands
                 {
                     Id = x.Id,
                     Url = x.ImageUrl,
-                    AlternativeText = x.AlternativeText,
                     Order = x.Order,
                 }).ToList()
             });

@@ -26,6 +26,7 @@
   <ItemGroup>
     <Folder Include="Commons\Dispatchers\Commands\" />
     <Folder Include="Commons\Dispatchers\Queries\" />
+    <Folder Include="Feedbacks\Commands\" />
   </ItemGroup>
 
 </Project>

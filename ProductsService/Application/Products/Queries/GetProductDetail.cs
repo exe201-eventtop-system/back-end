@@ -144,7 +144,7 @@ namespace Application.Products.Queries
                 Id = result.Id,
                 Name = result.Name,
                 Description = result.Description,
-                CategoryId = result.CategoryId ?? null,
+                CategoryId = result.CategoryId,
                 Category = result.CategoryNavigation?.Name,
                 ServiceImages = result.ImagesNavigation.Select(x => new ProductUploadedImage
                 {
@@ -152,7 +152,6 @@ namespace Application.Products.Queries
                     ImageUrl = x.ImageUrl,
                     Order = x.Order,
                 }).ToList(),
-                ParentServiceId = result.ParentServiceId,
                 ThumbnailUrl = result.ThumbnailUrl,
                 Location = result.Location,
                 Supplier = supplierInfo,

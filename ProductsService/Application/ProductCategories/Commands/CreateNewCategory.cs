@@ -57,7 +57,6 @@ namespace Application.ProductCategories.Commands
             {
                 Name = command.Name,
                 Description = command.Description,
-                ParentCategoryId = command.ParentId
             };
 
             newCategory = await unitOfWork.CategoryRepository.CreateAsync(newCategory);

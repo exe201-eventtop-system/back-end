@@ -12,4 +12,8 @@
     <None Remove="Constants\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\API-Gateway\SharedLibrary\SharedLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

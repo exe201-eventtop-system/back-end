@@ -9,9 +9,10 @@ namespace Application.Commons.UoW
 {
     public interface IUnitOfWork
     {
-        IEventTypeRepository EventTypeRepository { get; }
         IEventRepository EventRepository { get; }
         IUsedServiceRepository UsedServiceRepository { get; }
+        IFeedbackRepository FeedbackRepository { get; }
+        ITransactionRepository TransactionRepository { get; }
 
         /// <summary>
         ///     Commit all changes made by repositories from this unit of work instance to persistent database.

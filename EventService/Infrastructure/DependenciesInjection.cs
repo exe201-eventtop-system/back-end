@@ -20,7 +20,7 @@ namespace Infrastructure
     {
         public static IServiceCollection ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ScheduledEventServiceDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("default")));
+            services.AddDbContext<ScheduledEventServiceDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("EVENTCONNECTION")));
 
             // Add HttpClients
             services.AddHttpClient("AuthService", client =>

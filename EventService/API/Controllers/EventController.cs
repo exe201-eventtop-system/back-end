@@ -3,7 +3,6 @@ using Application.Commons.Dispatchers;
 using Application.Commons.PaginatedLists;
 using Application.Commons.Results;
 using Application.Events.Queries;
-using Application.EventTypes.Queries;
 using Application.UsedServices.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -41,13 +40,13 @@ namespace API.Controllers
             return result.MapToJsonResult();
         }
 
-        [HttpGet("types")]
-        [ProducesDefaultResponseType(typeof(Result<List<GetEventTypesResult>>))]
-        public async Task<IActionResult> GetEventTypes([FromQuery] GetEventTypesQuery query, CancellationToken cancellationToken)
-        {
-            var result = await _queryDispatcher.Dispatch<GetEventTypesQuery, Result<List<GetEventTypesResult>>>(query, cancellationToken);
-            return result.MapToJsonResult();
-        }
+        //[HttpGet("types")]
+        //[ProducesDefaultResponseType(typeof(Result<List<GetEventTypesResult>>))]
+        //public async Task<IActionResult> GetEventTypes([FromQuery] GetEventTypesQuery query, CancellationToken cancellationToken)
+        //{
+        //    var result = await _queryDispatcher.Dispatch<GetEventTypesQuery, Result<List<GetEventTypesResult>>>(query, cancellationToken);
+        //    return result.MapToJsonResult();
+        //}
 
         [HttpGet("{id}")]
         [ProducesDefaultResponseType(typeof(Result<EventDetail>))]

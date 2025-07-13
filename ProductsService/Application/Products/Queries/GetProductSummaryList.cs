@@ -3,6 +3,7 @@ using Application.Commons.PaginatedLists;
 using Application.Commons.Results;
 using Application.Commons.UoW;
 using Domain.Entities.Products;
+using Domain.Repositories;
 using System.Linq.Expressions;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
@@ -14,14 +15,14 @@ namespace Application.Products.Queries
         [JsonPropertyName("name")]
         public string ProductNameContain { get; set; } = string.Empty;
 
-        [JsonPropertyName("category")]
-        public Guid? CategoryId { get; set; } = null;
+        [JsonPropertyName("package_name")]
+        public string? PackageName { get; set; } = null;
 
         [JsonPropertyName("page")]
         public int Page { get; set; } = 1;
 
         [JsonPropertyName("page_size")]
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 12;
     }
 
     public class ProductSummaryItem
@@ -37,6 +38,8 @@ namespace Application.Products.Queries
 
         [JsonPropertyName("thumbnail")]
         public string ThumbnailUrl { get; set; }
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
 
         [JsonPropertyName("rating")]
         public double Rating { get; set; }
@@ -105,16 +108,20 @@ namespace Application.Products.Queries
 
         public async Task<Result<PaginatedList<ProductSummaryItem>>> Handle(ProductListQuery query, CancellationToken cancellationToken)
         {
-            // Filter expression
-            Expression<Func<Product, bool>> expression;
-            expression = service => service.Name.ToLower().Contains(query.ProductNameContain.ToLower())
-               && (query.CategoryId == null || service.CategoryNavigation.Id == query.CategoryId);
 
-            // Get the list of services that match the searching expression.
-            var product_list = await unitOfWork.ProductRepository.GetAllAsync(expression, null);
+
+
+            var (products, totalCount) = await unitOfWork.ProductRepository.GetAllAsyncWithPagning(
+     query.ProductNameContain,
+     query.PackageName,
+     query.Page,
+     query.PageSize
+ );
+
+
 
             // Get the list of supplier ids
-            List<Guid> supplier_id = product_list.Select(x => x.SupplierId).Distinct().ToList();
+            List<Guid> supplier_id = products.Select(x => x.SupplierId).Distinct().ToList();
 
             // Call Auth service to get list of suppliers.
             List<SupplierResponse> suppliers = new List<SupplierResponse>();
@@ -149,13 +156,14 @@ namespace Application.Products.Queries
             {
                 CurrentPage = query.Page,
                 PageSize = query.PageSize,
-                TotalCount = product_list.Count,
-                PageContent = product_list.Select(x => new ProductSummaryItem
+                TotalCount = totalCount,
+                PageContent = products.Select(x => new ProductSummaryItem
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
-                    Rating = 0,
+                    Category = x.CategoryNavigation.Name,
+                    Rating = 3.5,
                     ThumbnailUrl = x.ThumbnailUrl,
                     Supplier = new ProductSummarySupplier
                     {

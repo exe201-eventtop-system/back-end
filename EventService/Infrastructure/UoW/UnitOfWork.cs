@@ -9,25 +9,16 @@ namespace Infrastructure.UoW
     {
         private readonly ScheduledEventServiceDbContext _context;
 
-        private IEventTypeRepository _eventTypeRepository;
 
         private IEventRepository _eventRepository;
 
         private IUsedServiceRepository _usedServiceRepository;
+        private IFeedbackRepository _feedbackRepository;
+        private ITransactionRepository _transactionRepository;
 
         public UnitOfWork(ScheduledEventServiceDbContext context) => _context = context;
 
-        public IEventTypeRepository EventTypeRepository
-        {
-            get
-            {
-                if (_eventTypeRepository == null)
-                {
-                    _eventTypeRepository = new EventTypeRepository(_context);
-                }
-                return _eventTypeRepository;
-            }
-        }
+      
 
         public IEventRepository EventRepository
         {
@@ -53,6 +44,28 @@ namespace Infrastructure.UoW
             }
         }
 
+        public IFeedbackRepository FeedbackRepository
+        {
+            get
+            {
+                if (_feedbackRepository == null)
+                {
+                    _feedbackRepository = new FeedbackRepository(_context);
+                }
+                return _feedbackRepository;
+            }
+        }
+        public ITransactionRepository TransactionRepository
+        {
+            get
+            {
+                if (_transactionRepository == null)
+                {
+                    _transactionRepository = new TransactionRepository(_context);
+                }
+                return _transactionRepository;
+            }
+        }
         public Task<int> CommitAsync()
         {
             return _context.SaveChangesAsync();

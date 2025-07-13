@@ -56,7 +56,6 @@ namespace Application.PackageStructures.Commands
                 Name = command.Name,
                 Description = command.Description,
                 Type = command.Type,
-                CreatorId = command.AdminId,
             };
 
             newPackage = await unitOfWork.PackageStructureRepository.CreateAsync(newPackage);

@@ -14,12 +14,14 @@ namespace Infrastructure.Repositories
     {
         public UsedServiceRepository(ScheduledEventServiceDbContext context) : base(context) { }
 
-        public async Task<UsedService?> GetByIdAsync(Guid id)
+        public async Task<List<UsedService>> GetUsedServicesWithRating()
         {
-            return await base._context.UsedSessionServices
-                .Include(x => x.ScheduledEventNavigation)
-                .ThenInclude(x => x.EventTypeNavigation)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            var query = _context.UsedServices
+                .Include(us => us.Feedback) // eager load Feedback
+                .Where(us => us.Feedback != null);
+
+            return await query.ToListAsync();
         }
+
     }
 }
