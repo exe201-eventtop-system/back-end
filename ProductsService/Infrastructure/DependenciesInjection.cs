@@ -22,7 +22,7 @@ namespace Infrastructure
             // Configuring DbContext
             services.AddDbContext<ProductDbContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString("DefaultDatabase"));
+                options.UseSqlServer(config.GetConnectionString("SERVICECONNECTION"));
             });
 
 
@@ -33,7 +33,7 @@ namespace Infrastructure
             // Add HttpClients
             services.AddHttpClient("AuthService", client =>
             {
-                client.BaseAddress = new Uri(config["AuthService:BaseUrl"]);
+                client.BaseAddress = new Uri(config["AUTHSERVICE:PORT"]);
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
 

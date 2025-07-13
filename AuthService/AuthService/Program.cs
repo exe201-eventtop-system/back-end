@@ -13,24 +13,24 @@ namespace AuthService
             var config = builder.Configuration;
             builder.Configuration.AddEnvironmentVariables();
 
-            builder.Configuration["App:FrontendBaseUrl"] = Environment.GetEnvironmentVariable("APP_FRONTEND_BASE_URL");
-            builder.Configuration["Jwt:Key"] = Environment.GetEnvironmentVariable("JWT_KEY");
-            builder.Configuration["Jwt:Issuer"] = Environment.GetEnvironmentVariable("JWT_ISSUER");
-            builder.Configuration["Jwt:Audience"] = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+            //builder.Configuration["App:FrontendBaseUrl"] = Environment.GetEnvironmentVariable("APP_FRONTEND_BASE_URL");
+            //builder.Configuration["Jwt:Key"] = Environment.GetEnvironmentVariable("JWT_KEY");
+            //builder.Configuration["Jwt:Issuer"] = Environment.GetEnvironmentVariable("JWT_ISSUER");
+            //builder.Configuration["Jwt:Audience"] = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
 
-            builder.Configuration["Email:SmtpServer"] = Environment.GetEnvironmentVariable("EMAIL_SMTP_SERVER");
-            builder.Configuration["Email:SmtpPort"] = Environment.GetEnvironmentVariable("EMAIL_SMTP_PORT");
-            builder.Configuration["Email:SenderEmail"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_EMAIL");
-            builder.Configuration["Email:SenderName"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_NAME");
-            builder.Configuration["Email:SenderPassword"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_PASSWORD");
+            //builder.Configuration["Email:SmtpServer"] = Environment.GetEnvironmentVariable("EMAIL_SMTP_SERVER");
+            //builder.Configuration["Email:SmtpPort"] = Environment.GetEnvironmentVariable("EMAIL_SMTP_PORT");
+            //builder.Configuration["Email:SenderEmail"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_EMAIL");
+            //builder.Configuration["Email:SenderName"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_NAME");
+            //builder.Configuration["Email:SenderPassword"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_PASSWORD");
 
-            builder.Configuration["Authentication:Google:ClientId"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_ID");
-            builder.Configuration["Authentication:Google:ClientSecret"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_SECRET");
+            //builder.Configuration["Authentication:Google:ClientId"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_ID");
+            //builder.Configuration["Authentication:Google:ClientSecret"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_SECRET");
 
-            builder.Configuration["Firebase:BucketName"] = Environment.GetEnvironmentVariable("FIREBASE_BUCKET_NAME");
-            builder.Configuration["Firebase:CredentialPath"] = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIAL_PATH");
+            //builder.Configuration["Firebase:BucketName"] = Environment.GetEnvironmentVariable("FIREBASE_BUCKET_NAME");
+            //builder.Configuration["Firebase:CredentialPath"] = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIAL_PATH");
 
-            builder.Configuration["ConnectionStrings:AuthConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_AUTHCONNECTION");
+            //builder.Configuration["ConnectionStrings:AuthConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_AUTHCONNECTION");
 
 
             builder.Services.AddControllers();

@@ -25,7 +25,7 @@ namespace API.Extentions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+            services.Configure<EmailSettings>(config.GetSection("EMAIL"));
             services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
                 options.Cookie.Path = "/"; 

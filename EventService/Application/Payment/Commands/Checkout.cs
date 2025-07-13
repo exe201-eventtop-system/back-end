@@ -1,22 +1,15 @@
 ﻿using Application.Commons.Handlers;
-using Application.Commons.Results;
 using Application.Commons.UoW;
-using Application.Feedbacks.Queries;
 using Domain.Entities;
+using Microsoft.Extensions.Configuration;
 using Net.payOS.Types;
 using SharedLibrary.DTOs.Payment;
-using SharedLibrary.DTOs.Supplier;
 using SharedLibrary.PaymentServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Application.Payment.Commands
 {
-    public class CheckoutCommand 
+    public class CheckoutCommand
     {
         public Guid UserId { get; set; }
         public UsedServiceDto UsedServiceDto { get; set; } = new();
@@ -72,11 +65,13 @@ namespace Application.Payment.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PayOSService _payOSService;
+        private readonly IConfiguration _config;
 
-        public CheckoutHandler(IUnitOfWork unitOfWork, PayOSService payOSService)
+        public CheckoutHandler(IUnitOfWork unitOfWork, PayOSService payOSService, IConfiguration config)
         {
             _unitOfWork = unitOfWork;
             _payOSService = payOSService;
+            _config = config;
         }
 
         public async Task<PaymentRes> Handle(CheckoutCommand command, CancellationToken cancellationToken)

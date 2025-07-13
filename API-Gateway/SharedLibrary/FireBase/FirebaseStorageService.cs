@@ -18,8 +18,8 @@ namespace SharedLibrary.FireBase
         public FirebaseStorageService(IConfiguration configuration)
         {
 
-            _bucketName = configuration["Firebase:BucketName"];
-            string credentialPath = configuration["Firebase:CredentialPath"];
+            _bucketName = configuration["FIREBASE:BUCKET_NAME"];
+            string credentialPath = configuration["FIREBASE:CREDENTIAL_PATH"];
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
             if (string.IsNullOrEmpty(_bucketName) || string.IsNullOrEmpty(credentialPath))
             {

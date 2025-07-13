@@ -64,12 +64,12 @@ namespace SharedLibrary.Email
 
         private IConfigurationSection GetEmailSettings()
         {
-            return _configuration.GetSection("Email");
+            return _configuration.GetSection("EMAIL");
         }
 
         private string GenerateConfirmLink(string token)
         {
-            var baseUrl = _configuration["App:FrontendBaseUrl"] ?? "https://your-default-domain.com";
+            var baseUrl = _configuration["APP_FRONTEND_BASE_URL"] ?? "https://your-default-domain.com";
             return $"{baseUrl}/confirm?token={Uri.EscapeDataString(token)}";
         }
 
@@ -99,7 +99,7 @@ namespace SharedLibrary.Email
             };
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(emailSettings["SenderName"], emailSettings["SenderEmail"]));
+            message.From.Add(new MailboxAddress(emailSettings["SENDER_NAME"], emailSettings["SENDER_EMAIL"]));
             message.To.Add(new MailboxAddress("", toEmail));
             message.Subject = subject;
 
@@ -112,8 +112,8 @@ namespace SharedLibrary.Email
         private async Task SendEmailViaSmtp(MimeMessage message, IConfigurationSection emailSettings)
         {
             using var client = new SmtpClient();
-            await client.ConnectAsync(emailSettings["SmtpServer"], int.Parse(emailSettings["SmtpPort"]), SecureSocketOptions.StartTls);
-            await client.AuthenticateAsync(emailSettings["SenderEmail"], emailSettings["SenderPassword"]);
+            await client.ConnectAsync(emailSettings["SMTP_SERVER"], int.Parse(emailSettings["SMTP_PORT"]), SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(emailSettings["SENDER_EMAIL"], emailSettings["SENDER_PASSWORD"]);
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
         }

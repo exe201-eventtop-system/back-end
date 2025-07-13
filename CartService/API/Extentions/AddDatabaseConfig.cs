@@ -10,7 +10,7 @@ namespace API.Extentions
             IConfiguration config)
         {
             // 🔍 In ra ConnectionString để kiểm tra
-            var connectionString = config.GetConnectionString("CartConnection");
+            var connectionString = config.GetConnectionString("CARTCONNECTION");
             Console.WriteLine("==> CartConnection: " + connectionString);
 
             services.AddDbContext<CartServiceDBContext>(options =>

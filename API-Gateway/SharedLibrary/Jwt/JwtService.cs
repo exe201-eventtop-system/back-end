@@ -64,8 +64,8 @@ namespace SharedLibrary.Jwt
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+                issuer: _configuration["JWT:ISSUER"],
+                audience: _configuration["JWT:AUDIENCE"],
                 claims: claims,
                 expires: DateTime.UtcNow.Add(TimeSpan.FromHours(2)),
                 signingCredentials: creds
@@ -77,14 +77,14 @@ namespace SharedLibrary.Jwt
         public Task<ClaimsPrincipal?> ValidateToken(TokenDTO token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? throw new InvalidOperationException("JWT key is missing"));
+            var key = Encoding.UTF8.GetBytes(_configuration["JWT:KEY"] ?? throw new InvalidOperationException("JWT key is missing"));
 
             var validationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
-                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidIssuer = _configuration["JWT:ISSUER"],
                 ValidateAudience = true,
-                ValidAudience = _configuration["Jwt:Audience"],
+                ValidAudience = _configuration["JWT:AUDIENCE"],
                 ValidateLifetime = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ClockSkew = TimeSpan.Zero

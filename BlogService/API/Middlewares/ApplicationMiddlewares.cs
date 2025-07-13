@@ -34,10 +34,10 @@ namespace API.Extensions
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuers = configuration.GetValue<List<string>>("Jwt:Issuers"),
-                    ValidAudiences = configuration.GetValue<List<string>>("Jwt:Audiences"),
+                    ValidIssuer = configuration["JWT:ISSUER"],
+                    ValidAudience = configuration["JWT:AUDIENCE"],
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Secret"))
+                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("JWT:KEY"))
                     )
                 };
             });

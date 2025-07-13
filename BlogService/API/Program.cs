@@ -11,8 +11,8 @@ namespace API
             DotNetEnv.Env.Load("../../.env");
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.AddEnvironmentVariables();
-            var blogConnStr = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_BLOGCONNECTION");
-            builder.Configuration["ConnectionStrings:BlogConnection"] = blogConnStr;
+            //var blogConnStr = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_BLOGCONNECTION");
+            //builder.Configuration["ConnectionStrings:BlogConnection"] = blogConnStr;
             var configuration = builder.Configuration;
 
             builder.Services.ConfigureInfratructure(configuration)

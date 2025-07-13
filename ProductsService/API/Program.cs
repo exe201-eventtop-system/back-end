@@ -15,7 +15,7 @@ namespace API
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.AddEnvironmentVariables();
             var configuration = builder.Configuration;
-            builder.Configuration["ConnectionStrings:DefaultDatabase"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_SERVICECONNECTION");
+            //builder.Configuration["ConnectionStrings:DefaultDatabase"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_SERVICECONNECTION");
 
 
             // Configuring infrastructure layer's services.

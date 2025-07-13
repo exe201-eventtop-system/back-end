@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SharedLibrary.FireBase;
 using SharedLibrary.Jwt;
+using SharedLibrary.PaymentServices;
+using SharedLibrary.System.APICall;
 using System.Reflection;
 
 namespace Infrastructure
@@ -25,18 +27,20 @@ namespace Infrastructure
             // Add HttpClients
             services.AddHttpClient("AuthService", client =>
             {
-                client.BaseAddress = new Uri(configuration["Endpoints:Auth"]);
+                client.BaseAddress = new Uri(configuration["AUTHSERVICE:PORT"]);
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
 
             services.AddHttpClient("ProductService", client =>
             {
-                client.BaseAddress = new Uri(configuration["Endpoints:Product"]);
+                client.BaseAddress = new Uri(configuration["PRODUCTSERVICE:PORT"]);
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
 
             // Add Shared library
+            services.AddScoped<ApiCaller>();
             services.AddScoped<JwtService>();
+            services.AddScoped<PayOSService>();
 
             // Adding HttpClient used in calling other endpoints
             services.AddScoped<IApiEndpointCaller, ApiEndpointCaller>();

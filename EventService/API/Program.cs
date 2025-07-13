@@ -14,11 +14,11 @@ namespace API
 
             builder.Configuration.AddEnvironmentVariables();
 
-            builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
-            builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
-            builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
-            builder.Configuration["PayOS:ReturnUrl"] = Environment.GetEnvironmentVariable("PAYOS_RETURNURL");
-            builder.Configuration["ServiceUrls:ApiGateway"] = Environment.GetEnvironmentVariable("SERVICEURLS_APIGATEWAY");
+            //builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
+            //builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
+            //builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
+            //builder.Configuration["PayOS:ReturnUrl"] = Environment.GetEnvironmentVariable("PAYOS_RETURNURL");
+            //builder.Configuration["ServiceUrls:ApiGateway"] = Environment.GetEnvironmentVariable("SERVICEURLS_APIGATEWAY");
 
             builder.Services.ConfigureInfrastructure(configuration)
                 .ConfigureMiddlewares(configuration)

@@ -13,10 +13,10 @@ namespace API
             builder.Configuration.AddEnvironmentVariables();
             var config = builder.Configuration;
             // Add services to the container.
-            builder.Configuration["Gemini:ApiKey"] = Environment.GetEnvironmentVariable("GEMINI_API_KEY");
-            builder.Configuration["Gemini:Model"] = Environment.GetEnvironmentVariable("GEMINI_MODEL");
-            builder.Configuration["Gemini:BaseUrl"] = Environment.GetEnvironmentVariable("GEMINI_BASE_URL");
-            builder.Configuration["ConnectionStrings:PlanningServiceConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_PLANNINGCONNECTION");
+            //builder.Configuration["Gemini:ApiKey"] = Environment.GetEnvironmentVariable("GEMINI_API_KEY");
+            //builder.Configuration["Gemini:Model"] = Environment.GetEnvironmentVariable("GEMINI_MODEL");
+            //builder.Configuration["Gemini:BaseUrl"] = Environment.GetEnvironmentVariable("GEMINI_BASE_URL");
+            //builder.Configuration["ConnectionStrings:PlanningServiceConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_PLANNINGCONNECTION");
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
            

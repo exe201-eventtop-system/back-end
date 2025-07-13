@@ -30,11 +30,12 @@ namespace API.Controllers
             var result = await _queryDispatcher.Dispatch<GetServiceRating, List<ServiceRatingDto>>(new GetServiceRating(), cancellationToken);
             return Ok(result);
         }
-        [HttpGet("service/{id}")]
-        public async Task<IActionResult> GetFeedbackServiceRating(CancellationToken cancellationToken, Guid id)
-        {
-            var result = await _queryDispatcher.Dispatch<GetFeedbackServiceRating, List<ServiceRatingDto>>(new GetServiceRating(), cancellationToken);
-            return Ok(result);
-        }
+
+        //[HttpGet("service/{id}")]
+        //public async Task<IActionResult> GetFeedbackServiceRating(CancellationToken cancellationToken, Guid id)
+        //{
+        //    var result = await _queryDispatcher.Dispatch<GetFeedbackServiceRating, List<ServiceRatingDto>>(new GetServiceRating(), cancellationToken);
+        //    return Ok(result);
+        //}
     }
 }

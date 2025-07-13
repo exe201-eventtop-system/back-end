@@ -10,7 +10,7 @@ namespace API.Extentions
     IConfiguration config)
         {
             services.AddDbContext<AuthDbContext>(options =>
-                options.UseSqlServer(config.GetConnectionString("AuthConnection")));
+                options.UseSqlServer(config.GetConnectionString("AUTHCONNECTION")));
             return services;
         }
 

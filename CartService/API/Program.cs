@@ -18,12 +18,12 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../../.env");
 builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
-builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
-builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
-builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
-builder.Configuration["PayOS:ReturnUrl"] = Environment.GetEnvironmentVariable("PAYOS_RETURNURL");
-builder.Configuration["ServiceUrls:ApiGateway"] = Environment.GetEnvironmentVariable("SERVICEURLS_APIGATEWAY");
-builder.Configuration["ConnectionStrings:CartConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_CARTCONNECTION");
+//builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
+//builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
+//builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
+//builder.Configuration["PayOS:ReturnUrl"] = Environment.GetEnvironmentVariable("PAYOS_RETURNURL");
+//builder.Configuration["ServiceUrls:ApiGateway"] = Environment.GetEnvironmentVariable("SERVICEURLS_APIGATEWAY");
+//builder.Configuration["ConnectionStrings:CartConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_CARTCONNECTION");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -40,7 +40,7 @@ builder.Services.AddHttpClient<ServiceClient>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<PayOSService>();
-builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PayOS"));
+builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PAYOS"));
 
 
 

@@ -35,23 +35,23 @@ namespace API.Middlewares
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.IsEssential = true;
-            })
-                .AddJwtBearer("Bearer", options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = false,
-                    ValidateActor = false,
-                    ValidIssuers = configuration.GetValue<List<string>>("Jwt:ValidIssuers"),
-                    ValidAudiences = configuration.GetValue<List<string>>("Jwt:ValidAudiences"),
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:SigningKey"))
-                    )
-                };
             });
+            //    .AddJwtBearer("Bearer", options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = false,
+            //        ValidateActor = false,
+            //        ValidIssuer = configuration.GetValue<string>("Jwt:ValidIssuers"),
+            //        ValidAudience = configuration.GetValue<string>("Jwt:ValidAudiences"),
+            //        IssuerSigningKey = new SymmetricSecurityKey(
+            //            Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:SigningKey"))
+            //        )
+            //    };
+            //});
 
             // Authorization
             services.AddAuthorization();

@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using SharedLibrary.AIGenerate;
 using SharedLibrary.DTOs.User;
 using SharedLibrary.Jwt;
+using SharedLibrary.System.APICall;
 
 namespace API.Extentions
 {
@@ -17,9 +18,10 @@ namespace API.Extentions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<GeminiSettings>(config.GetSection("Gemini"));
+            services.Configure<GeminiSettings>(config.GetSection("GEMINI"));
 
             services.AddHttpClient<GeminiClient>();
+            services.AddHttpClient<ApiCaller>();
 
             services.AddScoped<IPlanningUseCase, PlanningUseCase>();
             services.AddScoped<IPlanningRepository, PlanningRepository>();
