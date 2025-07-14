@@ -16,20 +16,20 @@ namespace Infrastructure.Context
         public DbSet<ScheduledEvent> Events { get; set; }
 
         public DbSet<UsedService> UsedServices { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<ServiceFeedback> Feedbacks { get; set; }
         public DbSet<UsedServiceTransaction> UsedServiceTransactions { get; set; }
-        public DbSet<Answer> Answers{ get; set; }
-        public DbSet<SystemQuestionFeedback> SystemQuestionFeedbacks{ get; set; }
+        public DbSet<SystemFeedbackAnswer> Answers{ get; set; }
+        public DbSet<SystemFeedbackQuestion> SystemQuestionFeedbacks{ get; set; }
         public DbSet<Transaction> Transactions{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Feedback>()
+            modelBuilder.Entity<ServiceFeedback>()
     .HasOne(f => f.UsedService)
     .WithOne(us => us.Feedback)
-    .HasForeignKey<Feedback>(f => f.Id);
+    .HasForeignKey<ServiceFeedback>(f => f.Id);
 
         }
     }

@@ -71,7 +71,7 @@ namespace Domain.Entities
         [ForeignKey(nameof(ScheduleId))]
 
         public virtual ScheduledEvent? ScheduledEventNavigation { get; set; }
-        public virtual Feedback? Feedback{ get; set; }
+        public virtual ServiceFeedback? Feedback{ get; set; }
     }
 
 }
