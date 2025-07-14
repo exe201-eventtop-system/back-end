@@ -11,14 +11,13 @@ namespace Infrastructure.UoW
 
 
         private IEventRepository _eventRepository;
-
         private IUsedServiceRepository _usedServiceRepository;
-        private IFeedbackRepository _feedbackRepository;
         private ITransactionRepository _transactionRepository;
+        private IServiceFeedbackRepository _serviceFeedbackRepository;
+        private ISystemFeedbackQuestionRepository _systemFeedbackQuestionRepository;
+        private ISystemFeedbackAnswerRepository _systemFeedbackAnswerRepository;
 
         public UnitOfWork(ScheduledEventServiceDbContext context) => _context = context;
-
-      
 
         public IEventRepository EventRepository
         {
@@ -44,15 +43,15 @@ namespace Infrastructure.UoW
             }
         }
 
-        public IFeedbackRepository FeedbackRepository
+        public IServiceFeedbackRepository FeedbackRepository
         {
             get
             {
-                if (_feedbackRepository == null)
+                if (_serviceFeedbackRepository == null)
                 {
-                    _feedbackRepository = new FeedbackRepository(_context);
+                    _serviceFeedbackRepository = new FeedbackRepository(_context);
                 }
-                return _feedbackRepository;
+                return _serviceFeedbackRepository;
             }
         }
         public ITransactionRepository TransactionRepository
@@ -66,6 +65,32 @@ namespace Infrastructure.UoW
                 return _transactionRepository;
             }
         }
+
+        public ISystemFeedbackAnswerRepository SystemFeedbackAnswerRepository
+        {
+            get
+            {
+                if (_systemFeedbackAnswerRepository == null)
+                {
+                    _systemFeedbackAnswerRepository = new SystemFeedbackAnswerRepository(_context);
+                }
+
+                return _systemFeedbackAnswerRepository;
+            }
+        }
+
+        public ISystemFeedbackQuestionRepository SystemFeedbackQuestionRepository
+        {
+            get
+            {
+                if (_systemFeedbackQuestionRepository == null)
+                {
+                    _systemFeedbackQuestionRepository = new SystemFeedbackQuestionRepository(_context);
+                }
+                return _systemFeedbackQuestionRepository;
+            }
+        }
+
         public Task<int> CommitAsync()
         {
             return _context.SaveChangesAsync();

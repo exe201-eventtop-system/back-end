@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Answer  : BaseEntities
+    public class SystemFeedbackAnswer  : BaseEntities
     {
-
         [Column("question_id ")]
         public Guid QuestionId { get; set; }  
         [Column("answer_text")]
@@ -18,6 +17,6 @@ namespace Domain.Entities
         [Column("customer_id")]
         public Guid  CustomerId { get; set; }
         [ForeignKey(nameof(QuestionId))]
-        public virtual SystemQuestionFeedback SystemFeedback { get; set; }  =  new SystemQuestionFeedback();
+        public virtual SystemFeedbackQuestion SystemFeedback { get; set; }  =  new SystemFeedbackQuestion();
     }
 }

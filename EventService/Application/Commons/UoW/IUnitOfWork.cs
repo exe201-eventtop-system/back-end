@@ -11,7 +11,9 @@ namespace Application.Commons.UoW
     {
         IEventRepository EventRepository { get; }
         IUsedServiceRepository UsedServiceRepository { get; }
-        IFeedbackRepository FeedbackRepository { get; }
+        IServiceFeedbackRepository FeedbackRepository { get; }
+        ISystemFeedbackAnswerRepository SystemFeedbackAnswerRepository { get; }
+        ISystemFeedbackQuestionRepository SystemFeedbackQuestionRepository { get; }
         ITransactionRepository TransactionRepository { get; }
 
         /// <summary>

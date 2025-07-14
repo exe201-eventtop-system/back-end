@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Feedback : BaseEntities
+    public class ServiceFeedback : BaseEntities
     {
         [ForeignKey(nameof(Id))]
         [Column("id")]

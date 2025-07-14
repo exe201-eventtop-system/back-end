@@ -16,7 +16,7 @@ namespace Application.Commons.Dispatchers.Commands
 
         public Task<TCommandResult> Dispatch<TCommand, TCommandResult>(TCommand command, CancellationToken cancellationToken)
         {
-            var handler = serviceProvider.GetRequiredService<IQueryHandler<TCommand, TCommandResult>>();
+            var handler = serviceProvider.GetRequiredService<ICommandHandler<TCommand, TCommandResult>>();
             return handler.Handle(command, cancellationToken);
         }
     }
