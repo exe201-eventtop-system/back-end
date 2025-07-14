@@ -1,4 +1,5 @@
 ﻿using Application.Commons.Handlers;
+using Application.Commons.Results;
 using Application.Commons.UoW;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,7 @@ namespace Application.Payment.Commands
 
     public class UsedServiceDto
     {
-        [JsonPropertyName("unit_price")]
+        [JsonPropertyName("price")]
         public int Price { get; set; }
 
         [JsonPropertyName("services")]
@@ -58,10 +59,11 @@ namespace Application.Payment.Commands
 
     public class PaymentRes
     {
+        [JsonPropertyName("payment_url")]
         public string Payment_Url { get; set; } = string.Empty;
     }
     // Handler
-    public class CheckoutHandler : ICommandHandler<CheckoutCommand, PaymentRes>
+    public class CheckoutHandler : ICommandHandler<CheckoutCommand, Result<PaymentRes>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PayOSService _payOSService;
@@ -74,7 +76,7 @@ namespace Application.Payment.Commands
             _config = config;
         }
 
-        public async Task<PaymentRes> Handle(CheckoutCommand command, CancellationToken cancellationToken)
+        public async Task<Result<PaymentRes>> Handle(CheckoutCommand command, CancellationToken cancellationToken)
         {
             var dto = command.UsedServiceDto;
 
@@ -119,10 +121,11 @@ namespace Application.Payment.Commands
     ).ToList()
             };
             var paymentUrl = await _payOSService.CreateLink(paymentDTO);
-            return new PaymentRes
+            return Result<PaymentRes>.Success(new PaymentRes
             {
                 Payment_Url = paymentUrl
-            };
+            });
+
         }
     }
 }

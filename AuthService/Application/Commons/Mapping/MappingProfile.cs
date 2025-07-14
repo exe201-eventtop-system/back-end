@@ -16,8 +16,7 @@ namespace Application.Commons.Mapping
         public UserMappingProfile()
         {
 
-            CreateMap<User, UserProfileDTO>()
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.ToString()));
+            CreateMap<User, UserProfileDTO>().ReverseMap();
             CreateMap<User, CreationalUser>().ReverseMap();
             CreateMap<User,GetAllUserDTO>().ReverseMap();
             CreateMap<SignInDTO, UserTokenDTO>().ReverseMap();

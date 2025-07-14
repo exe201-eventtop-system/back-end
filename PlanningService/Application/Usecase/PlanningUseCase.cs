@@ -22,19 +22,14 @@ namespace Application.Usecase
             _planningRepository = planningRepository;
             _mapper = mapper;
         }
-        public async Task<Result<bool>> AddService(ActionServiceDTO actionService)
+        public async Task<Result<Guid>> AddService(ActionServiceDTO actionService)
         {
             var sesstionServiceMapping = _mapper.Map<SesstionService>(actionService);
-            try
-            {
+
                 var result = await _planningRepository.AddService(sesstionServiceMapping);
 
-                return Result<bool>.Success(true);
-            }
-            catch (Exception ex)
-            {
-                return Result<bool>.Success(false);
-            }
+                return Result<Guid>.Success(result);
+          
         }
 
         public async Task<Result<Planning>> CreateStep1Async(PlanningStep1DTO planningStep1DTO, Guid userId)

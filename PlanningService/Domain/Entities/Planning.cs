@@ -20,13 +20,13 @@ namespace Domain.Entities
         [Column("name")]
         public string? Name { get; set; }
 
-        [Column("description", TypeName = "text")]
-        public string? Description { get; set; }
+        [Column("description", TypeName = "nvarchar(max)")]
+        public string Description { get; set; } = string.Empty;
 
         [Column("status")]
         public PlanningStatus? Status { get; set; } = PlanningStatus.Draft;
 
-        [Column("location", TypeName = "text")]
+        [Column("location", TypeName = "nvarchar(max)")]
         public string? Location { get; set; }
 
         [Column("date_of_event")]

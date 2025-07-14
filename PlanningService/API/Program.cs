@@ -1,5 +1,6 @@
 
 using API.Extentions;
+using SharedLibrary.AIGenerate;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace API
@@ -17,6 +18,7 @@ namespace API
             //builder.Configuration["Gemini:Model"] = Environment.GetEnvironmentVariable("GEMINI_MODEL");
             //builder.Configuration["Gemini:BaseUrl"] = Environment.GetEnvironmentVariable("GEMINI_BASE_URL");
             //builder.Configuration["ConnectionStrings:PlanningServiceConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_PLANNINGCONNECTION");
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
            

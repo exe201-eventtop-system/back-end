@@ -43,7 +43,11 @@ namespace API.Controllers
         [HttpPost("callback")]
         public async Task<IActionResult> PaymentCallBack(PaymentCallBackCommand paymentCallBackCommand, CancellationToken cancellationToken)
         {
-            var result = await _commandDispatcher.Dispatch<PaymentCallBackCommand, Result<bool>>(paymentCallBackCommand, cancellationToken);
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+            paymentCallBackCommand.CustomerId = userId;
+            var result = await _commandDispatcher.Dispatch<PaymentCallBackCommand, Result<int>>(paymentCallBackCommand, cancellationToken);
             return result.MapToJsonResult();
         }
         [HttpGet("transaction")]

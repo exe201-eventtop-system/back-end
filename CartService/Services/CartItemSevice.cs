@@ -1,12 +1,9 @@
-﻿using Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Repositories;
 using Repositories.Models;
 using Services.Commons;
 using Services.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SharedLibrary.DTOs.Payment;
 
 namespace Services
 {
@@ -89,6 +86,30 @@ namespace Services
             return ServiceResult<AddCartItemResponseDTO>.Success(
                 new AddCartItemResponseDTO { TotalCartItem = totalItems }
             );
+        }
+        public async Task<int> UpdateCart(PaymentUpdateCartDto paymentUpdateCartDto)
+        {
+            var customerId = paymentUpdateCartDto.CustomerId;
+            var serviceIds = paymentUpdateCartDto.ServiceIds;
+
+            var cart = await _unitOfWork.CartRepository.GetCartByCustomerIdAsync(customerId);
+
+            var itemsToUpdate = await _unitOfWork.CartItemRepository
+     .GetItemsByCartIdAndServiceIdsAsync(cart.Id, serviceIds);
+
+
+            foreach (var item in itemsToUpdate)
+            {
+                item.IsDeleted = true;
+                item.UpdatedAt = DateTime.UtcNow;
+                _unitOfWork.CartItemRepository.Update(item);
+            }
+
+            await _unitOfWork.SaveChangesWithTransactionAsync();
+
+            var remainingItems = await _unitOfWork.CartItemRepository.GetCartItemsByCartIdAsync(cart.Id);
+
+            return remainingItems.Count;
         }
     }
 }

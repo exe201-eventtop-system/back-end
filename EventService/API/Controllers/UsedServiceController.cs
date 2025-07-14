@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using API.Extensions;
+using Application.Commons.Dispatchers;
+using Application.Commons.Results;
+using Application.Events.Queries;
+using Application.UsedServices.Queries;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Jwt;
+using System.Threading;
 
 namespace API.Controllers
 {
@@ -8,7 +14,13 @@ namespace API.Controllers
     [ApiController]
     public class UsedServiceController : ControllerBase
     {
-        [HttpGet("used-service")]
+        private readonly IQueryDispatcher _queryDispatcher;
+
+        public UsedServiceController(IQueryDispatcher queryDispatcher)
+        {
+            _queryDispatcher = queryDispatcher;
+        }
+        [HttpGet]
         public async Task<IActionResult> UsedService()
         {
 
@@ -37,14 +49,11 @@ namespace API.Controllers
             return Ok();
         }
         [HttpGet("{id}/schedule-supplier")]
-        public async Task<IActionResult> GetScheduleSupplier(Guid id)
+        public async Task<IActionResult> GetScheduleSupplier(Guid id,CancellationToken cancellationToken)
         {
 
-            //return await HandleServiceCall<List<TimeSlotDto>>(async () =>
-            //{
-            //    return await _serviceProviders.UsedService.GetScheduleAsync(id);
-            //});
-            return Ok();
+            var result = await _queryDispatcher.Dispatch<GetScheduleSupplierQuery, Result<List<TimeSlotDto>>>(new GetScheduleSupplierQuery { supplier_id = id }, cancellationToken);
+            return result.MapToJsonResult();
         }
     }
 }

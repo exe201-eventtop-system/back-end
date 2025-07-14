@@ -22,6 +22,12 @@ namespace Infrastructure.Repositories
 
             return await query.ToListAsync();
         }
+        public async Task<List<UsedService>> GetScheduleIdAsync(Guid supplierId)
+        {
+            return await _context.UsedServices
+                .Where(us => us.SupplierId == supplierId && us.IsDeleted == false)
+                .ToListAsync();
+        }
 
     }
 }

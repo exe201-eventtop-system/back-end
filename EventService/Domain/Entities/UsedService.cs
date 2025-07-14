@@ -15,13 +15,13 @@ namespace Domain.Entities
     public class UsedService : BaseEntities
     {
 
-        [Column("session_id")]
-        public Guid SessionId { get; set; }
         [Column("schedule_id")]
         public Guid? ScheduleId { get; set; }
 
         [Column("event_id")]
         public Guid? EventId { get; set; }
+        [Column("transaction_id")]
+        public Guid? TransactionId { get; set; }
 
         [Column("service_id")]
         public Guid ServiceId { get; set; }
@@ -32,11 +32,10 @@ namespace Domain.Entities
         [Column("location")]
         public string Location { get; set; } = string.Empty;
 
-        [Column("package_id")]
-        public Guid PackageId { get; set; }
-
         [Column("customer_id")]
         public Guid CustomerId { get; set; }
+        [Column("customer_name")]
+        public Guid CustomerName { get; set; }
         [Column("phone")]
         public string Phone { get; set; } = string.Empty;
         [Column("supplier_id")]
@@ -57,18 +56,18 @@ namespace Domain.Entities
         public ServiceDamageType DamageType { get; set; }
 
         [Column("initial_condition")]
-        public string InitialCondition { get; set; }
+        public string? InitialCondition { get; set; }
 
         [Column("returned_condition")]
-        public string ReturnedCondition { get; set; }
+        public string? ReturnedCondition { get; set; }
 
         [Column("status")]
         public UsedServiceStatus Status { get; set; }
 
         [Column("unit_price", TypeName = "decimal(10,2)")]
         public decimal UnitPrice { get; set; }
-
-        public virtual ICollection<UsedServiceTransaction>? UsedServiceTransactions { get; set; }
+        [ForeignKey(nameof(TransactionId))]
+        public virtual Transaction? Transaction{ get; set; }
         [ForeignKey(nameof(ScheduleId))]
 
         public virtual ScheduledEvent? ScheduledEventNavigation { get; set; }

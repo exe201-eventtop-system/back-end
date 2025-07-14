@@ -18,6 +18,6 @@ namespace Domain.Entities
         public decimal Amount { get; set; }
         [Column("is_payment")]
         public bool IsPayment { get; set; } = false;
-        public ICollection<UsedServiceTransaction>? UsedServiceTransactions{ get; set; }
+        public ICollection<UsedService>? UsedServices{ get; set; }
     }
 }

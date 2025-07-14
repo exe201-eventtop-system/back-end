@@ -24,8 +24,8 @@ namespace AuthService
             //builder.Configuration["Email:SenderName"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_NAME");
             //builder.Configuration["Email:SenderPassword"] = Environment.GetEnvironmentVariable("EMAIL_SENDER_PASSWORD");
 
-            //builder.Configuration["Authentication:Google:ClientId"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_ID");
-            //builder.Configuration["Authentication:Google:ClientSecret"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_SECRET");
+            builder.Configuration["Authentication:Google:ClientId"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_ID");
+            builder.Configuration["Authentication:Google:ClientSecret"] = Environment.GetEnvironmentVariable("AUTH_GOOGLE_CLIENT_SECRET");
 
             //builder.Configuration["Firebase:BucketName"] = Environment.GetEnvironmentVariable("FIREBASE_BUCKET_NAME");
             //builder.Configuration["Firebase:CredentialPath"] = Environment.GetEnvironmentVariable("FIREBASE_CREDENTIAL_PATH");

@@ -306,5 +306,10 @@ namespace Application.UseCases
             }
             return Result<ICollection<SuppliersRatingResDto>>.Success(result);
         }
+
+        public Task<Result<AnalyticsDataDto>> GetDashboard()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

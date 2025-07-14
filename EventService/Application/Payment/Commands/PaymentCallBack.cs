@@ -1,4 +1,5 @@
 ﻿using Application.Commons.Handlers;
+using Application.Commons.Results;
 using Application.Commons.UoW;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
@@ -21,8 +22,9 @@ namespace Application.Payment.Commands
         public string Cancel { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public long OrderCode { get; set; }
+        public Guid CustomerId { get; set; } = Guid.Empty;
     }
-    public class PaymentCallBackHandler : ICommandHandler<PaymentCallBackCommand, bool>
+    public class PaymentCallBackHandler : ICommandHandler<PaymentCallBackCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
@@ -36,14 +38,19 @@ namespace Application.Payment.Commands
             _apiCaller = apiCaller;
         }
 
-        public async Task<bool> Handle(PaymentCallBackCommand command, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(PaymentCallBackCommand command, CancellationToken cancellationToken)
         {
             var serviceIds = await _unitOfWork.TransactionRepository.SaveTransaction(command.OrderCode);
             var baseUrl = _config["CARTSERVICE:PORT"];
             var url = $"{baseUrl}/api/cart/update-cart-item";
-            await _apiCaller.PutFromApiAsync<List<Guid>>(url, serviceIds);
+            var paymentUpdateCartDto = new PaymentUpdateCartDto
+            {
+                CustomerId = command.CustomerId,
+                ServiceIds = serviceIds,
+            };
+            var totalCart = await _apiCaller.PutFromApiAsync<int>(url, paymentUpdateCartDto);
 
-            return true;
+            return Result<int>.Success(totalCart);
         }
     }
 

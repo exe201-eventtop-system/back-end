@@ -35,7 +35,7 @@ namespace SharedLibrary.PaymentServices
             //_payOSSettings.ApiKey,
             //_payOSSettings.ChecksumKey
              _configuration["PAYOS:CLIENTID"] ?? throw new MissingMemberException("Can not find settings for type of PAYOS:CLIENTID"),
-             _configuration["PAYOS:APIEY"] ?? throw new MissingMemberException("Can not find settings for type of PAYOS:APIKEY"),
+             _configuration["PAYOS:APIKEY"] ?? throw new MissingMemberException("Can not find settings for type of PAYOS:APIKEY"),
              _configuration["PAYOS:CHECKSUMKEY"] ?? throw new MissingMemberException("Can not find settings for type of PAYOS:CHECKSUMKEY")
     );
 

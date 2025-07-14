@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,13 @@ namespace SharedLibrary.AIGenerate
         private readonly HttpClient _httpClient;
         private readonly string _geminiUrl;
 
-        public GeminiClient(HttpClient httpClient, IOptions<GeminiSettings> settings)
+        public GeminiClient(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _geminiUrl = $"{settings.Value.BaseUrl}/models/{settings.Value.Model}:generateContent?key={settings.Value.ApiKey}";
+            var baseUrl = config["GEMINI:BASE_URL"];
+            var model = config["GEMINI:MODEL"];
+            var apiKey = config["GEMINI:API_KEY"];
+            _geminiUrl = $"{baseUrl}/models/{model}:generateContent?key={apiKey}";
         }
 
         public async Task<string> GenerateScriptAsync(string userInput)
@@ -28,11 +32,11 @@ namespace SharedLibrary.AIGenerate
                 Dựa vào nội dung trên, hãy phân tích và tạo ra một kế hoạch tổ chức sự kiện **đầy đủ, rõ ràng, chi tiết** theo đúng cấu trúc JSON sau:
 
                 {{
-                  ""eventName"": string,
+                  ""name"": string,
                   ""eventDate"": string, // định dạng dd/MM/yyyy — bắt buộc là ngày TƯƠNG LAI (>= ngày hôm nay) - Ngày tổ chức phải là một ngày hợp lý trong tương lai (không được nhỏ hơn ngày hôm nay).
                   ""location"": string,
                   ""expectedParticipants"": string,
-                  ""themeColor"": string,  // Gồm 3 màu chính đại diện cho sự kiện hài hòa và hợp với nhau
+                  ""themeColor"": string,  // Gồm 1 màu chính đại diện cho sự kiện hài hòa và hợp với nhau
                   ""budget"": string,
                   ""description"": string, // Viết chi tiết toàn bộ kế hoạch
                   ""eventType"": string
@@ -40,7 +44,7 @@ namespace SharedLibrary.AIGenerate
 
                 Yêu cầu phần`description phải thực sự chi tiết và logic. Bao gồm:
                 - Lý do chọn **ngày tổ chức**, **giờ tổ chức**, **địa điểm**.
-                - Vì sao chọn **3 màu sắc** đại diện cho sự kiện (ghi rõ từng màu và ý nghĩa).
+                - Vì sao chọn **1 màu sắc** đại diện cho sự kiện (ghi rõ từng màu và ý nghĩa).
                 - Danh sách **các hoạt động chính** trong sự kiện (ít nhất 2–3 hoạt động).
                 - Các **bước thực hiện sự kiện theo thời gian cụ thể**.
                 - Các **lưu ý quan trọng** trong khâu chuẩn bị, vận hành và sau khi kết thúc.

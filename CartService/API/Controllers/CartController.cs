@@ -5,6 +5,7 @@ using Repositories.Models;
 using Services;
 using Services.Commons;
 using Services.DTOs;
+using SharedLibrary.DTOs.Payment;
 using SharedLibrary.Jwt;
 using ShareLibary.Model;
 using System.Collections.Generic;
@@ -80,6 +81,16 @@ namespace API.Controllers
             {
                 return await _serviceProviders.CartItemSevice.DeleteCartAsync(userId,id);
             });
+        }
+        [HttpPut("update-cart-item")]
+        public async Task<IActionResult> UpdatCart( [FromBody] PaymentUpdateCartDto paymentUpdateCartDto)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+
+           var totalCart = await _serviceProviders.CartItemSevice.UpdateCart(paymentUpdateCartDto);
+            return Ok(totalCart);
         }
     }
 }

@@ -18,6 +18,12 @@ namespace Repositories
 
         public CartItemRepository(CartServiceDBContext context) => _context = context;
 
+        public async Task<List<CartItem>> GetItemsByCartIdAndServiceIdsAsync(Guid cartId, List<Guid> serviceIds)
+        {
+            return await _context.CartItems
+                .Where(ci => ci.CartId == cartId && serviceIds.Contains(ci.ServiceId) && !ci.IsDeleted)
+                .ToListAsync();
+        }
 
         public async Task<List<CartItem>> GetCartItemsByCartIdAsync(Guid cartId)
         {

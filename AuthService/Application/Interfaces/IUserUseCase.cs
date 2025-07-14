@@ -30,5 +30,6 @@ namespace Application.Interfaces
         Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestDTO processRequestDTO);
      //   Task<Result<List<Supplier>>> GetSuppliersInspect(Guid userId);
         Task<Result<UserTokenDTO>> UpdateProfile(Guid userId, UserTokenDTO userTokenDTO);
+        Task<Result<AnalyticsDataDto>> GetDashboard();
     }
 }

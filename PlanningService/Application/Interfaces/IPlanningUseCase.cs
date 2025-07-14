@@ -17,7 +17,7 @@ namespace Application.Interfaces
         Task<Result<Planning>> GetPlanByIdAsync(Guid planningId);
         Task<Result<bool>> DeletePlanAsync(Guid planningId);
         Task<Result<int>> GetNumberPlanningAsync(Guid userId);
-        Task<Result<bool>> AddService(ActionServiceDTO actionService);
+        Task<Result<Guid>> AddService(ActionServiceDTO actionService);
         Task<Result<bool>> DeleteService(Guid sesstionId);
     }
 }
