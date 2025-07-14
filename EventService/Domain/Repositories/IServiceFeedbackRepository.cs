@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    public interface IFeedbackRepository : IGenericRepository<Feedback>
+    public interface IServiceFeedbackRepository : IGenericRepository<ServiceFeedback>
     {     
     }
 }
