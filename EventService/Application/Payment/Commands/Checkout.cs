@@ -96,14 +96,6 @@ namespace Application.Payment.Commands
                     ThumbnailService = s.ThumbnailService,
                     Location = s.Location,
                     RentStartTime = s.RentStartTime,
-                    UsedServiceTransactions = new List<UsedServiceTransaction>
-                         {
-                            new UsedServiceTransaction
-                            {
-                                UsedServiceId = usedServiceId,
-                        TransactionId = transaction.Item2,
-                    }
-                            },
                     RentEndTime = s.RentEndTime,
                     UnitPrice = dto.Price
                 };

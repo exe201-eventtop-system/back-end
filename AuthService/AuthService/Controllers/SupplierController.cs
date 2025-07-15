@@ -37,6 +37,12 @@ namespace API.Controllers
             var supplier = await _useCase.GetSupllier(id);
             return Ok(supplier);
         }
+        [HttpGet("detail/{id}")]
+        public async Task<IActionResult> GetSupplierDetail(Guid id)
+        {
+            var supplier = await _useCase.GetSupplierDetail(id);
+            return Ok(supplier);
+        }
         //[HttpPost("sign-up")]
         //public async Task<IActionResult> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
         //{

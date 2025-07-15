@@ -10,7 +10,7 @@ using SharedLibrary.DTOs.Supplier;
 
 namespace API.Controllers
 {
-    [Route("api/feeback")]
+    [Route("api/feedback")]
     [ApiController]
     public class FeedbackController : ControllerBase
     {

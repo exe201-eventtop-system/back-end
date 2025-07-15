@@ -53,6 +53,8 @@ namespace Application.Products.Queries
 
     public class ProductSummarySupplier
     {
+        [JsonPropertyName("id")]
+        public string SupplierId{ get; set; }
         [JsonPropertyName("name")]
         public string SupplierName { get; set; }
 
@@ -167,6 +169,7 @@ namespace Application.Products.Queries
                     ThumbnailUrl = x.ThumbnailUrl,
                     Supplier = new ProductSummarySupplier
                     {
+                        SupplierId = supplier_dict[x.SupplierId].Id.ToString(),
                         SupplierName = supplier_dict[x.SupplierId].Name,
                         SupplierLocation = supplier_dict[x.SupplierId].Location,
                         AvatarUrl = supplier_dict[x.SupplierId].Avatar,

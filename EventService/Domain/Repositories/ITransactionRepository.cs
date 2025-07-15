@@ -12,5 +12,6 @@ namespace Domain.Repositories
     {
         Task<(long, Guid)> AddTransaction(Guid userId, int unitPrice);
         Task<List<Guid>> SaveTransaction(long orderCode);
+        Task<List<Transaction>> GetAllTransactionsAsync();
     }
 }

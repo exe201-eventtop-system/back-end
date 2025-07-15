@@ -12,9 +12,6 @@ namespace Application.Commons.DTOs.Supplier
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
 
-        [JsonPropertyName("rating")]
-        public double Rating { get; set; }
-
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
 
@@ -24,20 +21,14 @@ namespace Application.Commons.DTOs.Supplier
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
 
-        [JsonPropertyName("number_feedback")]
-        public int NumberFeedback { get; set; }
 
         [JsonPropertyName("thumbnail")]
         public string Thumbnail { get; set; } = string.Empty;
 
-        [JsonPropertyName("type_service")]
-        public List<TypeOfServiceDto> TypeService { get; set; } = new();
+
+
     }
 
-    public class TypeOfServiceDto
-    {
-        [JsonPropertyName("name")]
-        public string Name { get; set; } = string.Empty;
-    }
+
 
 }

@@ -49,7 +49,6 @@ namespace Application.Events.Queries
                 {
                     Id = y.Id,
                     ServiceId = y.ServiceId,
-                    PackageId = y.PackageId,
                     SupplierId = y.SupplierId,
                     UnitPrice = y.UnitPrice,
                     Status = y.Status,

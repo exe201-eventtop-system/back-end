@@ -43,6 +43,13 @@ namespace API.Controllers
             return result.MapToJsonResult();
         }
 
+        [HttpGet("by-rating")]
+        public async Task<IActionResult> GetServiceByRating(CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<GetServiceByRatingQuery, Result<List<ProductDetail>>>(new GetServiceByRatingQuery {}, cancellationToken);
+            return result.MapToJsonResult();
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreateNewProduct([FromForm] CreateProductCommand command, CancellationToken cancellationToken)

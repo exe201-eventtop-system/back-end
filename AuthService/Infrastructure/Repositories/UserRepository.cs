@@ -178,5 +178,15 @@ namespace Infrastructure.Repositories
 
         public async Task<bool> CheckPhoneNumber(string phoneNumber) =>
             await _context.Users.AnyAsync(u => u.PhoneNumber == phoneNumber);
+
+        public async Task<Supplier?> GetSupplierDetail(Guid supplierId)
+        {
+            var supplier = await _context.Suppliers
+                .Include(sp => sp.OrginazationImages)
+                .FirstOrDefaultAsync(sp => sp.Id == supplierId);
+
+            return supplier;
+        }
+
     }
 }

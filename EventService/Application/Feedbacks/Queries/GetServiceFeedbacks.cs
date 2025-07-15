@@ -28,8 +28,10 @@ namespace Application.Feedbacks.Queries
         public Guid UserId { get; set; }
         [JsonPropertyName("user_name")]
         public string Username { get; set; }
-        [JsonPropertyName("user_avater")]
+        [JsonPropertyName("user_avatar")]
         public string UserAvatar { get; set; }
+        [JsonPropertyName("create_at")]
+        public DateTime CreateAt { get; set; }
         [JsonPropertyName("service_rating")]
         public int ServiceRating { get; set; }
         [JsonPropertyName("service_comment")]
@@ -62,6 +64,7 @@ namespace Application.Feedbacks.Queries
                     UserId = x.UsedService.CustomerId,
                     Username = "Anonymous",
                     UserAvatar = "",
+                    CreateAt = x.CreatedAt,
                     ServiceRating = x.RatingService,
                     ServiceFeedback = x.CommentService,
                 }).ToList()

@@ -3,10 +3,13 @@ using Application.Commons.Dispatchers;
 using Application.Commons.PaginatedLists;
 using Application.Commons.Results;
 using Application.Events.Queries;
+using Application.Feedbacks.Queries;
 using Application.Payment.Commands;
+using Application.Payment.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Jwt;
+using System.Collections.Generic;
 using System.Threading;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -51,14 +54,17 @@ namespace API.Controllers
             return result.MapToJsonResult();
         }
         [HttpGet("transaction")]
-        public async Task<IActionResult> GetTransaction()
+        public async Task<IActionResult> GetTransaction(CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<GetTransactionQuery, Result<List<TransactionDTOs>>>(new GetTransactionQuery(), cancellationToken);
+            return result.MapToJsonResult();
+        }
+        [HttpGet("revenue")]
+        public async Task<IActionResult> GetRevenue(CancellationToken cancellationToken)
         {
 
-            //return await HandleServiceCall<List<TransactionDTOs>>(async () =>
-            //{
-            //    return await _serviceProviders.UsedService.GetTransactions();
-            //});
-            return Ok();
+            var result = await _queryDispatcher.Dispatch<GetRevenueQuery, Result<List<RevenueDto>>> (new GetRevenueQuery(), cancellationToken);
+            return result.MapToJsonResult();
         }
     }
 }

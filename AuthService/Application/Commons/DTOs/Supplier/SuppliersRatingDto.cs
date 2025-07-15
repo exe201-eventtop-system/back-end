@@ -7,21 +7,19 @@ using System.Threading.Tasks;
 
 namespace Application.Commons.DTOs.Supplier
 {
-    public class TypeOfServiceRatingDto
-    {
-        public string Name { get; set; }
-    }
-
     public class SuppliersRatingResDto
     {
+        [JsonPropertyName("id")]
         public string Id { get; set; }
-        public double Rating { get; set; }
+        [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("description")]
         public string Description { get; set; }
+        [JsonPropertyName("thumbnail")]
         public string Thumbnail { get; set; }
+        [JsonPropertyName("location")]
+        public string Location { get; set; }
 
-        [JsonPropertyName("type_service")]
-        public List<TypeOfServiceRatingDto> TypeService { get; set; }
     }
 
 }

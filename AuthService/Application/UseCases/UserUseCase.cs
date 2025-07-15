@@ -30,7 +30,7 @@ namespace Application.UseCases
         private readonly EmailService _emailService;
         private readonly IMapper _mapper;
         private readonly FirebaseStorageService _firebaseStorageService;
-        public UserUseCase(IUserRepository userRepository, IMapper mapper, FirebaseStorageService firebaseStorageService, ISupplierRepository supplierRepository, EmailService emailService, PasswordHasherService passwordHasherService,ApiCaller apiCaller,IConfiguration  configuration)
+        public UserUseCase(IUserRepository userRepository, IMapper mapper, FirebaseStorageService firebaseStorageService, ISupplierRepository supplierRepository, EmailService emailService, PasswordHasherService passwordHasherService, ApiCaller apiCaller, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -227,15 +227,9 @@ namespace Application.UseCases
             {
                 Id = s.Id.ToString(),
                 Name = s.NameOrginazation,
-              //  Rating = s.Rating,
                 Description = s.Description,
                 Address = s.Location,
-                //NumberFeedback = s.NumberFeedback,
-                //Thumbnail = s.Thumbnail,
-                //TypeService = s.TypeServices.Select(t => new TypeServiceDto
-                //{
-                //    Name = t.Name
-                //}).ToList()
+                Thumbnail = s.Thumnnail,
             }).ToList();
 
             // Build pagination response
@@ -286,30 +280,50 @@ namespace Application.UseCases
             return Result<bool>.Success(result);
         }
 
-        public async Task<Result<ICollection<SuppliersRatingResDto>>> GetSuppliersByRating()
-        {
-            var baseUrl = _config["EVENTSERVICE:PORT"];
-            var url = $"{baseUrl}/api/feeback/supplier-rating";
-            var apiRes = await _apiCaller.GetFromApiAsync<List<SupplierRatingDto>>(url);
-
-            var result = new List<SuppliersRatingResDto>();
-
-            foreach (var rating in apiRes)
-            {
-                var supplier = await _userRepository.GetByIdAsync(rating.SupplierId);
-                if (supplier != null)
-                {
-                    var dto = _mapper.Map<SuppliersRatingResDto>(supplier);
-                    dto.Rating = rating.AverageRating;
-                    result.Add(dto);
-                }
-            }
-            return Result<ICollection<SuppliersRatingResDto>>.Success(result);
-        }
 
         public Task<Result<AnalyticsDataDto>> GetDashboard()
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Result<ICollection<SuppliersRatingResDto>>> GetSuppliersByRating()
+        {
+            var suppliers = await _supplierRepository.GetAllSuppliers();
+
+            var top10Suppliers = suppliers
+                .OrderByDescending(s => s.CreatedAt)
+                .Take(10)
+                .Select(s => new SuppliersRatingResDto
+                {
+                    Id = s.Id.ToString(),
+                    Name = s.NameOrginazation,
+                    Description = s.Description,
+                    Location = s.Location,
+                    Thumbnail = s.Thumnnail,
+                })
+                .ToList();
+
+            return Result<ICollection<SuppliersRatingResDto>>.Success(top10Suppliers);
+        }
+
+        public async Task<Result<SupplierDetailDTO>> GetSupplierDetail(Guid supplierId)
+        {
+            var supplier = await _userRepository.GetSupplierDetail(supplierId);
+
+            var dto = new SupplierDetailDTO
+            {
+                Location = supplier.Location,
+                NameOrginazation = supplier.NameOrginazation,
+                Description = supplier.Description,
+                Thumnnail = supplier.Thumnnail,
+                IsActive = supplier.IsActive,
+                OrginazationImages = supplier.OrginazationImages
+                    .Select(img => img.ImageUrl)
+                    .Where(url => !string.IsNullOrEmpty(url))
+                    .ToList()
+            };
+
+            return Result<SupplierDetailDTO>.Success(dto);
+        }
     }
-}
+    }

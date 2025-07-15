@@ -24,6 +24,7 @@ namespace Application.Interfaces
         Task<ICollection<SupplierResponseDTO>> GetListSupllier(List<Guid> supplierIds);
         Task<Result<ICollection<SuppliersRatingResDto>>> GetSuppliersByRating();
         Task<SupplierResponseDTO> GetSupllier(Guid supplierId);
+        Task<Result<SupplierDetailDTO>> GetSupplierDetail(Guid supplierId);
         //  Task<Result<bool>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO);
         Task<Result<PaginationResult<SupplierDto>>> GetSuppliers(SupplierFilterDto filterDTO);
         Task<Result<bool>> ProcessRequestAsync(ProcessRequestDTO processRequestDTO);

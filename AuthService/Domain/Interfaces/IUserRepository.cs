@@ -12,6 +12,7 @@ namespace Domain.Interfaces
     public interface IUserRepository
     {
         Task<bool> CheckEmail(string Email);
+        Task<Supplier> GetSupplierDetail(Guid supplierId);
         Task<bool> CheckPhoneNumber(string phoneNumber);
         Task<User> CreateUser(User user);
         Task<(List<User> Items, int TotalItems)> GetAllUserPagingAsync(int pageNumber, int pageSize,string search);

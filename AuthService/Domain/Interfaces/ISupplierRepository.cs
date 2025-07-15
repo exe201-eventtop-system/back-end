@@ -13,6 +13,7 @@ namespace Domain.Interfaces
         public Task<bool> RequestSignInSupplier(Supplier supplier);
         Task<(List<Supplier> Items, int TotalCount)> GetSuppliers(
 int pageSize, int pageNumber, string? searchKey, string?address);
+        Task<List<Supplier>> GetAllSuppliers();
         Task<List<Supplier>> GetSuppliersInspect(Guid userId);
         Task<Supplier?> GetByIdAsync(Guid supplierId);
         Task<Supplier> AssignInspector(Guid supplierId,Guid? inspectorId);

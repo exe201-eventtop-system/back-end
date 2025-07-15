@@ -165,14 +165,14 @@ namespace Application.UsedServices.Queries
                 PageContent = usedServices.Select(x => new UsedServiceQueryResult
                 {
                     Id = x.Id,
-                    PackageId = x.PackageId,
+                  //  PackageId = x.PackageId,
                     ServiceId = x.ServiceId,
                     SupplierId = x.SupplierId,
                     Name = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).Name,
-                    PackageName = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
-                    .FirstOrDefault(data => data.Id == x.PackageId).Name,
-                    Price = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
-                    .FirstOrDefault(data => data.Id == x.PackageId).Price
+                    //PackageName = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
+                    //.FirstOrDefault(data => data.Id == x.PackageId).Name,
+                    //Price = RequestResult.Data.FirstOrDefault(data => data.Id == x.ServiceId).ProductPackages
+                    //.FirstOrDefault(data => data.Id == x.PackageId).Price
                 }).ToList(),
             };
 

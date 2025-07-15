@@ -94,5 +94,10 @@ namespace Infrastructure.SqlServer.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Supplier>> GetAllSuppliers()
+        {
+          return await  _context.Suppliers.ToListAsync();
+        }
     }
 }

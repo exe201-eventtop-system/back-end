@@ -169,6 +169,19 @@
       "SwaggerKey": "eventService"
     },
     {
+      "DownstreamPathTemplate": "/api/feedback/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "UpstreamPathTemplate": "/feedback/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "eventService"
+    },
+    {
       "DownstreamPathTemplate": "/api/payment/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

@@ -35,6 +35,16 @@ namespace Infrastructure.Repositories
             return (transaction.OrderCode, transaction.Id);
 
         }
+
+        public async Task<List<Transaction>> GetAllTransactionsAsync()
+        {
+            return await _context.Transactions
+                .Include(tr => tr.UsedServices)
+                .Where(tr => tr.IsPayment == true && tr.IsDeleted == false)
+                .ToListAsync();
+        }
+
+
         public async Task<List<Guid>> SaveTransaction(long orderCode)
         {
             var transaction = await _context.Transactions
@@ -45,9 +55,8 @@ namespace Infrastructure.Repositories
 
             transaction.IsPayment = true;
 
-            var serviceIds = transaction.UsedServiceTransactions
-        .Where(ust => ust.UsedService != null && !ust.UsedService.IsDeleted)
-        .Select(ust => ust.UsedService.ServiceId)
+            var serviceIds = transaction.UsedServices
+        .Select(ust => ust.ServiceId)
         .Distinct() // nếu bạn muốn loại bỏ trùng lặp
         .ToList();
 

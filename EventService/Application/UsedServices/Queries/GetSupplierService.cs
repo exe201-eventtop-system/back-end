@@ -104,11 +104,11 @@ namespace Application.UsedServices.Queries
             {
                 Id = x.Id,
                 ServiceId = x.ServiceId,
-                PackageId = x.PackageId,
+               // PackageId = x.PackageId,
                 Name = product_infos.FirstOrDefault(y => y.Id == x.ServiceId)?.Name,
-                PackageName = product_infos
-                .FirstOrDefault(y => y.Id == x.ServiceId)?.ProductPackages
-                .FirstOrDefault(y => y.Id == x.PackageId)?.Name,
+                //PackageName = product_infos
+                //.FirstOrDefault(y => y.Id == x.ServiceId)?.ProductPackages
+                //.FirstOrDefault(y => y.Id == x.PackageId)?.Name,
                 Price = x.UnitPrice,
                 StartTime = x.RentStartTime,
                 EndTime = x.RentEndTime,
