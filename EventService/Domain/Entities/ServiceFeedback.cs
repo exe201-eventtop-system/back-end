@@ -11,9 +11,6 @@ namespace Domain.Entities
 {
     public class ServiceFeedback : BaseEntities
     {
-        [ForeignKey(nameof(Id))]
-        [Column("id")]
-        public virtual Guid Id { get; set; }
         [Column("rating_service")]
         public int RatingService { get; set; }  
         [Column("comment_service")]
@@ -22,6 +19,6 @@ namespace Domain.Entities
         public int RatingSupplier { get; set; }
         [Column("comment_supplier")]
         public string? CommentSupplier { get; set; } 
-        public virtual UsedService UsedService{ get; set; } = new UsedService();
+        public virtual UsedService UsedService{ get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace Infrastructure.Repositories
         public async Task<List<Guid>> SaveTransaction(long orderCode)
         {
             var transaction = await _context.Transactions
+                .Include(t => t.UsedServices) 
                 .FirstOrDefaultAsync(t => t.OrderCode == orderCode);
 
             if (transaction == null)
@@ -55,14 +56,15 @@ namespace Infrastructure.Repositories
 
             transaction.IsPayment = true;
 
-            var serviceIds = transaction.UsedServices
-        .Select(ust => ust.ServiceId)
-        .Distinct() // nếu bạn muốn loại bỏ trùng lặp
-        .ToList();
+            var serviceIds = transaction.UsedServices?
+                .Select(us => us.ServiceId)
+                .Distinct()
+                .ToList();
 
             await _context.SaveChangesAsync();
 
-            return serviceIds;
+            return serviceIds ?? new List<Guid>();
         }
+
     }
 }

@@ -10,13 +10,14 @@ namespace Domain.Entities
 {
     public class SystemFeedbackAnswer  : BaseEntities
     {
-        [Column("question_id ")]
+        [Column("question_id")]
         public Guid QuestionId { get; set; }  
         [Column("answer_text")]
         public string AnswerText { get; set; } = string.Empty;
         [Column("customer_id")]
         public Guid  CustomerId { get; set; }
+
         [ForeignKey(nameof(QuestionId))]
-        public virtual SystemFeedbackQuestion SystemFeedback { get; set; }  =  new SystemFeedbackQuestion();
+        public virtual SystemFeedbackQuestion SystemFeedback { get; set; }
     }
 }

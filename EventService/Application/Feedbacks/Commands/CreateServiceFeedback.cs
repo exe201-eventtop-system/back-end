@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Handlers;
 using Application.Commons.Results;
 using Application.Commons.UoW;
+using Domain.Constants.UsedServices;
 using Domain.Entities;
 using SharedLibrary.Jwt;
 using System;
@@ -60,6 +61,8 @@ namespace Application.Feedbacks.Commands
             Guid user_id = await jwtService.ExtractUserIdFromToken(command.UserToken);
 
             var order = await unitOfWork.UsedServiceRepository.GetByIdAsync(command.OrderId);
+            order.Status = UsedServiceStatus.Returned;
+            unitOfWork.CommitAsync();
 
             if (order == null)
             {
@@ -76,11 +79,14 @@ namespace Application.Feedbacks.Commands
 
             var result = await unitOfWork.FeedbackRepository.CreateAsync(new ServiceFeedback
             {
+                Id = order.Id,
                 RatingService = command.ServiceRating,
                 RatingSupplier = command.SupplierRating,
                 CommentService = command.ServiceFeedback,
                 CommentSupplier = command.SupplierFeedback,
             });
+
+            Console.WriteLine(":");
 
             return Result<CreateServiceFeedbackResult>.Success(new CreateServiceFeedbackResult(), "Success");
         }

@@ -77,8 +77,7 @@ namespace Infrastructure
                                     && openHandlerInterfaces.Contains(i.GetGenericTypeDefinition()));
 
                     foreach (var serviceType in matchingInterfaces)
-                    {
-                        Console.WriteLine($"\t{serviceType.FullName}");
+                    {                        
                         services.AddScoped(serviceType, impl);
                     }
                 }

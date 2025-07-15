@@ -65,7 +65,12 @@ namespace API.Controllers
             var result = await _queryDispatcher.Dispatch<GetSystemFeedbackRequest, Result<List<SystemFeedbackGroup>>>(new GetSystemFeedbackRequest(), cancellationToken);
             return result.MapToJsonResult();
         }
-
+        [HttpGet("system/question")]
+        public async Task<IActionResult> GetSystemQuestion(CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<GetQuestionQuery, Result<List<Question>>>(new (), cancellationToken);
+            return result.MapToJsonResult();
+        }
         [HttpPost("system")]
         public async Task<IActionResult> PostSystemFeedback([FromBody] List<UserAnswer> answers, CancellationToken cancellationToken)
         {

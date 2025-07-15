@@ -62,7 +62,7 @@ namespace Application.Feedbacks.Queries
                 Details = feedbacks.Select(x => new ServiceFeedbackDetail
                 {
                     UserId = x.UsedService.CustomerId,
-                    Username = "Anonymous",
+                    Username =  x.UsedService.CustomerName,
                     UserAvatar = "",
                     CreateAt = x.CreatedAt,
                     ServiceRating = x.RatingService,

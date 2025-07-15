@@ -9,10 +9,6 @@ namespace Domain.Constants.UsedServices
     public enum UsedServiceStatus
     {
         Registered,
-        Delivered,
-        Recieved,
-        Returned,
-        ReturnedAccepted,
-        Canceled
+        Returned
     }
 }

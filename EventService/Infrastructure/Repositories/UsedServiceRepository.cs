@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Constants.UsedServices;
+using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,20 @@ namespace Infrastructure.Repositories
         public async Task<List<UsedService>> GetScheduleIdAsync(Guid supplierId)
         {
             return await _context.UsedServices
-                .Where(us => us.SupplierId == supplierId && us.IsDeleted == false)
+                .Where(us => us.SupplierId == supplierId && us.IsDeleted == false && us.Status == UsedServiceStatus.Registered)
+                .ToListAsync();
+        }
+
+        public async Task<List<UsedService>> GetUsedServiceByUserIdAsync(Guid userd, UsedServiceStatus serviceStatus)
+        {
+            return await _context.UsedServices
+                .Where(us => us.CustomerId ==userd && us.IsDeleted == false && us.Status == serviceStatus)
+                .ToListAsync();
+        }
+        public async Task<List<UsedService>> GetUsedServiceByUserIdSupAsync(Guid userd)
+        {
+            return await _context.UsedServices
+                .Where(us => us.SupplierId == userd && us.IsDeleted == false)
                 .ToListAsync();
         }
 

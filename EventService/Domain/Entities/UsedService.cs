@@ -35,11 +35,13 @@ namespace Domain.Entities
         [Column("customer_id")]
         public Guid CustomerId { get; set; }
         [Column("customer_name")]
-        public Guid CustomerName { get; set; }
+        public string? CustomerName { get; set; }
         [Column("phone")]
         public string Phone { get; set; } = string.Empty;
         [Column("supplier_id")]
         public Guid SupplierId { get; set; }
+        [Column("supplier_name")]
+        public string? SupplierName { get; set; }
         [Column("rent_start_time")]
         public DateTime RentStartTime { get; set; }
 

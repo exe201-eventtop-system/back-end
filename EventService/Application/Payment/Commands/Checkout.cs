@@ -1,6 +1,7 @@
 ﻿using Application.Commons.Handlers;
 using Application.Commons.Results;
 using Application.Commons.UoW;
+using Domain.Constants.UsedServices;
 using Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Net.payOS.Types;
@@ -36,6 +37,8 @@ namespace Application.Payment.Commands
 
         [JsonPropertyName("phone")]
         public string Phone { get; set; } = string.Empty;
+        [JsonPropertyName("customer_name")]
+        public string CustomerName { get; set; } = string.Empty;
         [JsonPropertyName("thumbnail_service")]
         public string ThumbnailService { get; set; } = string.Empty;
         [JsonPropertyName("location")]
@@ -46,6 +49,8 @@ namespace Application.Payment.Commands
 
         [JsonPropertyName("supplier_id")]
         public Guid SupplierId { get; set; }
+        [JsonPropertyName("supplier_name")]
+        public string? SupplierName{ get; set; }
 
         [JsonPropertyName("rent_start_time")]
         public DateTime RentStartTime { get; set; }
@@ -89,15 +94,19 @@ namespace Application.Payment.Commands
                     Id = usedServiceId,
                     CustomerId = command.UserId,
                     EventId = s.EventId,
+                    TransactionId = transaction.Item2,
                     ServiceId = s.ServiceId,
+                    Status = UsedServiceStatus.Registered,
                     SupplierId = s.SupplierId,
+                    CustomerName = s.CustomerName,  
+                    SupplierName = s.SupplierName,
                     ServiceName = s.ServiceName,
                     Phone = s.Phone,
                     ThumbnailService = s.ThumbnailService,
                     Location = s.Location,
                     RentStartTime = s.RentStartTime,
                     RentEndTime = s.RentEndTime,
-                    UnitPrice = dto.Price
+                    UnitPrice = s.Price
                 };
 
                 await _unitOfWork.UsedServiceRepository.CreateAsync(usedService);
