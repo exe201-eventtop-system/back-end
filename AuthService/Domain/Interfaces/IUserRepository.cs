@@ -29,5 +29,11 @@ namespace Domain.Interfaces
     string? address);
         Task<SupplierResponseDTO> GetSupplier(Guid userIds);
         Task<User> UpdateUser(User user);
+
+        /// <summary>
+        ///  This method should be avoided
+        /// </summary>
+        /// <returns>Information of all users on the system</returns>
+        Task<List<User>> GetAll();
     }
 }

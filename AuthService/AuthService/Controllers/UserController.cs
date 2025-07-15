@@ -2,6 +2,7 @@
 using Application.Commons.DTOs.Pagination;
 using Application.Commons.DTOs.User;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Jwt;
@@ -54,6 +55,12 @@ namespace API.Controllers
             return result.ToActionResult();
         }
 
-
+        [HttpGet("minimal")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUserAsMinimalList()
+        {
+            var result = await _useCase.GetMinmalUserInfo();
+            return result.ToActionResult();
+        }
     }
 }

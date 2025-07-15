@@ -1,17 +1,15 @@
 ﻿
 using Application.Commons;
 using Application.Commons.DTOs;
-using Application.Commons.DTOs.Pagination;
 using Application.Commons.DTOs.Supplier;
 using Application.Commons.DTOs.User;
 using Application.Interfaces;
 using AutoMapper;
-using Contacts.Supplier;
 using Domain.Entities;
 using Domain.Interfaces;
-using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Configuration;
 using SharedLibrary.DTOs.Supplier;
+using SharedLibrary.DTOs.User;
 using SharedLibrary.Email;
 using SharedLibrary.Enum;
 using SharedLibrary.FireBase;
@@ -227,6 +225,7 @@ namespace Application.UseCases
             {
                 Id = s.Id.ToString(),
                 Name = s.NameOrginazation,
+                //  Rating = s.Rating,
                 Description = s.Description,
                 Address = s.Location,
                 Thumbnail = s.Thumnnail,
@@ -324,6 +323,15 @@ namespace Application.UseCases
             };
 
             return Result<SupplierDetailDTO>.Success(dto);
+        }
+
+        public async Task<Result<List<MinimalUserInfo>>> GetMinmalUserInfo()
+        {
+            var users = await _userRepository.GetAll();
+
+            return Result<List<MinimalUserInfo>>
+                .Success(users.Select(x => new MinimalUserInfo(x.Id, x.UserName, x.Role, x.Suppliers?.NameOrginazation, x.CreatedAt, x.IsDeleted)
+                ).ToList());
         }
     }
     }

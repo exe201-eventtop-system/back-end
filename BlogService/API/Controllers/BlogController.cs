@@ -4,6 +4,7 @@ using Application.Commons.Commands;
 using Application.Commons.Models;
 using Application.Commons.Queries;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.DTOs.Blog;
 
 namespace API.Controllers
 {
@@ -24,6 +25,13 @@ namespace API.Controllers
         public async Task<Result<PaginatedList<BlogQueryResult>>> GetAllBlog([FromQuery] GetAllBlogQuery query, CancellationToken cancelationToken)
         {
             return await _queryDispatcher.Dispatch<GetAllBlogQuery, Result<PaginatedList<BlogQueryResult>>>(query, cancelationToken);
+        }
+
+        [HttpGet("minimal")]
+        public async Task<Result<List<MinimalBlogInfo>>> GetCount()
+        {
+            var result = await _queryDispatcher.Dispatch<GetBlogMinimalInfoQuery,Result<List<MinimalBlogInfo>>>(new GetBlogMinimalInfoQuery(), CancellationToken.None);
+            return result;
         }
 
         [HttpGet("{id}")]
