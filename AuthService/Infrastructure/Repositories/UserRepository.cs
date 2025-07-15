@@ -179,6 +179,7 @@ namespace Infrastructure.Repositories
         public async Task<bool> CheckPhoneNumber(string phoneNumber) =>
             await _context.Users.AnyAsync(u => u.PhoneNumber == phoneNumber);
 
+
         public async Task<Supplier?> GetSupplierDetail(Guid supplierId)
         {
             var supplier = await _context.Suppliers
@@ -188,5 +189,9 @@ namespace Infrastructure.Repositories
             return supplier;
         }
 
+        public async Task<List<User>> GetAll()
+        {
+            return await _context.Users.Include(x => x.Suppliers).ToListAsync();
+        }
     }
 }

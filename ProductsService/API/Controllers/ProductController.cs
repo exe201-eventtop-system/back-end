@@ -9,6 +9,7 @@ using Application.Products.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.DTOs.Service;
 using SharedLibrary.Jwt;
 using System.Text.Json;
 
@@ -106,6 +107,13 @@ namespace API.Controllers
         public async Task<IActionResult> DeleteProductPackage([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _commandDispatcher.Dispatch<RemoveProductPackageCommand, Result<RemoveProductPackageResult>>(new RemoveProductPackageCommand { PackageId = id }, cancellationToken);
+            return result.MapToJsonResult();
+        }
+
+        [HttpGet("minimal")]
+        public async Task<IActionResult> GetMinimalProductInfo(CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<ProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>(new ProductMinimalInformationQuery(), cancellationToken);
             return result.MapToJsonResult();
         }
     }

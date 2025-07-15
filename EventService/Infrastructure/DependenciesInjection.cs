@@ -37,6 +37,12 @@ namespace Infrastructure
                 client.Timeout = TimeSpan.FromSeconds(30);
             });
 
+            services.AddHttpClient("BlogService", client =>
+            {
+                client.BaseAddress = new Uri(configuration["BLOGSERVICE:PORT"]);
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+
             // Add Shared library
             services.AddScoped<ApiCaller>();
             services.AddScoped<JwtService>();

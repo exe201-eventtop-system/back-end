@@ -6,6 +6,7 @@ using Application.Commons.Models;
 using Application.Commons.Queries;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SharedLibrary.DTOs.Blog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Application
             // queries
             services.AddScoped<IQueryHandler<GetAllBlogQuery, Result<PaginatedList<BlogQueryResult>>>, GetAllBlogQueryHandler>();
             services.AddScoped<IQueryHandler<GetBlogDetailQuery, Result<BlogDetailResult>>, GetBlogDetailQueryHandler>();
-
+            services.AddScoped<IQueryHandler<GetBlogMinimalInfoQuery, Result<List<MinimalBlogInfo>>>,GetBlogMinimalInfoQueryHandler>();
             return services;
         }
     }

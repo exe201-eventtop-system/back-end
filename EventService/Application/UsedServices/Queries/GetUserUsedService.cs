@@ -142,7 +142,7 @@ namespace Application.UsedServices.Queries
 
                 // Using HttpClient to call to product (service) API endpoint
                 var result = await client
-                    .PostAsJsonAsync<ProductInfoByIdQuery>($"h/services/list", new ProductInfoByIdQuery
+                    .PostAsJsonAsync<ProductInfoByIdQuery>($"api/services/list", new ProductInfoByIdQuery
                     {
                         ProductIdList = usedServiceIds.ToList()
                     });

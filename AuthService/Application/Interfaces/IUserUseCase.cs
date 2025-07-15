@@ -6,6 +6,7 @@ using Application.Commons.DTOs.User;
 using Contacts.Supplier;
 using Domain.Entities;
 using SharedLibrary.DTOs.Supplier;
+using SharedLibrary.DTOs.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace Application.Interfaces
         Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestDTO processRequestDTO);
      //   Task<Result<List<Supplier>>> GetSuppliersInspect(Guid userId);
         Task<Result<UserTokenDTO>> UpdateProfile(Guid userId, UserTokenDTO userTokenDTO);
-        Task<Result<AnalyticsDataDto>> GetDashboard();
+
+        Task<Result<List<MinimalUserInfo>>> GetMinmalUserInfo();
     }
 }
