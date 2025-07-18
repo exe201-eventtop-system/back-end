@@ -76,7 +76,6 @@ namespace Infrastructure
 
                 foreach (var impl in types)
                 {
-                    Console.WriteLine(impl.FullName);
 
                     var matchingInterfaces = impl.GetInterfaces()
                         .Where(i => i.IsGenericType

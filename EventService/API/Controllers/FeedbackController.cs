@@ -22,19 +22,6 @@ namespace API.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
-        [HttpGet("supplier-rating")]
-        public async Task<IActionResult> GetSupplierRating(CancellationToken cancellationToken)
-        {
-            var result = await _queryDispatcher.Dispatch<GetSupplierRating, List<SupplierRatingDto>>(new GetSupplierRating(), cancellationToken);
-            return Ok(result);
-        }
-        [HttpGet("service-rating")]
-        public async Task<IActionResult> GetServiceRating(CancellationToken cancellationToken)
-        {
-            var result = await _queryDispatcher.Dispatch<GetServiceRating, List<ServiceRatingDto>>(new GetServiceRating(), cancellationToken);
-            return Ok(result);
-        }
-
         [HttpPost("after-service/{id}")]
         public async Task<IActionResult> PostServiceFeedback([FromRoute] Guid id, [FromBody] CreateServiceFeedbackCommand feedback, CancellationToken cancellationToken)
         {
@@ -72,12 +59,13 @@ namespace API.Controllers
             return result.MapToJsonResult();
         }
         [HttpPost("system")]
-        public async Task<IActionResult> PostSystemFeedback([FromBody] List<UserAnswer> answers, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostSystemFeedback([FromBody] CreateSystemFeedbackCommand command, CancellationToken cancellationToken)
         {
-            var command = new CreateSystemFeedbackCommand { Answers = answers, Token = Request.Headers.Authorization.FirstOrDefault() };
+            command.Token = Request.Headers.Authorization.FirstOrDefault();
 
             var result = await _commandDispatcher.Dispatch<CreateSystemFeedbackCommand, Result<CreateSystemFeedbackResult>>(command, cancellationToken);
             return result.MapToJsonResult();
         }
+
     }
 }

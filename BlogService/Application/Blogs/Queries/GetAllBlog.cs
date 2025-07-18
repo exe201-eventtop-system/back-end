@@ -55,16 +55,23 @@ namespace Application.Blogs.Queries
 
         public async Task<Result<PaginatedList<BlogQueryResult>>> Handle(GetAllBlogQuery query, CancellationToken cancellation)
         {
-            var result = await _repository
-                .GetAllAsync(filter: x => (string.IsNullOrEmpty(query.TitleContain) || x.Title.ToLower().Contains(query.TitleContain.ToLower())) && !x.IsDeleted, null);
+            var allBlogs = await _repository
+                .GetAllAsync(
+                    filter: x =>
+                        (string.IsNullOrEmpty(query.TitleContain) ||
+                         x.Title.ToLower().Contains(query.TitleContain.ToLower()))
+                         && !x.IsDeleted,
+                    orderBy: null
+                );
 
-            return Result<PaginatedList<BlogQueryResult>>.Success(new PaginatedList<BlogQueryResult>
-            {
-                CurrentPage = query.Page,
-                PageSize = query.PageSize,
-                PageCount = 0,
-                TotalCount = result.Count,
-                PageContent = result.Select(blog => new BlogQueryResult
+            var totalCount = allBlogs.Count;
+
+            var skip = (query.Page - 1) * query.PageSize;
+
+            var pagedBlogs = allBlogs
+                .Skip(skip)
+                .Take(query.PageSize)
+                .Select(blog => new BlogQueryResult
                 {
                     Id = blog.Id,
                     Title = blog.Title,
@@ -73,8 +80,20 @@ namespace Application.Blogs.Queries
                     AuthorId = blog.UserId,
                     CreatedAt = blog.CreatedAt,
                     LastModifiedAt = blog.LastModifiedAt
-                }).ToList()
+                })
+                .ToList();
+
+            var pageCount = (int)Math.Ceiling((double)totalCount / query.PageSize);
+
+            return Result<PaginatedList<BlogQueryResult>>.Success(new PaginatedList<BlogQueryResult>
+            {
+                CurrentPage = query.Page,
+                PageSize = query.PageSize,
+                PageCount = pageCount,
+                TotalCount = totalCount,
+                PageContent = pagedBlogs
             });
         }
+
     }
 }

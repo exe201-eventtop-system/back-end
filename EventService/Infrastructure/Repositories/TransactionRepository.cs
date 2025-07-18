@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enum;
 using Domain.Repositories;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace Infrastructure.Repositories
             var transaction = new Transaction
             {
                 UserId = userId,
+                PaymentType = PaymentType.CustomerPurcharse,
                 Amount = unitPrice,
                 OrderCode = orderCode,
             };
@@ -34,6 +36,28 @@ namespace Infrastructure.Repositories
 
             return (transaction.OrderCode, transaction.Id);
 
+        }
+
+        public async Task<(long, Guid)> AddTransactionReturnAmount(Guid userId, Guid transactionId, int unitPrice)
+        {
+            string timePart = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
+            string randPart = new Random().Next(100, 999).ToString();
+            int orderCode = int.Parse(DateTimeOffset.Now.ToString("HHmmss"));
+
+
+            var transaction = new Transaction
+            {
+                UserId = userId,
+                PaymentType = PaymentType.ReturnSupplier,
+                ParentTransactionId = transactionId,
+                Amount = unitPrice,
+                OrderCode = orderCode,
+            };
+
+            await _context.Transactions.AddAsync(transaction);
+            await _context.SaveChangesAsync();
+
+            return (transaction.OrderCode, transaction.Id);
         }
 
         public async Task<List<Transaction>> GetAllTransactionsAsync()

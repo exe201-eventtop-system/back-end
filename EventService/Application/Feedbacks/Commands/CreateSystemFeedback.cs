@@ -14,6 +14,9 @@ namespace Application.Feedbacks.Commands
 {
     public class CreateSystemFeedbackCommand
     {
+        [JsonPropertyName("user_name")]
+        public string UserName { get; set; }
+        [JsonPropertyName("user_answers")]
         public List<UserAnswer> Answers { get; set; }
 
         [JsonIgnore]
@@ -62,6 +65,7 @@ namespace Application.Feedbacks.Commands
                 var result = await unitOfWork.SystemFeedbackAnswerRepository.CreateAsync(new SystemFeedbackAnswer
                 {
                     CustomerId = user_id,
+                    CustomerName = command.UserName,
                     QuestionId = answer.QuestionId,
                     AnswerText = answer.Answer,
                 });

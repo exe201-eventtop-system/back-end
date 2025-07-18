@@ -16,6 +16,8 @@ namespace Domain.Entities
         public string AnswerText { get; set; } = string.Empty;
         [Column("customer_id")]
         public Guid  CustomerId { get; set; }
+        [Column("customer_name")]
+        public string CustomerName { get; set; }
 
         [ForeignKey(nameof(QuestionId))]
         public virtual SystemFeedbackQuestion SystemFeedback { get; set; }

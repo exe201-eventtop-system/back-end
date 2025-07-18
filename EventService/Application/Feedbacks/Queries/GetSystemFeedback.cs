@@ -57,7 +57,7 @@ namespace Application.Feedbacks.Queries
                     Answer = x.Answers.Select(y => new FeedbackQuestionAnswer
                     {
                         UserId = y.CustomerId,
-                        Username = "Anonymous",
+                        Username = y.CustomerName,
                         Answer = y.AnswerText,
                     }).ToList()
                 }).ToList(), "Success");
