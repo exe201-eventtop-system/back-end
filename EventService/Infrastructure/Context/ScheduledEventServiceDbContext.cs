@@ -25,10 +25,17 @@ namespace Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ServiceFeedback>()
-    .HasOne(f => f.UsedService)
-    .WithOne(us => us.Feedback)
-    .HasForeignKey<ServiceFeedback>(f => f.Id);
+    .HasKey(f => f.Id); // Id là Primary Key
+
+            modelBuilder.Entity<ServiceFeedback>()
+                .HasOne(f => f.UsedService)
+                .WithOne(u => u.Feedback)
+                .HasForeignKey<ServiceFeedback>(f => f.Id) // dùng chung Id làm FK
+                .OnDelete(DeleteBehavior.Cascade); // tuỳ chọn
+
+
 
         }
     }

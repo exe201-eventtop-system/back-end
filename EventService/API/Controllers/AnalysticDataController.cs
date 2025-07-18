@@ -18,9 +18,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAnalysticData(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAnalysticData([FromQuery] int year,CancellationToken cancellationToken)
         {
-            var result = await _queryDispatcher.Dispatch<GetAnalysticQuery, Result<AnalysitcData>>(new(),cancellationToken);
+            var result = await _queryDispatcher.Dispatch<GetAnalysticQuery, Result<AnalysitcData>>(new GetAnalysticQuery {Year = year },cancellationToken);
             return result.MapToJsonResult();
         }
 

@@ -194,6 +194,19 @@
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "SwaggerKey": "eventService"
     },
+    {
+      "DownstreamPathTemplate": "/api/dashboard/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5400
+        }
+      ],
+      "UpstreamPathTemplate": "/dashboard/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "eventService"
+    },
     //================================================================================================================
 
     //================================================================================================================

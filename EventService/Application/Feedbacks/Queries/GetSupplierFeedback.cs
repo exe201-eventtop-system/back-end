@@ -19,7 +19,7 @@ namespace Application.Feedbacks.Queries
         public List<SupplierFeedbackDetail> Details { get; set; }
 
         [JsonPropertyName("average_rating")]
-        public double AverageRating => Details.Count > 1 ? Details.Average(x => x.SupplierRating) : 0.0;
+        public double AverageRating => Details.Count >= 1 ? Details.Average(x => x.SupplierRating) : 0.0;
     }
 
     public class SupplierFeedbackDetail
@@ -62,11 +62,11 @@ namespace Application.Feedbacks.Queries
                 Details = feedbacks.Select(x => new SupplierFeedbackDetail
                 {
                     UserId = x.UsedService.CustomerId,
-                    Username = "Anonymous",
+                    Username = x.UsedService.CustomerName,
                     UserAvatar = "",
                     CreatedAt = x.CreatedAt,
-                    SupplierRating = x.RatingService,
-                    SupplierFeedback = x.CommentService,
+                    SupplierRating = x.RatingSupplier,
+                    SupplierFeedback = x.CommentSupplier,
                 }).ToList()
             });
         }

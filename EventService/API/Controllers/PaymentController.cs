@@ -43,6 +43,16 @@ namespace API.Controllers
             var result = await _commandDispatcher.Dispatch<CheckoutCommand, Result<PaymentRes>>(command, cancellationToken);
             return result.MapToJsonResult();
         }
+        [HttpPost("checkout/return-supplier")]
+        public async Task<IActionResult> CheckOutReturnSupplier(ReturnAmountSupplierCommand command, CancellationToken cancellationToken)
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString();
+
+            Guid userId = await _jwtService.ExtractUserIdFromToken(token);
+            command.UserId = userId;
+            var result = await _commandDispatcher.Dispatch<ReturnAmountSupplierCommand, Result<PaymentRes>>(command, cancellationToken);
+            return result.MapToJsonResult();
+        }
         [HttpPost("callback")]
         public async Task<IActionResult> PaymentCallBack(PaymentCallBackCommand paymentCallBackCommand, CancellationToken cancellationToken)
         {

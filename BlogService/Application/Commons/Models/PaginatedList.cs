@@ -24,9 +24,9 @@ namespace Application.Commons.Models
         [JsonPropertyName("content")]
         public IReadOnlyCollection<T> PageContent { get; set; } = new List<T>();
 
-        public bool HasNextPage => CurrentPage < PageCount;
+        //public bool HasNextPage => CurrentPage < PageCount;
 
-        public bool HasPreviousPage => PageCount > 1;
+        //public bool HasPreviousPage => PageCount > 1;
 
         //public PaginatedList(int current, int total, int page_size, IReadOnlyCollection<T> content)
         //{

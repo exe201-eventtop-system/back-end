@@ -167,7 +167,7 @@ namespace Application.Analystic.Query
                 // Getting ALL user information from auth service
                 using (var authClient = httpClientFactory.CreateClient("AuthService"))
                 {
-                    authClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", query.UserToken.Split(" ")[1]);
+                    //authClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", query.UserToken.Split(" ")[1]);
                     var auth_query_result = await authClient.GetFromJsonAsync<Result<List<MinimalUserInfo>>>("/api/users/minimal");
                     
                     minimalUserInfo = auth_query_result?.Data;
@@ -182,7 +182,7 @@ namespace Application.Analystic.Query
                 // Getting ALL blog information from the blog service
                 using (var blogClient = httpClientFactory.CreateClient("BlogService"))
                 {
-                    var blog_query_result = await blogClient.GetFromJsonAsync<Result<List<MinimalBlogInfo>>>("api/blogs/minimal");
+                    var blog_query_result = await blogClient.GetFromJsonAsync<Result<List<MinimalBlogInfo>>>("/api/blogs/minimal");
                     minimalBlogInfo = blog_query_result?.Data;
 
                     if (minimalBlogInfo == null)

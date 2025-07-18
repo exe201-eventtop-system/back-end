@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Constants.UsedServices
+namespace Domain.Enum
 {
-    public enum UsedServiceStatus
+    public enum PaymentType
     {
-        Registered,
-        Returned
+        CustomerPurcharse,
+        ReturnSupplier,
     }
 }

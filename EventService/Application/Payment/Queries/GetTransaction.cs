@@ -2,6 +2,7 @@
 using Application.Commons.Results;
 using Application.Commons.UoW;
 using Application.Feedbacks.Queries;
+using Domain.Constants.UsedServices;
 using Microsoft.Extensions.Configuration;
 using SharedLibrary.DTOs.Supplier;
 using SharedLibrary.System.APICall;
@@ -21,6 +22,7 @@ namespace Application.Payment.Queries
         public decimal? Price { get; set; }
         public bool? Status { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsComplete { get; set; }
         public List<Transactionitem>? TransactionItems { get; set; }
     }
     public class Transactionitem
@@ -45,21 +47,33 @@ namespace Application.Payment.Queries
         {
             var transactions = await _unitOfWork.TransactionRepository.GetAllTransactionsAsync();
 
-            var result = transactions.Select(tr => new TransactionDTOs
+            var result = transactions.Select(tr =>
             {
-                OrderCode = tr.OrderCode,
-                CreatedAt = tr.CreatedAt,
-                Price = tr.Amount,
-                Status = tr.IsPayment,
-                CustomerName = tr.UsedServices?.FirstOrDefault()?.CustomerName.ToString(),
-                TransactionItems = tr.UsedServices?.Select(us => new Transactionitem
+                var isAllReturned = tr.UsedServices != null
+                                    && tr.UsedServices.All(us => us.Status == UsedServiceStatus.Returned);
+
+                var hasChildTransactions = transactions.Any(child => child.ParentTransactionId == tr.Id);
+
+                var isComplete = isAllReturned && !hasChildTransactions;
+
+                return new TransactionDTOs
                 {
-                    SupplierName = us.SupplierId.ToString(),
-                    ServiceName = us.ServiceName,
-                    UnitPrice = us.UnitPrice,
-                    CreatedAt = us.CreatedAt
-                }).ToList()
+                    OrderCode = tr.OrderCode,
+                    CreatedAt = tr.CreatedAt,
+                    Price = tr.Amount,
+                    IsComplete = isComplete,
+                    Status = tr.IsPayment,
+                    CustomerName = tr.UsedServices?.FirstOrDefault()?.CustomerName,
+                    TransactionItems = tr.UsedServices?.Select(us => new Transactionitem
+                    {
+                        SupplierName = us.SupplierName,
+                        ServiceName = us.ServiceName,
+                        UnitPrice = us.UnitPrice,
+                        CreatedAt = us.CreatedAt
+                    }).ToList()
+                };
             }).ToList();
+
 
             return Result<List<TransactionDTOs>>.Success(result);
         }
