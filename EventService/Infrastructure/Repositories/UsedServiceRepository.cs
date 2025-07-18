@@ -29,5 +29,22 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<List<UsedService>> GetUsedServiceByTransactionId(Guid id)
+        {
+            return await _context.UsedServices
+                .Include(x => x.Transaction)
+                .Include(x => x.Feedback)
+                .Where(x => x.TransactionId == id)
+                .ToListAsync();
+        }
+
+        public async Task<List<UsedService>> GetUsedServiceByTransactionCode(long code)
+        {
+            return await _context.UsedServices
+                .Include(x => x.Transaction)
+                .Include(x => x.Feedback)
+                .Where(x => x.Transaction.OrderCode == code)
+                .ToListAsync();
+        }
     }
 }

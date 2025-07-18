@@ -1,17 +1,14 @@
 ﻿using API.Extensions;
 using Application.Commons.Dispatchers.Commands;
 using Application.Commons.Dispatchers.Queries;
-using Application.Commons.Handlers;
 using Application.Commons.PaginatedLists;
 using Application.Commons.Results;
 using Application.Products.Commands;
 using Application.Products.Queries;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.DTOs.Service;
 using SharedLibrary.Jwt;
-using System.Text.Json;
 
 namespace API.Controllers
 {
@@ -33,21 +30,21 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetSummaryList([FromQuery] ProductListQuery query, CancellationToken cancellationToken)
         {
-           var result = await _queryDispatcher.Dispatch<ProductListQuery, Result<PaginatedList<ProductSummaryItem>>>(query, cancellationToken);
+            var result = await _queryDispatcher.Dispatch<ProductListQuery, Result<PaginatedList<ProductSummaryItem>>>(query, cancellationToken);
             return result.MapToJsonResult();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductDetail([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await _queryDispatcher.Dispatch<ProductDetailQuery, Result<ProductDetail>>(new ProductDetailQuery { Id = id}, cancellationToken);
+            var result = await _queryDispatcher.Dispatch<ProductDetailQuery, Result<ProductDetail>>(new ProductDetailQuery { Id = id }, cancellationToken);
             return result.MapToJsonResult();
         }
 
         [HttpGet("by-rating")]
         public async Task<IActionResult> GetServiceByRating(CancellationToken cancellationToken)
         {
-            var result = await _queryDispatcher.Dispatch<GetServiceByRatingQuery, Result<List<ProductDetail>>>(new GetServiceByRatingQuery {}, cancellationToken);
+            var result = await _queryDispatcher.Dispatch<GetServiceByRatingQuery, Result<List<ProductDetail>>>(new GetServiceByRatingQuery { }, cancellationToken);
             return result.MapToJsonResult();
         }
 
@@ -99,7 +96,7 @@ namespace API.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var result = await _commandDispatcher.Dispatch<DeleteProductCommand, Result<DeleteProductResult>>(new DeleteProductCommand { Id = id}, cancellationToken);
+            var result = await _commandDispatcher.Dispatch<DeleteProductCommand, Result<DeleteProductResult>>(new DeleteProductCommand { Id = id }, cancellationToken);
             return result.MapToJsonResult();
         }
 
@@ -114,6 +111,13 @@ namespace API.Controllers
         public async Task<IActionResult> GetMinimalProductInfo(CancellationToken cancellationToken)
         {
             var result = await _queryDispatcher.Dispatch<ProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>(new ProductMinimalInformationQuery(), cancellationToken);
+            return result.MapToJsonResult();
+        }
+
+        [HttpGet("minimal/supplier/{id}")]
+        public async Task<IActionResult> GetMinimalProductInfoOfSupplier(Guid id, CancellationToken cancellationToken)
+        {
+            var result = await _queryDispatcher.Dispatch<SupplierProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>(new() { Id = id }, cancellationToken);
             return result.MapToJsonResult();
         }
     }

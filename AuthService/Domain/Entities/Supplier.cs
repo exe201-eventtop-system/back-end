@@ -33,6 +33,9 @@ namespace Domain.Entities
         public string Thumnnail { get; set; } = string.Empty;
         [Column("is_active")]
         public bool IsActive { get; set; } = false;
+        [Column("balances")]
+        public decimal Balance = 0m;
+
         public virtual User Users { get; set; } = new User();
         public virtual ICollection<OrginazationImage> OrginazationImages { get; set; } = new List<OrginazationImage>();
     }

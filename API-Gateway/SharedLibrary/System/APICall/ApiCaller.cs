@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SharedLibrary.System.APICall
@@ -40,6 +42,33 @@ namespace SharedLibrary.System.APICall
                 return default;
             }
         }
+
+        public async Task<TResult?> PostToAsync<TResult>(string url, object data)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            };
+
+            var requestBody = JsonSerializer.Serialize(data, options);
+
+            try
+            {
+                using (var response = await _httpClient.PostAsJsonAsync(url, requestBody))
+                {
+                    response.EnsureSuccessStatusCode();
+
+                    return JsonSerializer.Deserialize<TResult>(await response.Content.ReadAsStringAsync(), options);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Http Client]: {ex.Message}\nStack trace:\n{ex.StackTrace}");
+                return default;
+            }
+        }
+
         public async Task<T?> PutFromApiAsync<T>(string url, object data)
         {
             try

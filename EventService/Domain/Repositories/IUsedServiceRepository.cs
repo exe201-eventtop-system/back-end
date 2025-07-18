@@ -11,5 +11,7 @@ namespace Domain.Repositories
     {
         Task<List<UsedService>> GetUsedServicesWithRating();
         Task<List<UsedService>> GetScheduleIdAsync(Guid supplierId);
+        Task<List<UsedService>> GetUsedServiceByTransactionId(Guid id);
+        Task<List<UsedService>> GetUsedServiceByTransactionCode(long code);
     }
 }

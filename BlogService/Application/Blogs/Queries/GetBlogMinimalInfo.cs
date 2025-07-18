@@ -28,7 +28,7 @@ namespace Application.Blogs.Queries
             var result = await blogRepository.GetAllAsync();
 
             return Result<List<MinimalBlogInfo>>
-                .Success(result.Select(x => new MinimalBlogInfo(x.Id, x.Title, x.CreatedAt, x.IsDeleted)).ToList(), "Success");
+                .Success(result.Select(x => new MinimalBlogInfo(x.Id, x.Title, x.UserId, x.CreatedAt, x.IsDeleted)).ToList(), "Success");
         }
     }
 }

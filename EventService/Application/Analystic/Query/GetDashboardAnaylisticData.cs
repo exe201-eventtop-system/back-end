@@ -216,7 +216,7 @@ namespace Application.Analystic.Query
                             TotalBlogCount = minimalBlogInfo.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalCustomerCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.CreatedDate.Month == i && x.Role == UserRole.Customer),
                             TotalSupplierCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.CreatedDate.Month == i && x.Role == UserRole.Supplier),
-                            TotalRevenue = transaction_list.Where(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i).Sum(x => x.Amount),
+                            TotalRevenue = transaction_list.Where(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i).Sum(x => x.Amount) * 0.05m,
                             TotalEventCompleted = events_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalServiceCount = events_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalUsedServiceCount = orders_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),

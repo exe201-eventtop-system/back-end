@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.Jwt;
 using Application.Commons;
+using SharedLibrary.DTOs.Supplier;
 
 namespace API.Controllers
 {
@@ -74,6 +75,13 @@ namespace API.Controllers
         {
             var supplier = await _useCase.ProcessRequestInspectorAsync(processRequestDTO);
             return Ok(supplier);
+        }
+
+        [HttpPost("{id}/balances")]
+        public async Task<IActionResult> ProccessBalanceUpdate([FromRoute] Guid id , SupplierBalanceUpdateDto command)
+        {
+            var result = await _useCase.UpdateSupplierBalance(id, command.Amount);
+            return result.ToActionResult();
         }
 
     }
