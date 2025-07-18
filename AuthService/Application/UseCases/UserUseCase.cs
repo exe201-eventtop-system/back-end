@@ -333,5 +333,19 @@ namespace Application.UseCases
                 .Success(users.Select(x => new MinimalUserInfo(x.Id, x.UserName, x.Role, x.Suppliers?.NameOrginazation, x.CreatedAt, x.IsDeleted)
                 ).ToList());
         }
+
+        public async Task<Result<bool>> UpdateSupplierBalance(Guid id, decimal amount)
+        {
+            var supplier = await _supplierRepository.GetByIdAsync(id);
+
+            if (supplier == null)
+            {
+                return Result<bool>.Failure(ServiceError.NotFoundError("Supplier not found"));
+            }
+            supplier.Balance = amount;
+            await _supplierRepository.UpdateSupplier(supplier);
+
+            return Result<bool>.Success(true);
+        }
     }
     }

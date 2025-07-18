@@ -5,6 +5,7 @@ using Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Net.payOS.Types;
 using SharedLibrary.DTOs.Payment;
+using SharedLibrary.DTOs.Supplier;
 using SharedLibrary.PaymentServices;
 using SharedLibrary.System.APICall;
 using System;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Application.Payment.Commands
 {
-     public class PaymentCallBackCommand
+    public class PaymentCallBackCommand
     {
         public string Code { get; set; } = string.Empty;
         public string Id { get; set; } = string.Empty;
@@ -24,6 +25,7 @@ namespace Application.Payment.Commands
         public long OrderCode { get; set; }
         public Guid CustomerId { get; set; } = Guid.Empty;
     }
+
     public class PaymentCallBackHandler : ICommandHandler<PaymentCallBackCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -49,6 +51,17 @@ namespace Application.Payment.Commands
                 ServiceIds = serviceIds,
             };
             var totalCart = await _apiCaller.PutFromApiAsync<int>(url, paymentUpdateCartDto);
+            
+            // Update supplier balances 
+            var usedServices = await _unitOfWork.UsedServiceRepository.GetUsedServiceByTransactionCode(command.OrderCode);
+
+            var groupedService = usedServices.GroupBy(x => x.SupplierId);
+
+            foreach (var supplier in groupedService)
+            {
+                string balance_url = $"{_config["AUTHSERVICE:PORT"]}/api/suppliers/{supplier.Key}";
+                var result = await _apiCaller.PostToAsync<Result<bool>>(balance_url, new SupplierBalanceUpdateDto {Amount = supplier.Sum(x => x.UnitPrice) * 0.95m});
+            }
 
             return Result<int>.Success(totalCart);
         }

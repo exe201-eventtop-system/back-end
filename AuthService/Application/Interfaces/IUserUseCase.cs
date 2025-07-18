@@ -34,5 +34,7 @@ namespace Application.Interfaces
         Task<Result<UserTokenDTO>> UpdateProfile(Guid userId, UserTokenDTO userTokenDTO);
 
         Task<Result<List<MinimalUserInfo>>> GetMinmalUserInfo();
+
+        Task<Result<bool>> UpdateSupplierBalance(Guid id, decimal amount);
     }
 }

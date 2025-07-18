@@ -14,7 +14,12 @@ namespace Application.Products.Queries
     {
     }
 
-    public class GetProductMinimalInformationHandler : IQueryHandler<ProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>
+    public class SupplierProductMinimalInformationQuery
+    {
+        public Guid Id { get; set; }
+    }
+
+    public class GetProductMinimalInformationHandler : IQueryHandler<ProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>, IQueryHandler<SupplierProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -29,6 +34,14 @@ namespace Application.Products.Queries
 
             return Result<List<MinimalServiceInfo>>
                 .Success(result.Select(x => new MinimalServiceInfo(x.Id, x.SupplierId, x.Name, x.CreatedAt, x.IsDeleted)).ToList(), "Success");
+        }
+
+        public async Task<Result<List<MinimalServiceInfo>>> Handle(SupplierProductMinimalInformationQuery query, CancellationToken cancellationToken)
+        {
+            var result = await unitOfWork.ProductRepository.GetAllAsync(x => x.SupplierId == query.Id, null);
+
+            return Result<List<MinimalServiceInfo>>
+                .Success(result.Select(x => new MinimalServiceInfo(x.Id, x.SupplierId, x.Name, x.CreatedAt, x.IsDeleted)).ToList());
         }
     }
 }

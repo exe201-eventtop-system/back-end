@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace SharedLibrary.DTOs.Blog
 {
-    public record MinimalBlogInfo(Guid Id, string Title, DateTime CreatedAt, bool IsDeleted);
+    public record MinimalBlogInfo(Guid Id, string Title, Guid CreatorId, DateTime CreatedAt, bool IsDeleted);
 }
