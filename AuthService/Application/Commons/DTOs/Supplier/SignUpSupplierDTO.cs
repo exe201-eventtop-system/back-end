@@ -24,10 +24,14 @@ namespace Application.Commons.DTOs.Supplier
         public string Description { get; set; }
         [Column("about")]
         public string About { get; set; }
+    }
+    public class SignUpLicenseSupplierDTO
+    {
+        public Guid Id { get; set; }
         [Column("business_license")]
-        public string BusinessLicense { get; set; }
+        public IFormFile BusinessLicense { get; set; } 
         [Column("thumnnail")]
-        public string Thumnnail { get; set; } = string.Empty;
+        public IFormFile Thumnnail { get; set; }
         public ICollection<IFormFile> formFiles { get; set; } = new List<IFormFile>();
     }
 }

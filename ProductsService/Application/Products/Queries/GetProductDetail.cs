@@ -46,15 +46,7 @@ namespace Application.Products.Queries
         public decimal Price { get; set; }
     }
 
-    public class ProductUploadedImage
-    {
-        [JsonPropertyName("id")]
-        public Guid ImageId { get; set; }
-        [JsonPropertyName("order")]
-        public int Order {  get; set; }
-        [JsonPropertyName("url")]
-        public string ImageUrl { get; set; }
-    }
+
 
     public class ProductDetail
     {
@@ -86,7 +78,7 @@ namespace Application.Products.Queries
         public Guid? ParentServiceId { get; set; } = null;
 
         [JsonPropertyName("images")]
-        public List<ProductUploadedImage> ServiceImages { get; set; } = new();
+        public List<string> ServiceImages { get; set; } = new();
 
         [JsonPropertyName("packages")]
         public List<ProductRentalOption> RentalOptions { get; set; } = new();
@@ -146,12 +138,7 @@ namespace Application.Products.Queries
                 Description = result.Description,
                 CategoryId = result.CategoryId,
                 Category = result.CategoryNavigation?.Name,
-                ServiceImages = result.ImagesNavigation.Select(x => new ProductUploadedImage
-                {
-                    ImageId = x.Id,
-                    ImageUrl = x.ImageUrl,
-                    Order = x.Order,
-                }).ToList(),
+                ServiceImages = result.ImagesNavigation.Select(x => x.ImageUrl).ToList(),
                 ThumbnailUrl = result.ThumbnailUrl,
                 Location = result.Location,
                 Supplier = supplierInfo,

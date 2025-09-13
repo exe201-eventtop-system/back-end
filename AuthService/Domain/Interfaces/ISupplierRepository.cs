@@ -22,7 +22,9 @@ int pageSize, int pageNumber, string? searchKey, string?address);
         Task<Supplier> SaveSupplier(Supplier supplier);
         Task<bool> ApporeSupplier(Guid supplierId,string contract);
         Task<Supplier> UpdateSupplier(
-            Supplier supplier);
+            Guid id, decimal amount);
         Task<bool> DeleteSupplier(Guid supplierId);
+        Task<bool> UpdateSupplier(Guid id ,string business,string thumnail,List<string> urls);
+        Task<bool> ApproveSupplier(Guid id, string contract);
     }
 }

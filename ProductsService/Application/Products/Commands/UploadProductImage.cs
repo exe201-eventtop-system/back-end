@@ -15,6 +15,8 @@ namespace Application.Products.Commands
 {
     public class UploadProductImageCommand
     {
+        [JsonPropertyName("thumbnail")]
+        public IFormFile? Thumbnail { get; set; }
         [JsonPropertyName("images")]
         public List<IFormFile> Images { get; set; }
 
@@ -30,11 +32,7 @@ namespace Application.Products.Commands
         [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [JsonPropertyName("alternative_text")]
-        public string AlternativeText { get; set; }
 
-        [JsonPropertyName("order")]
-        public int Order { get; set; }
     }
 
     public class UploadProductImageResult
@@ -56,35 +54,63 @@ namespace Application.Products.Commands
 
         public async Task<Result<UploadProductImageResult>> Handle(UploadProductImageCommand command, CancellationToken cancellationToken)
         {
-            var item = await unitOfWork.ProductRepository.GetByIdAsync((Guid)command.ProductId);
+            // Lấy sản phẩm từ DB (bao gồm navigation ImagesNavigation)
+            var product = await unitOfWork.ProductRepository.GetByIdsAsync(command.ProductId);
 
-            for (int i = 0; i < command.Images.Count; i++)
+            if (product == null)
             {
-                IFormFile current = command.Images[i];
-
-                string url = await firebaseStorageService.Upload(current);
-
-                ProductImage image = new ProductImage
-                {
-                    ImageUrl = url,
-                    Order = item.ImagesNavigation.Count,
-                    ProductId = (Guid) command.ProductId,
-                };
-
-                item.ImagesNavigation.Add(image);
+                return Result<UploadProductImageResult>.Failure(
+                    Application.Commons.Results.Error.NotFoundError($"Product with id {command.ProductId} not found"), 
+                    "Product not found");
             }
 
-            item = await unitOfWork.ProductRepository.Update(item);
-
-            return Result<UploadProductImageResult>.Success(new UploadProductImageResult
+            // Nếu có thumbnail -> upload
+            if (command.Thumbnail != null)
             {
-                Images = item.ImagesNavigation.Select(x => new UploadedImage 
-                { 
-                    Id = x.Id, 
-                    Url = x.ImageUrl, 
-                    Order = x.Order,
-                }).ToList()
-            });
+                string thumbnailUrl = await firebaseStorageService.Upload(command.Thumbnail);
+                product.ThumbnailUrl = thumbnailUrl;
+            }
+
+            // Cập nhật UpdatedAt timestamp
+            product.UpdatedAt = DateTime.UtcNow;
+
+            // Update the product first (without navigation properties)
+            var updatedProduct = await unitOfWork.ProductRepository.Update(product);
+
+            // Nếu có ảnh sản phẩm -> xử lý riêng
+            if (command.Images != null && command.Images.Any())
+            {
+                foreach (var formFile in command.Images)
+                {
+                    string imageUrl = await firebaseStorageService.Upload(formFile);
+
+                    var image = new ProductImage
+                    {
+                        Id = Guid.NewGuid(),
+                        ImageUrl = imageUrl,
+                        ProductId = product.Id,
+                    };
+
+                    // Add image directly to the context using the repository
+                    await unitOfWork.ProductRepository.CreateProductImageAsync(image);
+                }
+            }
+
+            // Reload the product to get the updated data
+            var finalProduct = await unitOfWork.ProductRepository.GetByIdsAsync(command.ProductId);
+
+            // Trả kết quả
+            var result = new UploadProductImageResult
+            {
+                Images = finalProduct.ImagesNavigation?.Select(x => new UploadedImage
+                {
+                    Id = x.Id,
+                    Url = x.ImageUrl
+                }).ToList() ?? new List<UploadedImage>()
+            };
+
+            return Result<UploadProductImageResult>.Success(result);
         }
+
     }
 }

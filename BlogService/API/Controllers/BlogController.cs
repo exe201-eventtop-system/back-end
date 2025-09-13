@@ -33,7 +33,12 @@ namespace API.Controllers
             var result = await _queryDispatcher.Dispatch<GetBlogMinimalInfoQuery,Result<List<MinimalBlogInfo>>>(new GetBlogMinimalInfoQuery(), CancellationToken.None);
             return result;
         }
-
+        [HttpGet("minimal/supplier/{SupplierId}")]
+        public async Task<Result<List<MinimalBlogInfo>>> GetCountSup(Guid SupplierId)
+        {
+            var result = await _queryDispatcher.Dispatch<GetBlogMinimalInfoSupQuery, Result<List<MinimalBlogInfo>>>(new GetBlogMinimalInfoSupQuery{ IdSup = SupplierId },CancellationToken.None);
+            return result;
+        }
         [HttpGet("{id}")]
         public async Task<Result<BlogDetailResult>> GetBlogDetail([FromRoute] Guid id, CancellationToken cancellationToken)
         {

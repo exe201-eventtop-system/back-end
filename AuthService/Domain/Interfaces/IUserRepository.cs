@@ -14,6 +14,8 @@ namespace Domain.Interfaces
         Task<bool> CheckEmail(string Email);
         Task<Supplier> GetSupplierDetail(Guid supplierId);
         Task<bool> CheckPhoneNumber(string phoneNumber);
+        Task<User> UpdataSupPass(Guid id,string hashedPass);
+        Task<List<Supplier>> GetSupNotAccept();
         Task<User> CreateUser(User user);
         Task<(List<User> Items, int TotalItems)> GetAllUserPagingAsync(int pageNumber, int pageSize,string search);
         Task<bool> DeleteUser(Guid userId);

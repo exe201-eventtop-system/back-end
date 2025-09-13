@@ -78,5 +78,65 @@ namespace Infrastructure.Repositories
 
             return item;
         }
+
+        public async Task<Product?> GetByIdsAsync(Guid? id)
+        {
+            return await _context.Services
+                .Include(x => x.ImagesNavigation)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Product> UpdateProductWithImages(Product product)
+        {
+            // Get the existing product from database
+            var existingProduct = await _context.Services
+                .Include(x => x.ImagesNavigation)
+                .FirstOrDefaultAsync(x => x.Id == product.Id);
+
+            if (existingProduct == null)
+            {
+                throw new InvalidOperationException($"Product with id {product.Id} not found");
+            }
+
+            // Update the product properties
+            if (!string.IsNullOrEmpty(product.ThumbnailUrl))
+            {
+                existingProduct.ThumbnailUrl = product.ThumbnailUrl;
+            }
+            existingProduct.UpdatedAt = product.UpdatedAt;
+
+            // Mark the entity as modified
+            _context.Entry(existingProduct).State = EntityState.Modified;
+
+            // Handle new images by adding them directly to the ServiceImages table
+            if (product.ImagesNavigation != null)
+            {
+                foreach (var newImage in product.ImagesNavigation)
+                {
+                    // Check if image already exists
+                    var existingImage = await _context.ServiceImages.FindAsync(newImage.Id);
+                    if (existingImage == null)
+                    {
+                        // Add new image directly
+                        _context.ServiceImages.Add(newImage);
+                    }
+                }
+            }
+
+            // Save all changes at once
+            await _context.SaveChangesAsync();
+
+            // Return the updated product by reloading it
+            return await GetByIdsAsync(product.Id);
+        }
+
+        public async Task<ProductImage> CreateProductImageAsync(ProductImage image)
+        {
+            var tracker = await _context.ServiceImages.AddAsync(image);
+            await _context.SaveChangesAsync();
+            await tracker.ReloadAsync();
+            return tracker.Entity;
+        }
+
     }
 }

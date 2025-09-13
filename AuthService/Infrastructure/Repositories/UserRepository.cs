@@ -193,5 +193,21 @@ namespace Infrastructure.Repositories
         {
             return await _context.Users.Include(x => x.Suppliers).ToListAsync();
         }
+
+        public Task<List<Supplier>> GetSupNotAccept()
+        {
+            var listSup = _context.Suppliers.Where(x => x.IsActive == false).Include(x => x.Users).Include(x => x.OrginazationImages).ToList();
+            return Task.FromResult(listSup);
+        }
+
+        public async Task<User> UpdataSupPass(Guid id, string hashedPass)
+        {
+            var user= await _context.Users
+     .FirstOrDefaultAsync(sp => sp.Id ==id);
+           user.HashPassword = hashedPass;
+            user.Role = UserRole.Supplier;
+           await _context.SaveChangesAsync();
+            return user;
+        }
     }
 }

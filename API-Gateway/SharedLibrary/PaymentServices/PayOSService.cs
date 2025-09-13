@@ -50,8 +50,8 @@ namespace SharedLibrary.PaymentServices
                 amount: paymentDTO.UnitPrice,
                 description: "Thanh toán đơn hàng",
                 items: payOSItems,
-                returnUrl: domain + "payment-success",
-                cancelUrl: domain + "payment-cancel"
+                returnUrl: domain + "/payment-success",
+                cancelUrl: domain + "/payment-cancel"
             );
 
             var response = await payOS.createPaymentLink(paymentLinkRequest);

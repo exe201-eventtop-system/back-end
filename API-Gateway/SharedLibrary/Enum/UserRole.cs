@@ -8,17 +8,11 @@ namespace SharedLibrary.Enum
 {
     public enum UserRole
     {
+        Demo,
         Admin ,
         Inspector,
         Supplier ,
         Customer ,
     }
 
-    public static class UserRoleText
-    {
-        public const string Admin = "Admin";
-        public const string Inspector = "Inspector";
-        public const string Supplier = "Suplier";
-        public const string Customer = "customer";
-    }
 }

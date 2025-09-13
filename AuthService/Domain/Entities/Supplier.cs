@@ -18,11 +18,11 @@ namespace Domain.Entities
         [Column("name_organization")]
         public string NameOrginazation { get; set; } = string.Empty;
         [Column("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Column("about")]
-        public string About { get; set; }
+        public string? About { get; set; }
         [Column("business_license")]
-        public string BusinessLicense { get; set; }
+        public string? BusinessLicense { get; set; }
         [Column("inspector_id")]
         public Guid? InspectorId { get; set; }
         [Column("tax_code")]
@@ -34,7 +34,7 @@ namespace Domain.Entities
         [Column("is_active")]
         public bool IsActive { get; set; } = false;
         [Column("balances")]
-        public decimal Balance = 0m;
+        public decimal Balance { get; set; } = 0m;
 
         public virtual User Users { get; set; } = new User();
         public virtual ICollection<OrginazationImage> OrginazationImages { get; set; } = new List<OrginazationImage>();

@@ -1,5 +1,4 @@
-﻿using DotNetEnv;
-using API.Extentions;
+﻿using API.Extentions;
 
 namespace AuthService
 {
@@ -8,7 +7,6 @@ namespace AuthService
         public static void Main(string[] args)
         {
             DotNetEnv.Env.Load("../../.env");
-
             var builder = WebApplication.CreateBuilder(args);
             var config = builder.Configuration;
             builder.Configuration.AddEnvironmentVariables();
@@ -64,8 +62,9 @@ namespace AuthService
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-            // 🚦 Middleware pipeline
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

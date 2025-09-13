@@ -114,7 +114,6 @@ namespace Application.UsedServices.Queries
                 EndTime = x.RentEndTime,
                 Status = x.Status,
                 DeliveryTime = x.DeliveredTime,
-                ReturnTime = x.ReturnTime,
             }).ToList(), "Success");
         }
     }

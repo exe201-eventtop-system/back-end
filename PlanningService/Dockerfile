@@ -2,11 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY . .
-RUN dotnet restore ProductsService/ProductsService.sln
-RUN dotnet publish ProductsService/API/API.csproj -c Release -o /app/publish
+RUN dotnet restore PlanningService/API/API.csproj
+RUN dotnet publish PlanningService/API/API.csproj -c Release -o /app/publish
 
 # Stage 2: Run
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "API.dll"]
+ENTRYPOINT ["dotnet", "API.dll"] 

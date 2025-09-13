@@ -29,7 +29,7 @@ namespace Services
            
             try
             {
-                var response = await _httpClient.GetAsync($"https://localhost:5300/api/services/{id}");
+                var response = await _httpClient.GetAsync($"api/services/{id}");
                 if (!response.IsSuccessStatusCode)
                     return null;
 
@@ -56,7 +56,7 @@ namespace Services
             try
             {
                 // Nếu BaseAddress đang trỏ tới Service, bạn phải build URL đầy đủ
-                var response = await _httpClient.GetAsync($"https://localhost:5100/api/user/{id}");
+                var response = await _httpClient.GetAsync($"api/user/{id}");
 
                 if (!response.IsSuccessStatusCode)
                     return null;

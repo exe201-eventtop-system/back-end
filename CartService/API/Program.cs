@@ -7,23 +7,13 @@ using Net.payOS;
 using Repositories;
 using Services;
 using Services.DTOs;
-using Services.Mapping;
 using SharedLibrary.DTOs.User;
 using SharedLibrary.Jwt;
 using SharedLibrary.PaymentServices;
 using static Org.BouncyCastle.Math.EC.ECCurve;
 
-
-var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load("../../.env");
-builder.Configuration.AddEnvironmentVariables();
-// Add services to the container.
-//builder.Configuration["PayOS:ClientId"] = Environment.GetEnvironmentVariable("PAYOS_CLIENTID");
-//builder.Configuration["PayOS:ApiKey"] = Environment.GetEnvironmentVariable("PAYOS_APIKEY");
-//builder.Configuration["PayOS:ChecksumKey"] = Environment.GetEnvironmentVariable("PAYOS_CHECKSUMKEY");
-//builder.Configuration["PayOS:ReturnUrl"] = Environment.GetEnvironmentVariable("PAYOS_RETURNURL");
-//builder.Configuration["ServiceUrls:ApiGateway"] = Environment.GetEnvironmentVariable("SERVICEURLS_APIGATEWAY");
-//builder.Configuration["ConnectionStrings:CartConnection"] = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_CARTCONNECTION");
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -37,25 +27,20 @@ builder.Services.AddDatabase(config);
 builder.Services.AddScoped<IPasswordHasher<UserToHashPassword>, PasswordHasher<UserToHashPassword>>();
 builder.Services.AddHttpContextAccessor(); 
 builder.Services.AddHttpClient<ServiceClient>();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-builder.Services.AddScoped<PayOSService>();
-builder.Services.Configure<PayOSSettings>(builder.Configuration.GetSection("PAYOS"));
 
 
+builder.Services.AddHttpClient<ServiceClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:8080"); 
+});
 
-builder.Services.AddHttpClient<ServiceClient>();
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -84,7 +84,9 @@ namespace Application.Analystic.Query
         public int TotalBlogCount { get; set; }
 
         [JsonPropertyName("lifetime_revenue")]
-        public decimal TotalRevenue { get; set; }
+        public decimal TotalRevenue => Math.Round(TotalRevenueRaw * 0.05m, 2);
+        [JsonIgnore] // Không serialize trường gốc
+        public decimal TotalRevenueRaw { get; set; }
     }
 
     public class YearlyGeneralAnalysticData
@@ -198,7 +200,7 @@ namespace Application.Analystic.Query
                     TotalSupplierCount = minimalUserInfo.Count(x => x.Role == UserRole.Supplier),
                     TotalServiceCount = minimalServiceInfo.Count(),
                     TotalEventCompleted = events_list.Count(),
-                    TotalRevenue = transaction_list.Sum(x => x.Amount),
+                    TotalRevenueRaw = transaction_list.Where(x => x.IsPayment == true).Sum(x => x.Amount),
                     TotalUsedServiceCount = orders_list.Count(),
                     TotalBlogCount = minimalBlogInfo.Count(),
                 };
@@ -216,7 +218,7 @@ namespace Application.Analystic.Query
                             TotalBlogCount = minimalBlogInfo.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalCustomerCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.CreatedDate.Month == i && x.Role == UserRole.Customer),
                             TotalSupplierCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.CreatedDate.Month == i && x.Role == UserRole.Supplier),
-                            TotalRevenue = transaction_list.Where(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i).Sum(x => x.Amount) * 0.05m,
+                            TotalRevenueRaw = transaction_list.Where(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i && x.IsPayment==true).Sum(x => x.Amount),
                             TotalEventCompleted = events_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalServiceCount = events_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
                             TotalUsedServiceCount = orders_list.Count(x => x.CreatedAt.Year == query.Year && x.CreatedAt.Month == i),
@@ -230,7 +232,7 @@ namespace Application.Analystic.Query
                     Year = query.Year,
                     Data = new GeneralAnalysticData
                     {
-                        TotalRevenue = transaction_list.Where(x => x.CreatedAt.Year == query.Year).Sum(x => x.Amount),
+                        TotalRevenueRaw = transaction_list.Where(x => x.CreatedAt.Year == query.Year && x.IsPayment == true).Sum(x => x.Amount),
                         TotalBlogCount = minimalBlogInfo.Count(x => x.CreatedAt.Year == query.Year),
                         TotalCustomerCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.Role == UserRole.Customer),
                         TotalSupplierCount = minimalUserInfo.Count(x => x.CreatedDate.Year == query.Year && x.Role == UserRole.Supplier),

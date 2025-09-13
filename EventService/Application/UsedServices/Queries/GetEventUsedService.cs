@@ -174,8 +174,6 @@ namespace Application.UsedServices.Queries
                     UsageEndTime = x.RentEndTime,
                     Price = x.UnitPrice,
                     DeliveryTime = x.DeliveredTime,
-                    ReturnTime = x.ReturnTime,
-                    InitialCondition = x.InitialCondition,
                     ReturnCondition = x.ReturnedCondition,
                     DamageType = x.DamageType,
                     Status = x.Status,

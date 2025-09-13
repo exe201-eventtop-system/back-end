@@ -34,7 +34,7 @@ namespace Application.Payment.Queries
                 .Select(group => new RevenueDto
                 {
                     Month = group.Key,
-                    Revenue = group.Sum(tr => tr.Amount)
+                    Revenue = group.Sum(tr => tr.Amount * 0.05m)
                 })
                 .OrderBy(r => r.Month)
                 .ToList();

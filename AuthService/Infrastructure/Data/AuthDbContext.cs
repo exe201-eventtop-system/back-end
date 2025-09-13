@@ -20,6 +20,9 @@ namespace Infrastructure.Data
         .HasForeignKey<Supplier>(s => s.Id); 
             modelBuilder.Entity<Supplier>()
                 .HasKey(s => s.Id);
+            modelBuilder.Entity<Supplier>()
+                .Property(s => s.Balance)
+                .HasPrecision(18, 2);
         }
     }
 }

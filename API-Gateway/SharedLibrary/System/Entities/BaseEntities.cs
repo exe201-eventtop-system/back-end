@@ -12,7 +12,7 @@ namespace SharedLibrary.System.Entities
         [Column("id")]
         public virtual Guid Id { get; set; } = Guid.NewGuid();
         [Column("create_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Column("update_at")]
         public DateTime UpdatedAt { get; set; }
         [Column("is_deleted")]

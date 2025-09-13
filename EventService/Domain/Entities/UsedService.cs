@@ -51,14 +51,8 @@ namespace Domain.Entities
         [Column("delivered_time")]
         public DateTime? DeliveredTime { get; set; }
 
-        [Column("return_time")]
-        public DateTime? ReturnTime { get; set; }
-
         [Column("damage_type")]
         public ServiceDamageType DamageType { get; set; }
-
-        [Column("initial_condition")]
-        public string? InitialCondition { get; set; }
 
         [Column("returned_condition")]
         public string? ReturnedCondition { get; set; }

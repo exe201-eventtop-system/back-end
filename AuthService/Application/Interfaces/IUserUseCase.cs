@@ -26,15 +26,16 @@ namespace Application.Interfaces
         Task<Result<ICollection<SuppliersRatingResDto>>> GetSuppliersByRating();
         Task<SupplierResponseDTO> GetSupllier(Guid supplierId);
         Task<Result<SupplierDetailDTO>> GetSupplierDetail(Guid supplierId);
-        //  Task<Result<bool>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO);
+        Task<Result<Guid>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO);
+        Task<Result<bool>> UpdateLicense(SignUpLicenseSupplierDTO signUpSupplierDTO);
         Task<Result<PaginationResult<SupplierDto>>> GetSuppliers(SupplierFilterDto filterDTO);
-        Task<Result<bool>> ProcessRequestAsync(ProcessRequestDTO processRequestDTO);
-        Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestDTO processRequestDTO);
+        Task<Result<List<ProcessRequestDTO>>> ProcessRequestAsync();
+        Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestInspectorDTO processRequestDTO);
      //   Task<Result<List<Supplier>>> GetSuppliersInspect(Guid userId);
         Task<Result<UserTokenDTO>> UpdateProfile(Guid userId, UserTokenDTO userTokenDTO);
 
         Task<Result<List<MinimalUserInfo>>> GetMinmalUserInfo();
 
-        Task<Result<bool>> UpdateSupplierBalance(Guid id, decimal amount);
+        Task<bool> UpdateSupplierBalance(Guid id, decimal amount);
     }
 }

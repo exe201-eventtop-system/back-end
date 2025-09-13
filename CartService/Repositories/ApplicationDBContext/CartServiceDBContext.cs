@@ -22,8 +22,6 @@ public partial class CartServiceDBContext : DbContext
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<CartItem> CartItems { get; set; }
-    public virtual DbSet<UsedService> UsedServices{ get; set; }
-    public virtual DbSet<Transaction> Transactions { get; set; }
 
 
 

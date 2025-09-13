@@ -62,7 +62,7 @@ namespace Application.Feedbacks.Commands
 
             var order = await unitOfWork.UsedServiceRepository.GetByIdAsync(command.OrderId);
             order.Status = UsedServiceStatus.Returned;
-            unitOfWork.CommitAsync();
+           await unitOfWork.CommitAsync();
 
             if (order == null)
             {

@@ -44,12 +44,18 @@ namespace API.Controllers
             var supplier = await _useCase.GetSupplierDetail(id);
             return Ok(supplier);
         }
-        //[HttpPost("sign-up")]
-        //public async Task<IActionResult> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
-        //{
-        //    var supplier = await _useCase.SignUpSupplier(signUpSupplierDTO);
-        //    return Ok(supplier);
-        //}
+        [HttpPost("sign-up")]
+        public async Task<IActionResult> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
+        {
+            var supplier = await _useCase.SignUpSupplier(signUpSupplierDTO);
+            return Ok(supplier);
+        }
+        [HttpPost("sign-up/update-license")]
+        public async Task<IActionResult> UpdateLicense([FromForm] SignUpLicenseSupplierDTO signUpSupplierDTO)
+        {
+            var supplier = await _useCase.UpdateLicense(signUpSupplierDTO);
+            return Ok(supplier);
+        }
         [HttpGet]
         public async Task<IActionResult> GetSuppliers([FromQuery] SupplierFilterDto filter) => (await _useCase.GetSuppliers(filter)).ToActionResult();
 
@@ -63,26 +69,26 @@ namespace API.Controllers
         //    var supplier = await _useCase.GetSuppliersInspect(userId);
         //    return Ok(supplier);
         //}
-        [HttpPost("process-request/admin")]
-        public async Task<IActionResult> ProcessRequestAdmin(ProcessRequestDTO processRequestDTO)
+        [HttpGet("process-request")]
+        public async Task<IActionResult> ProcessRequest()
         {
-            var supplier = await _useCase.ProcessRequestAsync(processRequestDTO);
+            var supplier = await _useCase.ProcessRequestAsync();
             return Ok(supplier);
         }
 
-        [HttpPost("process-request/inspector")]
-        public async Task<IActionResult> ProcessRequestInspector(ProcessRequestInspectorDTO processRequestDTO)
+        [HttpPost("process-request")]
+        public async Task<IActionResult> ProcessRequestInspector([FromForm]ProcessRequestInspectorDTO processRequestDTO)
         {
             var supplier = await _useCase.ProcessRequestInspectorAsync(processRequestDTO);
             return Ok(supplier);
         }
-
-        [HttpPost("{id}/balances")]
-        public async Task<IActionResult> ProccessBalanceUpdate([FromRoute] Guid id , SupplierBalanceUpdateDto command)
+        [HttpGet("{id}/balances/{amount}")]
+        public async Task<IActionResult> GetBalanceUpdate([FromRoute] Guid id, decimal amount)
         {
-            var result = await _useCase.UpdateSupplierBalance(id, command.Amount);
-            return result.ToActionResult();
+            var result = await _useCase.UpdateSupplierBalance(id, amount);
+            return Ok(result);
         }
+
 
     }
 }

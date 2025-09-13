@@ -24,7 +24,6 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = $"{UserRoleText.Admin}")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateNewCategoryCommand command, CancellationToken cancellationToken)
         {
             var result = await _commandDispatcher.Dispatch<CreateNewCategoryCommand, Result<CreateCategoryResult>>(command, cancellationToken);

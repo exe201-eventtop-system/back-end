@@ -36,6 +36,7 @@ namespace Application
             services.AddScoped<IQueryHandler<GetAllBlogQuery, Result<PaginatedList<BlogQueryResult>>>, GetAllBlogQueryHandler>();
             services.AddScoped<IQueryHandler<GetBlogDetailQuery, Result<BlogDetailResult>>, GetBlogDetailQueryHandler>();
             services.AddScoped<IQueryHandler<GetBlogMinimalInfoQuery, Result<List<MinimalBlogInfo>>>,GetBlogMinimalInfoQueryHandler>();
+            services.AddScoped<IQueryHandler<GetBlogMinimalInfoSupQuery, Result<List<MinimalBlogInfo>>>, GetBlogMinimalInfoSupQueryHandler>();
             return services;
         }
     }

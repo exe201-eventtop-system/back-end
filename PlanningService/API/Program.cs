@@ -11,8 +11,6 @@ namespace API
         {
             DotNetEnv.Env.Load("../../.env");
             var builder = WebApplication.CreateBuilder(args);
-            builder.Configuration.AddEnvironmentVariables();
-            var config = builder.Configuration;
             // Add services to the container.
             //builder.Configuration["Gemini:ApiKey"] = Environment.GetEnvironmentVariable("GEMINI_API_KEY");
             //builder.Configuration["Gemini:Model"] = Environment.GetEnvironmentVariable("GEMINI_MODEL");
@@ -22,8 +20,8 @@ namespace API
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
            
-            builder.Services.AddApplicationServices(config);
-            builder.Services.AddDatabase(config);
+            builder.Services.AddApplicationServices(builder.Configuration);
+            builder.Services.AddDatabase(builder.Configuration);
             builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -60,11 +58,8 @@ namespace API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

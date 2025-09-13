@@ -1,9 +1,9 @@
-version: '3.8'
 services:
   apigateway:
     build:
-      context: ./API-Gateway/API
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: API-Gateway/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/apigateway:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -15,60 +15,68 @@ services:
       - cartservice
     networks:
       - backend
+    env_file:
+      - .env
 
   authservice:
     build:
-      context: ./AuthService/AuthService
-      dockerfile: Dockerfile
-    ports:
-      - "5100:5100"
+      context: .
+      dockerfile: AuthService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/authservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
   planningservice:
     build:
-      context: ./PlanningService/API
-      dockerfile: Dockerfile
-    ports:
-      - "5200:5200"
+      context: .
+      dockerfile: PlanningService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/planningservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
   productservice:
     build:
-      context: ./ProductsService/API
-      dockerfile: Dockerfile
-    ports:
-      - "5300:5300"
+      context: .
+      dockerfile: ProductsService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/productservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
   blogservice:
     build:
-      context: ./BlogService/API
-      dockerfile: Dockerfile
-    ports:
-      - "5400:5400"
+      context: .
+      dockerfile: BlogService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/blogservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
   eventservice:
     build:
-      context: ./EventService/API
-      dockerfile: Dockerfile
-    ports:
-      - "5500:5500"
+      context: .
+      dockerfile: EventService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/eventservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
   cartservice:
     build:
-      context: ./CartService/API
-      dockerfile: Dockerfile
-    ports:
-      - "5600:5600"
+      context: .
+      dockerfile: CartService/Dockerfile
+    image: 790756194641.dkr.ecr.ap-southeast-2.amazonaws.com/cartservice:latest
     networks:
       - backend
+    env_file:
+      - .env
 
 networks:
   backend:

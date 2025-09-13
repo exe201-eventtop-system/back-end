@@ -6,7 +6,6 @@ target/
 node_modules/
 
 # Environment files
-.env
 .env.local
 .env.*.local
 .env.development
@@ -543,3 +542,8 @@ ehthumbs.db
 *.sdf
 *.db
 *.sqlite
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

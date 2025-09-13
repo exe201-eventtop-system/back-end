@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharedLibrary.DTOs.Service;
 using SharedLibrary.Jwt;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace API.Controllers
 {
@@ -49,19 +50,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> CreateNewProduct([FromForm] CreateProductCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateNewProduct( CreateProductCommand command, CancellationToken cancellationToken)
         {
             command.SupplierId = await _jwtService.ExtractUserIdFromToken(Request.Headers.Authorization[0].ToString());
-            var result = await _commandDispatcher.Dispatch<CreateProductCommand, Result<CreateProductResult>>(command, cancellationToken);
+            var result = await _commandDispatcher.Dispatch<CreateProductCommand, Result<Guid>>(command, cancellationToken);
             return result.MapToJsonResult();
         }
 
-        [HttpPost("{id}/image")]
-        [Authorize]
-        public async Task<IActionResult> UploadProductImage([FromRoute] Guid id, [FromForm] UploadProductImageCommand command, CancellationToken cancellationToken)
+        [HttpPost("image")]
+        public async Task<IActionResult> UploadProductImage([FromForm] UploadProductImageCommand command, CancellationToken cancellationToken)
         {
-            command.ProductId = id;
             var result = await _commandDispatcher.Dispatch<UploadProductImageCommand, Result<UploadProductImageResult>>(command, cancellationToken);
             return result.MapToJsonResult();
         }
@@ -93,7 +91,6 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteProduct([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var result = await _commandDispatcher.Dispatch<DeleteProductCommand, Result<DeleteProductResult>>(new DeleteProductCommand { Id = id }, cancellationToken);
@@ -120,5 +117,20 @@ namespace API.Controllers
             var result = await _queryDispatcher.Dispatch<SupplierProductMinimalInformationQuery, Result<List<MinimalServiceInfo>>>(new() { Id = id }, cancellationToken);
             return result.MapToJsonResult();
         }
+        [HttpGet("supplier")]
+        public async Task<IActionResult> GetSupplier(CancellationToken cancellationToken)
+        {
+            var supplierId = await _jwtService.ExtractUserIdFromToken(Request.Headers.Authorization[0].ToString());
+
+            var query = new GetListProductSupQuery
+            {
+                idSup = supplierId
+            };
+
+            var result = await _queryDispatcher.Dispatch<GetListProductSupQuery, Result<List<ProductSummaryItems>>>(query, cancellationToken);
+            return result.MapToJsonResult();
+        }
+
+
     }
 }

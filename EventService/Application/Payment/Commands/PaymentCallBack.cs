@@ -11,6 +11,8 @@ using SharedLibrary.System.APICall;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,6 +54,8 @@ namespace Application.Payment.Commands
             };
             var totalCart = await _apiCaller.PutFromApiAsync<int>(url, paymentUpdateCartDto);
             
+
+
             // Update supplier balances 
             var usedServices = await _unitOfWork.UsedServiceRepository.GetUsedServiceByTransactionCode(command.OrderCode);
 
@@ -59,8 +63,9 @@ namespace Application.Payment.Commands
 
             foreach (var supplier in groupedService)
             {
-                string balance_url = $"{_config["AUTHSERVICE:PORT"]}/api/suppliers/{supplier.Key}";
-                var result = await _apiCaller.PostToAsync<Result<bool>>(balance_url, new SupplierBalanceUpdateDto {Amount = supplier.Sum(x => x.UnitPrice) * 0.95m});
+                var amount = Math.Round(supplier.Sum(x => x.UnitPrice) * 0.95m, 2);
+                string balance_url = $"{_config["AUTHSERVICE:PORT"]}/api/suppliers/{supplier.Key}/balances/{amount}";
+                var result = await _apiCaller.GetFromApiAsync<bool>(balance_url);
             }
 
             return Result<int>.Success(totalCart);

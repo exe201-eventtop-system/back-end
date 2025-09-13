@@ -52,7 +52,8 @@ namespace Application.UseCases
             {
                 var userMap = _mapper.Map<UserTokenDTO>(registerDTO);
                 var token = await _jwtService.GenerateToken(userMap);
-                await _emailService.SendEmailAsync(registerDTO.Email, token,EmailType.Register);
+                // Temporarily disabled email sending to avoid Gmail limit
+                 await _emailService.SendEmailAsync(registerDTO.Email, token,EmailType.Register);
 
                 return Result.Success();
             }

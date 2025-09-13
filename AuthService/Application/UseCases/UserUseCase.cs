@@ -72,25 +72,18 @@ namespace Application.UseCases
             }
         }
 
-        //public async Task<Result<bool>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
-        //{
-        //    var userMap = _mapper.Map<User>(signUpSupplierDTO);
-        //    var user = await _userRepository.SaveUser(userMap);
+        public async Task<Result<Guid>> SignUpSupplier(SignUpSupplierDTO signUpSupplierDTO)
+        {
+            var userMap = _mapper.Map<User>(signUpSupplierDTO);
+            var user = await _userRepository.SaveUser(userMap);
 
-        //    var supplierMap = _mapper.Map<Supplier>(signUpSupplierDTO);
-        //    supplierMap.Id = user.Id;
-        //    supplierMap.Users = user;
-
-        //    var imageUrls = await _firebaseStorageService.UploadMultipleAsync(signUpSupplierDTO.formFiles);
-        //    supplierMap.OrginazationImages = imageUrls.Select(url => new OrginazationImage
-        //    {
-        //        ImageUrl = url
-        //    }).ToList();
-
-        //    await _supplierRepository.RequestSignInSupplier(supplierMap);
-        //    await _emailService.SendEmailAsync(user.Email, null, EmailType.SupplierRequest);
-        //    return Result<bool>.Success(true);
-        //}
+            var supplierMap = _mapper.Map<Supplier>(signUpSupplierDTO);
+            supplierMap.Id = user.Id;
+            supplierMap.Users = user;
+            await _supplierRepository.RequestSignInSupplier(supplierMap);
+           // await _emailService.SendEmailAsync(user.Email, null, EmailType.SupplierRequest);
+            return Result<Guid>.Success(user.Id);
+        }
 
         //public async Task<Result<PaginationResult<Supplier>>> GetSuppliers(SupplierFilterPagingDTO filterDTO)
         //{
@@ -113,68 +106,61 @@ namespace Application.UseCases
         //    return Result<PaginationResult<Supplier>>.Success(paginationResult);
         //}
 
-        public async Task<Result<bool>> ProcessRequestAsync(ProcessRequestDTO dto)
+        public async Task<Result<List<ProcessRequestDTO>>> ProcessRequestAsync()
         {
+            var suppliers = await _userRepository.GetSupNotAccept();
 
-            var user = await _userRepository.GetByIdAsync(dto.SupplierId); // Supplier.Id == UserId (giả sử như thế)
-
-            if (dto.IsAccept == true)
+            var supplierDTO = suppliers.Select(s => new ProcessRequestDTO
             {
-                await _supplierRepository.AssignInspector(dto.SupplierId, dto.InspectorId);
+                Id = s.Id,
+                Email = s.Users?.Email,
+                PhoneNumber = s.Users?.PhoneNumber,
+                Location = s.Location,
+                NameOrginazation = s.NameOrginazation,
+                Description = s.Description,
+                About = s.About,
+                BusinessLicense = s.BusinessLicense,
+                TaxCode = s.TaxCode,
+                Thumnnail = s.Thumnnail,
+                OrginazationImages = s.OrginazationImages
+                    .Where(img => !string.IsNullOrEmpty(img.ImageUrl))
+                    .Select(img => img.ImageUrl!)
+                    .ToList()
+            }).ToList();
 
-                await _emailService.SendEmailAsync(
-                    user.Email,
-                    token: "",
-                    emailType: EmailType.ApprovalNotice
-                );
-
-                return Result<bool>.Success(true);
-            }
-            else
-            {
-                // Từ chối: xóa supplier & gửi email
-                await _supplierRepository.DeleteSupplier(dto.SupplierId);
-
-                await _emailService.SendEmailAsync(
-                    user.Email,
-                    token: "",
-                    emailType: EmailType.RejectedNotice
-                );
-
-                return Result<bool>.Success(false);
-            }
+            return Result<List<ProcessRequestDTO>>.Success(supplierDTO);
         }
 
-        public async Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestInspectorDTO dto)
-        {
-            var user = await _userRepository.GetByIdAsync(dto.SupplierId);
+        //        public async Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestInspectorDTO dto)
+        //        {
+        //            var user = await _userRepository.GetByIdAsync(dto.SupplierId);
 
-            if (dto.IsAccept == true)
-            {
-                var (defaultPassword, hashedPassword) = await _passwordHasherService.GenerateAndHashPassword();
-                user.HashPassword = hashedPassword;
-
-
-                string contract = await _firebaseStorageService.Upload(dto.Contract);
-
-                await _supplierRepository.ApporeSupplier(dto.SupplierId, contract);
-
-                await _emailService.SendEmailAsync(
-    user.Email,
-    token: null,
-    emailType: EmailType.ProvideAccountSupplier,
-    plainPassword: defaultPassword
-);
+        //            if (dto.IsAccept == true)
+        //            {
+        //                var (defaultPassword, hashedPassword) = await _passwordHasherService.GenerateAndHashPassword();
+        //                user.HashPassword = hashedPassword;
 
 
-                return Result<bool>.Success(true);
-            }
-            else
-            {
-                await _supplierRepository.DeleteSupplier(dto.SupplierId);
-                return Result<bool>.Success(false);
-            }
-        }
+        //                string contract = await _firebaseStorageService.Upload(dto.Contract);
+
+        //                await _supplierRepository.ApporeSupplier(dto.SupplierId, contract);
+
+        //                await _emailService.SendEmailAsync(
+        //    user.Email,
+        //    token: null,
+        //    emailType: EmailType.ProvideAccountSupplier,
+        //    plainPassword: defaultPassword
+        //);
+
+
+        //                return Result<bool>.Success(true);
+        //            }
+        //            else
+        //            {
+        //                await _supplierRepository.DeleteSupplier(dto.SupplierId);
+        //                return Result<bool>.Success(false);
+        //            }
+        //        }
 
         //public async Task<Result<List<Supplier>>> GetSuppliersInspect(Guid userId)
         //{
@@ -185,10 +171,36 @@ namespace Application.UseCases
 
 
 
-        public Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestDTO processRequestDTO)
+        public async Task<Result<bool>> ProcessRequestInspectorAsync(ProcessRequestInspectorDTO processRequestDTO)
         {
-            throw new NotImplementedException();
+            if (!processRequestDTO.isAccept)
+            {
+                await _supplierRepository.DeleteSupplier(processRequestDTO.Id);
+                return Result<bool>.Success(true);
+            }
+
+            // 1. Tạo mật khẩu mặc định và mã hóa
+            var (defaultPassword, hashedPassword) = await _passwordHasherService.GenerateAndHashPassword();
+
+           var user =  await _userRepository.UpdataSupPass(processRequestDTO.Id,hashedPassword);
+
+            // 3. Upload hợp đồng lên Firebase
+            string contractUrl = await _firebaseStorageService.Upload(processRequestDTO.Contract);
+
+            // 4. Duyệt nhà cung cấp và lưu đường dẫn hợp đồng
+            await _supplierRepository.ApproveSupplier(processRequestDTO.Id, contractUrl);
+
+            // 5. Gửi email tạo tài khoản cho supplier
+            await _emailService.SendEmailAsync(
+                user.Email,
+                token: null,
+                emailType: EmailType.ProvideAccountSupplier,
+                plainPassword: defaultPassword
+            );
+
+            return Result<bool>.Success(true);
         }
+
 
         public async Task<Result<UserTokenDTO>> UpdateProfile(Guid userId, UserTokenDTO userTokenDTO)
         {
@@ -258,6 +270,10 @@ namespace Application.UseCases
 
         public async Task<Result<PaginationResult<GetAllUserDTO>>> GetAllUser(GetAllUserFillerDto dto)
         {
+            if(dto.PageNumber == 0)
+            {
+                dto.PageNumber = 1;
+            }
             var (users, totalItems) = await _userRepository.GetAllUserPagingAsync(dto.PageNumber, dto.PageSize, dto.Search);
             var userDto = _mapper.Map<List<GetAllUserDTO>>(users);
 
@@ -290,6 +306,7 @@ namespace Application.UseCases
             var suppliers = await _supplierRepository.GetAllSuppliers();
 
             var top10Suppliers = suppliers
+                .Where(x => x.IsActive ==true)
                 .OrderByDescending(s => s.CreatedAt)
                 .Take(10)
                 .Select(s => new SuppliersRatingResDto
@@ -334,18 +351,27 @@ namespace Application.UseCases
                 ).ToList());
         }
 
-        public async Task<Result<bool>> UpdateSupplierBalance(Guid id, decimal amount)
+        public async Task<bool> UpdateSupplierBalance(Guid id, decimal amount)
         {
-            var supplier = await _supplierRepository.GetByIdAsync(id);
+            await _supplierRepository.UpdateSupplier(id,amount);
 
-            if (supplier == null)
-            {
-                return Result<bool>.Failure(ServiceError.NotFoundError("Supplier not found"));
-            }
-            supplier.Balance = amount;
-            await _supplierRepository.UpdateSupplier(supplier);
-
-            return Result<bool>.Success(true);
+            return true;
         }
+
+        public async Task<Result<bool>> UpdateLicense(SignUpLicenseSupplierDTO signUpSupplierDTO)
+        {
+            var BusinessLicense = await _firebaseStorageService.Upload(signUpSupplierDTO.BusinessLicense);
+            var thumnail = await _firebaseStorageService.Upload(signUpSupplierDTO.Thumnnail);
+
+            var imageUrls = await _firebaseStorageService.UploadMultipleAsync(signUpSupplierDTO.formFiles);
+
+
+            // Gọi update
+            var result = await _supplierRepository.UpdateSupplier(signUpSupplierDTO.Id, BusinessLicense, thumnail, imageUrls);
+            return result
+                ? Result<bool>.Success(true)
+                : Result<bool>.Failure(ServiceError.UnhandledException($"Unexpected error occurred while retrieving profile: "));
+        }
+
     }
-    }
+}

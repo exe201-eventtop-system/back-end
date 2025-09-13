@@ -44,15 +44,52 @@ namespace SharedLibrary.Email
             """,
 
                 EmailType.ProvideAccountSupplier => $"""
-            <p>Chào {toEmail},</p>
-            <p>Tài khoản nhà cung cấp của bạn đã được duyệt.</p>
-            <p>Thông tin đăng nhập:</p>
-            <ul>
-                <li><strong>Email:</strong> {toEmail}</li>
-                <li><strong>Mật khẩu:</strong> {plainPassword}</li>
-            </ul>
-            <p>Vui lòng đăng nhập và đổi mật khẩu ngay sau khi sử dụng lần đầu.</p>
-            """,
+<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 10px; overflow: hidden;">
+                <tr>
+                    <td style="background-color: #1e90ff; padding: 20px; text-align: center; color: white;">
+                        <h2 style="margin: 0;">EVENTOP</h2>
+                        <p style="margin: 0;">Tài khoản nhà cung cấp đã được phê duyệt</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 30px;">
+                        <p>Xin chào <strong>{toEmail}</strong>,</p>
+                        <p>Tài khoản nhà cung cấp của bạn đã được <strong>phê duyệt</strong>.</p>
+                        <p>Dưới đây là thông tin đăng nhập của bạn:</p>
+                        <table cellpadding="5" cellspacing="0" style="background-color: #f1f1f1; border-radius: 5px; padding: 10px;">
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td>{toEmail}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mật khẩu:</strong></td>
+                                <td>{plainPassword}</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 20px;">Vui lòng đăng nhập và <strong>đổi mật khẩu ngay</strong> sau khi đăng nhập lần đầu để đảm bảo bảo mật.</p>
+                        <p style="text-align: center; margin: 30px 0;">
+                            <a href="https://eventop.vercel.app/" style="background-color: #1e90ff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                                Đăng nhập ngay
+                            </a>
+                        </p>
+                        <p>Nếu bạn không yêu cầu tạo tài khoản này, vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi.</p>
+                        <p>Trân trọng,<br>Đội ngũ EVENTOP</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #f1f1f1; text-align: center; font-size: 12px; color: #777; padding: 10px;">
+                        © 2025 EVENTOP. All rights reserved.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+"""
+,
 
                 _ => "<p>Xin chào, chúng tôi đã nhận được yêu cầu từ bạn.</p>"
             };
@@ -94,6 +131,7 @@ namespace SharedLibrary.Email
                 EmailType.Register => "Xác nhận email đăng ký tài khoản EVENTOP",
                 EmailType.SupplierRequest => "Yêu cầu trở thành nhà cung cấp",
                 EmailType.ForgotPassword => "Khôi phục mật khẩu EVENTOP",
+                EmailType.ProvideAccountSupplier => "Tài khoản nhà cung cấp được phê duyệt",
                 EmailType.ApprovalNotice => "Tài khoản của bạn đã được duyệt",
                 _ => "Thông báo từ EVENTOP"
             };

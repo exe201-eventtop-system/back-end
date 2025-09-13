@@ -5,6 +5,7 @@ using Domain.Entities;
 using SharedLibrary.DTOs.Blog;
 using SharedLibrary.DTOs.Service;
 using SharedLibrary.Jwt;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -69,18 +70,19 @@ namespace Application.Analystic.Query
 
             using (var ProductCaller = httpClientFactory.CreateClient("ProductService"))
             {
-                var result = await ProductCaller.GetAsync($"api/minimal/supplier/{SupplierId}");
-                var result_data = JsonSerializer.Deserialize<Result<List<MinimalServiceInfo>>>(result.Content.ToString());
-                List<MinimalServiceInfo> services =  result_data.Data;
+                var result = await ProductCaller.GetFromJsonAsync<Result<List<MinimalServiceInfo>>>($"/api/services/minimal/supplier/{SupplierId}");
+
+
+                List<MinimalServiceInfo> services =  result.Data;
 
                 service_count = services.Count;
             }
 
             using (var BlogCaller = httpClientFactory.CreateClient("BlogService"))
             {
-                var result = await BlogCaller.GetAsync($"api/minimal");
-                var result_data = JsonSerializer.Deserialize<Result<List<MinimalBlogInfo>>>(result.Content.ToString());
-                List<MinimalBlogInfo> blogs = result_data.Data;
+                var result = await BlogCaller.GetFromJsonAsync<Result<List<MinimalBlogInfo>>>($"/api/blogs/minimal/supplier/{SupplierId}");
+                ;
+                List<MinimalBlogInfo> blogs = result.Data;
 
                 blog_count = blogs.Count;
             }
@@ -98,7 +100,7 @@ namespace Application.Analystic.Query
                         new DashboardItem
                         {
                             Name = "Doanh thu",
-                            Value = order.Sum(x => x.UnitPrice),
+                            Value = order.Sum(x => x.UnitPrice * 0.95m),
                         },
                         new DashboardItem
                         {

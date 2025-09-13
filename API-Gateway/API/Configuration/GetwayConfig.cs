@@ -33,7 +33,7 @@ namespace API.Configuration
                         IssuerSigningKey = new SymmetricSecurityKey(key),
 
                         ValidateLifetime = true,
-                        ClockSkew = TimeSpan.Zero 
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
             services.AddCors(options =>

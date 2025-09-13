@@ -28,6 +28,7 @@ namespace Infrastructure.Repositories
                 UserId = userId,
                 PaymentType = PaymentType.CustomerPurcharse,
                 Amount = unitPrice,
+                IsPayment = true,
                 OrderCode = orderCode,
             };
 
@@ -49,7 +50,6 @@ namespace Infrastructure.Repositories
             {
                 UserId = userId,
                 PaymentType = PaymentType.ReturnSupplier,
-                ParentTransactionId = transactionId,
                 Amount = unitPrice,
                 OrderCode = orderCode,
             };

@@ -19,9 +19,11 @@ namespace Services
         {
             _unitOfWork = unitOfWork;
 
+            var baseUrl = Environment.GetEnvironmentVariable("PRODUCTSERVICE__PORT");
+            Console.WriteLine("vfd"+baseUrl);
             var httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:5000/")
+                BaseAddress = new Uri(baseUrl)
             };
 
             var token = httpContextAccessor.HttpContext?
@@ -75,37 +77,6 @@ namespace Services
                 Content = content
             };
         }
-        public async Task<List<BookingHistoryDTO>> GetUsedServiceByCustomerIdAsync(Guid customerId)
-        {
-            var usedServices = await _unitOfWork.UsedServiceRepository.GetUsedServicesByCustomerIdAsync(customerId);
-
-            if (usedServices == null || !usedServices.Any())
-                return new List<BookingHistoryDTO>();
-
-            var result = new List<BookingHistoryDTO>();
-
-            foreach (var usedService in usedServices)
-            {
-                var service = await _serviceClient.GetServiceByIdAsync(usedService.ServiceId);
-
-                result.Add(new BookingHistoryDTO
-                {
-                    ServiceId = usedService.ServiceId,
-                    ServiceName = usedService.ServiceName,
-                    SupllierName = service?.Supplier.SupplierName ?? "Không tìm thấy",
-                    Thumbnail = service?.ThumbnailUrl ?? "",
-                    Price = usedService.UnitPrice,
-                    Category = service?.Category ?? "",
-                    StartTime = usedService.RentStartTime,
-                    EndTime = usedService.RentEndTime,
-                    Date = DateOnly.FromDateTime(usedService.RentStartTime)
-                });
-            }
-
-            return result;
-        }
-       
-
     }
 
 }

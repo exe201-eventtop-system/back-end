@@ -52,16 +52,13 @@ namespace Application.Payment.Queries
                 var isAllReturned = tr.UsedServices != null
                                     && tr.UsedServices.All(us => us.Status == UsedServiceStatus.Returned);
 
-                var hasChildTransactions = transactions.Any(child => child.ParentTransactionId == tr.Id);
-
-                var isComplete = isAllReturned && !hasChildTransactions;
 
                 return new TransactionDTOs
                 {
                     OrderCode = tr.OrderCode,
                     CreatedAt = tr.CreatedAt,
                     Price = tr.Amount,
-                    IsComplete = isComplete,
+                    IsComplete = true,
                     Status = tr.IsPayment,
                     CustomerName = tr.UsedServices?.FirstOrDefault()?.CustomerName,
                     TransactionItems = tr.UsedServices?.Select(us => new Transactionitem

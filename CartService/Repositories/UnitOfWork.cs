@@ -11,8 +11,6 @@ namespace Repositories
     {
         CartItemRepository CartItemRepository { get; }
         CartRepository CartRepository { get; }
-        UsedServiceRepository UsedServiceRepository { get; }
-        TransactionRepository TransactionRepository { get; }
         int SaveChangesWithTransaction();
 
         Task<int> SaveChangesWithTransactionAsync();
@@ -25,8 +23,6 @@ namespace Repositories
 
         private CartItemRepository _cartItemRepository;
         private CartRepository _cartRepository;
-        private UsedServiceRepository _usedServiceRepository;
-        private TransactionRepository _transactionRepository;
         public UnitOfWork(CartServiceDBContext context)
         {
             _context = context;
@@ -47,20 +43,7 @@ namespace Repositories
             }
         }
 
-        public UsedServiceRepository UsedServiceRepository
-        {
-            get
-            {
-                return _usedServiceRepository ??= new UsedServiceRepository(_context);
-            }
-        }
-        public TransactionRepository TransactionRepository
-        {
-            get
-            {
-                return _transactionRepository ??= new TransactionRepository(_context);
-            }
-        }
+       
         public void Dispose() => _context.Dispose();
 
         public int SaveChangesWithTransaction()

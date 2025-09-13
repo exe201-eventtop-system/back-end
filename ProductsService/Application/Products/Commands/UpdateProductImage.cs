@@ -18,7 +18,6 @@ namespace Application.Products.Commands
         [JsonPropertyName("images")]
         public List<IFormFile> Images { get; set; }
 
-        [JsonIgnore]
         public Guid? ProductId { get; set; } = null;
     }
 
@@ -74,7 +73,6 @@ namespace Application.Products.Commands
                 ProductImage image = new ProductImage
                 {
                     ImageUrl = url,
-                    Order = item.ImagesNavigation.Count,
                     ProductId = (Guid) command.ProductId,
                 };
 
@@ -89,7 +87,6 @@ namespace Application.Products.Commands
                 {
                     Id = x.Id,
                     Url = x.ImageUrl,
-                    Order = x.Order,
                 }).ToList()
             });
         }

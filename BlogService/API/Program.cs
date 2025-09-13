@@ -11,8 +11,6 @@ namespace API
             DotNetEnv.Env.Load("../../.env");
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.AddEnvironmentVariables();
-            //var blogConnStr = Environment.GetEnvironmentVariable("CONNECTIONSTRINGS_BLOGCONNECTION");
-            //builder.Configuration["ConnectionStrings:BlogConnection"] = blogConnStr;
             var configuration = builder.Configuration;
 
             builder.Services.ConfigureInfratructure(configuration)
@@ -24,11 +22,8 @@ namespace API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseCors("allow_all");
