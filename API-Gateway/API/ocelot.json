@@ -1,0 +1,427 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice-production-cdf6.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice-production-cdf6.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/users",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice-production-cdf6.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/users/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/suppliers/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice-production-cdf6.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/suppliers/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/suppliers",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authservice-production-cdf6.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/suppliers",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/planning/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "planningservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/planning/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/planning",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "planningservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/planning",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/services/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productservice-production-8bd0.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/services/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/services",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productservice-production-8bd0.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/services",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/services/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productservice-production-8bd0.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/services/{everything}",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/{everything}",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productservice-production-8bd0.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/category/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/package-structure",
+      "DownstreamHeaderTransform": {
+        "Set-Cookie": "Copy"
+      },
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productservice-production-8bd0.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/package-structure",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "UpstreamHeaderTransform": {
+        "Cookie": "Copy"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/events/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/used-service/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/used-service/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/feedback/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/feedback/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/payment/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/payment/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/dashboard",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/dashboard",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/dashboard/supplier",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "eventservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/dashboard/supplier",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/cart/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "cartservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/cart",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/blogs/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "blogservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/blogs/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/blogs",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "blogservice-production.up.railway.app",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/blogs",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "apigateway-production-cfd1.up.railway.app"
+  }
+}

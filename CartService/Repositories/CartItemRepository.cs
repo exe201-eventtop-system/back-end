@@ -1,0 +1,69 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Repositories.Basic;
+using Repositories.DBContext;
+using Repositories.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositories
+{
+    public class CartItemRepository: GenericRepository<CartItem>
+    {
+        public CartItemRepository()
+        {
+        }
+
+        public CartItemRepository(CartServiceDBContext context) => _context = context;
+
+        public async Task<List<CartItem>> GetItemsByCartIdAndServiceIdsAsync(Guid cartId, List<Guid> serviceIds)
+        {
+            return await _context.CartItems
+                .Where(ci => ci.CartId == cartId && serviceIds.Contains(ci.ServiceId) && !ci.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<List<CartItem>> GetCartItemsByCartIdAsync(Guid cartId)
+        {
+            var cartItems = await _context.CartItems
+                .Where(ci => ci.CartId == cartId && !ci.IsDeleted)
+                .ToListAsync();
+
+            return cartItems;
+        }
+
+
+        public async Task<int> CountItemsByCartIdAsync(Guid cartId)
+        {
+            var result =  await _context.CartItems
+            .Where(ci => ci.CartId == cartId && ci.IsDeleted == false )
+            .CountAsync();
+            return result;
+        }
+
+        public async Task<bool> Delete(Guid cartItemId)
+        {
+            var cart = await _context.CartItems.FirstOrDefaultAsync(ci => ci.Id == cartItemId);
+
+            if (cart == null)
+            {
+                return false;
+            }
+
+            cart.IsDeleted = true;
+            _context.CartItems.Update(cart);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> IsExistServiceAsync(Guid cartId, Guid serviceId)
+        {
+            return await _context.CartItems
+                .AnyAsync(ci => ci.CartId == cartId && ci.ServiceId == serviceId && !ci.IsDeleted);
+        }
+
+    }
+}

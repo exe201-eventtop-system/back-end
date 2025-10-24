@@ -1,0 +1,33 @@
+name: CI/CD Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Copy files to EC2
+        run: |
+          rsync -avz --exclude='.git*' --exclude='node_modules' ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:C:/Users/Administrator/project-backend/
+
+      - name: SSH and deploy
+        run: |
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} powershell -Command "
+            cd C:\Users\Administrator\project-backend;
+            docker-compose down;
+            docker-compose pull;
+            docker-compose build;
+            docker-compose up -d --remove-orphans
+          "
